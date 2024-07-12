@@ -166,11 +166,11 @@
       <div class="hidden md:flex items-center w-2/3">
         <div>
           <nav id="menu-items" class=" text-[#272727]  flex gap-5 items-center justify-center" x-data="{ openCatalogo: false, openSubMenu: null }">
-            <a href="#" class="py-5  font-medium font-poppins text-[17px] px-3 hover:opacity-75 ">
+            <a href="/" class="py-5  font-medium font-poppins text-[17px] px-3 hover:opacity-75 ">
               <span class="underline-this">INICIO</span>
             </a>
             <div @mouseenter="openCatalogo = true" @mouseleave="openCatalogo = false" class="px-3 py-5">
-              <a href="#" class="font-medium font-poppins  hover:opacity-75 " aria-haspopup="true">
+              <a href="/catalogo/0" class="font-medium font-poppins  hover:opacity-75 " aria-haspopup="true">
                 <span class="underline-this">PRODUCTOS</span>
               </a>
 
