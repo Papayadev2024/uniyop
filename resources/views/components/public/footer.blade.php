@@ -15,7 +15,7 @@
       <h3 class="font-bold text-[19px]">Informacion</h3>
 
       <a href="/" class="font-normal text-[14px]">Inicio</a>
-      <a href="{{ route('catalogo.all') }}" class="font-normal text-[14px]">Productos</a>
+      <a href="{{ route('catalogo') }}" class="font-normal text-[14px]">Productos</a>
       <a href="{{ route('contacto') }}" class="font-normal text-[14px]">Blog</a>
     </div>
 
