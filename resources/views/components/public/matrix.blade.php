@@ -60,6 +60,7 @@
   {{-- @vite(['resources/js/functions.js']) --}}
   <script src="{{ asset('js/functions.js') }}?v={{ uniqid() }}"></script>
 
+
   <script>
     tippy('[tippy]', {
       arrow: true

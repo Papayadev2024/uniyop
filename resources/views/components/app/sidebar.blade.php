@@ -49,7 +49,16 @@
     <!-- Links -->
     <div class="space-y-8">
       <!-- Pages group -->
-      <x-menu.group title="Mensajes">
+      <x-menu.group title="Sistema">
+        <x-menu.item id="dashboard" href="{{ route('dashboard') }}" icon="fas fa-home">Dashboard</x-menu.item>
+        <x-menu.item id="pedidos" href="{{ route('pedidos.index') }}" icon="fa fa-solid fa-cart-shopping">
+          Pedidos
+          @if ($salesCount !== 0)
+            <x-slot name="tag">
+              {{ $salesCount }}
+            </x-slot>
+          @endif
+        </x-menu.item>
         <x-menu.item id="mensajes" href="{{ route('mensajes.index') }}" icon="fas fa-comments">
           Mensajes
           @if ($mensajes !== 0)
@@ -93,7 +102,7 @@
           Terminos y Condiciones
         </x-menu.item>
         <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-wrench">Servicios</x-menu.item>
-        <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item>
+        {{-- <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item> --}}
         <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Logos cliente</x-menu.item>
         <x-menu.item id="staff" href="{{ route('staff.index') }}" icon="fas fa-users">Personal</x-menu.item>
         <x-menu.item id="strength" href="{{ route('strength.index') }}">Beneficios</x-menu.item>
@@ -104,6 +113,9 @@
         </x-menu.item>
         <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">
           Costos de Envio
+        </x-menu.item>
+        <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">
+          Estados de pedidos
         </x-menu.item>
         <x-menu.item id="faqs" href="{{ route('faqs.index') }}"
           icon="fas fa-question-circle">FAQs</x-menu.item>

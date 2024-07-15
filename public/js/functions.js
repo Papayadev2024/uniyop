@@ -254,23 +254,6 @@ var carrosuelComplementario = new Swiper(".productos-complementarios", {
 
 /* --------------------------------------------- */
 
-var carrouselHeader = new Swiper(".header-slider", {
-  slidesPerView: 1,
-  spaceBetween: 10,
-  loop: true,
-  grab: true,
-  centeredSlides: false,
-  initialSlide: 0, // Empieza en el cuarto slide (índice 3)
-  pagination: {
-    el: ".swiper-pagination-slider-header",
-    clickable: true,
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-    },
-  },
-});
 
 /* ------------------------------------------ */
 

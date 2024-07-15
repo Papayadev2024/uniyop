@@ -9,85 +9,24 @@
 
   <main class="z-[15] ">
 
-    <section class="bg-[#f8f8f8] flex flex-col justify-between ">
-      <div class="mt-16 ">
-        <h2 class="text-[#006BF6]  text-[29px] text-center">VENTA HASTA 30% DE DESCUENTO</h2>
-        <h1 class=" text-[56px] font-semibold text-center">Serie de Cargadores Premium</h1>
-
-        <div class="flex flex-col items-center justify-center w-[591px] mx-auto">
-          <h3 class="text-[17px]  text-center leading-9">Funciones empaquetadas a un mejor precio que nunca Potentes
-            sensores para
-            controla tu estado físico</h3>
-        </div>
-
-        <div class="flex flex-col items-center justify-center  mx-auto mt-3">
-          <button
-            class="bg-[#006BF6] text-sm font-semibold text-white text-center p-3 rounded-3xl flex items-center justify-center"
-            type="button">
-            Comprar ahora
-            <img src="{{ asset('images/img/Vector.png') }}" alt="Icono" class="ml-2">
-          </button>
-
-        </div>
-
-
-
-
-      </div>
-
-      <div class="h-[235px] relative">
-        <img class="absolute mx-auto w-[770px] object-cover bottom-[-15.5rem] left-0 right-36"
-          src="{{ asset('images\img\Frame_37798.png') }}" alt="">
-
-      </div>
-
+    <section class="bg-[#f8f8f8] ">
+      <x-swipper-card :items="$slider" />
 
     </section>
 
     {{-- Seccion Categoria  --}}
-    <section class="w-11/12 mx-auto">
+    @if ($categorias->count() > 0)
 
-      <h1 class="text-[29px] mx-auto mt-20 font-semibold "> Categorias </h1>
+      <x-sections.simple title="Categorias">
 
+        @foreach ($categorias as $item)
+          <x-content-categoria :item="$item" />
+        @endforeach
 
-      <div class="flex gap-5 mt-14 md:min-h-[390px]">
-        <div class="bg-[#EEEEEE] w-full flex flex-col justify-between items-center gap-5 relative bg-center bg-no-repeat"
-          style="background-image: url({{ asset('images/img/Container.png') }});">
+      </x-sections.simple>
 
-          <div class="z-10 flex flex-col items-center gap-5">
-            <h2 class="mt-10 text-sm"> ACCESORIOS </h2>
-            <h1 class="text-[29px]"> Los mejores Accesorios desde S/ 20.00</h1>
+    @endif
 
-            <button
-              class="bg-[#006BF6] text-sm font-semibold text-white text-center p-3 rounded-3xl  items-center justify-center w-32 mb-5 block"
-              type="button">
-              Comprar ahora
-            </button>
-          </div>
-        </div>
-        <div class="bg-[#EEEEEE] w-full flex flex-col justify-between items-center gap-5 relative bg-center bg-no-repeat"
-          style="background-image: url({{ asset('images/img/Container-1.png') }});">
-
-
-          <div class="z-10 flex flex-col items-center gap-5">
-            <h2 class="mt-10 text-sm"> CELULARES </h2>
-            <h1 class="text-[29px]"> Smartphones desde S/ 800.00</h1>
-
-            <button
-              class="bg-[#006BF6] text-sm font-semibold text-white text-center p-3 rounded-3xl flex items-center justify-center w-32"
-              type="button">
-              Comprar ahora
-
-            </button>
-
-          </div>
-
-
-        </div>
-      </div>
-
-
-    </section>
 
     {{-- seccion Ultimos Productos  --}}
     <section class="w-11/12 mx-auto">

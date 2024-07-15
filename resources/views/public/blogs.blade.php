@@ -138,8 +138,8 @@
     <section class="flex flex-col gap-10 md:basis-9/12   ">
 
       <div class="grid grid-cols-2 gap-4">
-        <div class="h-10 w-full bg-gray-500">HERE</div>
-        <div class="h-10 w-full bg-gray-500">HERE</div>
+        <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
+        <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
 
       </div>
       <div class="w-full h-12     font-medium flex flex-row justify-center items-center">
