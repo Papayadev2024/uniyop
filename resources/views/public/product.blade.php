@@ -150,16 +150,173 @@
           </div>
 
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col mt-9">
           <h6 class="">Combinalo con: </h6>
-          <div class="grid grid-3">
+          <div class="grid grid-cols-3 gap-3  mb-6">
+            <div class="flex flex-col items-center justify-center col-span-1  shadow-lg py-2  pb-5">
+              <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
+              <span>Droubook space gray</span>
+              <h2 class="font-bold text-[#006BF6]">S/ 80.00</h2>
+            </div>
+            <div class="flex flex-col items-center justify-center col-span-1 shadow-lg pb-5">
+              <img src="{{ asset('images\img\2.png') }}" alt="" class="h-40 w-40 ">
+              <span>DrouPods Pro white</span>
+              <h2 class="font-bold text-[#006BF6]">S/ 39.00</h2>
+            </div>
+            <div class="flex flex-col items-center justify-center col-span-1 shadow-lg pb-5">
+              <img src="{{ asset('images\img\3.png') }}" alt="" class="h-40 w-40 ">
+              <span>lPhone 13 white color</span>
+              <h2 class="font-bold text-[#006BF6]">S/ 110.00</h2>
+            </div>
+
 
           </div>
 
         </div>
+        <div class="flex flex-col mt-9 gap-2">
+          <span>
+            Pago seguro garantizado
+          </span>
+          <div class="flex flex-row gap-4">
+            <img src="{{ asset('images\svg\amazon.png') }}" alt="" class="h-9 w-14">
+            <img src="{{ asset('images\svg\american.svg') }}" alt="" class="h-9 w-14">
+            <img src="{{ asset('images\svg\applepay.png') }}" alt="" class="h-9 w-14">
+            <img src="{{ asset('images\svg\bitcoin.png') }}" alt="" class="h-9 w-14">
+            <img src="{{ asset('images\svg\Vector-1.svg') }}" alt="" class="h-9 w-14">
+            <img src="{{ asset('images\svg\gpay.png') }}" alt="" class="h-9 w-14">
+
+            <img src="{{ asset('images\svg\visa.svg') }}" alt="" class="h-9 w-14">
+
+            <img src="{{ asset('images\svg\paypal.svg') }}" alt="" class="h-9 w-14">
+          </div>
+          <div class="flex flex-row gap-4 mt-6">
+            <span>Compartir</span>
+            <img src="{{ asset('images\svg\gb.svg') }}" alt="" class="h-8 w-8">
+            <img src="{{ asset('images\svg\twitter.svg') }}" alt="" class="h-8 w-8">
+            <img src="{{ asset('images\svg\pinterest.svg') }}" alt="" class="h-8 w-8">
+          </div>
+        </div>
 
       </div>
     </section>
+    <section class="bg-[#F8F8F8]">
+      <div class="w-11/12 mx-auto pt-20 ">
+        <div class="flex flex-row justify-between w-full ">
+          <h1 class="text-[29px] font-semibold">Productos Relacionados</h1>
+          <a href="" class="flex items-center font-semibold text-[#006BF6] ">Ver todos los productos <img
+              src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
+        </div>
+        <div class="grid grid-cols-4 gap-4 mt-14 w-full">
+          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
+            <img src="{{ asset('images\img\img1.png') }}" alt="" class="w-full   object-cover">
+            <h2 class="text-xl mt-4  ">
+              Drou watch ultra
+            </h2>
+            <div class="flex content-between flex-row gap-4">
+              <span class="text-[#006BF6] text-base font-semibold">S/ 70.00</span>
+              <span class="text-sm text-[#15294C] opacity-60 line-through">S/ 85.00</span>
+            </div>
+
+          </div>
+          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
+            <img src="{{ asset('images\img\img2.png') }}" alt="" class="w-full   object-cover">
+            <h2 class="text-xl mt-4 ">
+              Laptop Lenovo Gris
+            </h2>
+            <div class="flex content-between flex-row gap-4">
+              <span class="text-[#006BF6] text-base font-semibold">S/ 80.00</span>
+
+
+            </div>
+
+          </div>
+          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
+            <img src="{{ asset('images\img\img3.png') }}" alt="" class="w-full   object-cover">
+            <h2 class="text-xl mt-4 ">
+              Homepod mini 2022
+            </h2>
+            <div class="flex content-between flex-row gap-4">
+              <span class="text-[#006BF6] text-base font-semibold">S/ 39.00</span>
+              <span class="text-sm text-[#15294C] opacity-60 line-through">S/ 60.00</span>
+            </div>
+
+
+          </div>
+          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
+            <img src="{{ asset('images\img\img4.png') }}" alt="" class="w-full   object-cover">
+            <h2 class="text-xl mt-4 ">
+              DroSafe Charger
+            </h2>
+            <div class="flex content-between flex-row gap-4">
+
+              <span class="text-[#006BF6] text-base font-semibold">S/ 55.00</span>
+              <span class="text-sm text-[#15294C] opacity-60 line-through">S/ 75.00</span>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <section class="">
+      <div class="w-11/12 mx-auto pt-20 ">
+        <h3 class="text-[30px] font-medium"> ¿Qué dicen los clientes sobre nosotros?</h3>
+
+        <div class="grid grid-cols-3 w-full gap-8 pt-20">
+          <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
+            <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
+              <p class="font-medium text-[20px] flex-1">Gran calidad</p>
+              <!-- flex-1 hace que el texto ocupe el espacio disponible -->
+              <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
+                class="w-10 h-10 rounded-full">
+            </div>
+            <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
+              mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
+            </p>
+            <div class="font-bold text-[20px] w-5">
+              Ademir Neyra
+            </div>
+            <p class="text-[13px] font-normal">Lima, Peru</p>
+          </div>
+          <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
+            <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
+              <p class="font-medium text-[20px] flex-1">Gran calidad</p>
+              <!-- flex-1 hace que el texto ocupe el espacio disponible -->
+              <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
+                class="w-10 h-10 rounded-full">
+            </div>
+            <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
+              mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
+            </p>
+            <div class="font-bold text-[20px] w-5">
+              Ademir Neyra
+            </div>
+            <p class="text-[13px] font-normal">Lima, Peru</p>
+          </div>
+          <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
+            <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
+              <p class="font-medium text-[20px] flex-1">Gran calidad</p>
+              <!-- flex-1 hace que el texto ocupe el espacio disponible -->
+              <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
+                class="w-10 h-10 rounded-full">
+            </div>
+            <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
+              mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
+            </p>
+            <div class="font-bold text-[20px] w-5">
+              Ademir Neyra
+            </div>
+            <p class="text-[13px] font-normal">Lima, Peru</p>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </section>
+
 
   </main>
 

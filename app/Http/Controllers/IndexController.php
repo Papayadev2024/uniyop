@@ -7,6 +7,7 @@ use App\Http\Requests\StoreIndexRequest;
 use App\Http\Requests\UpdateIndexRequest;
 use App\Models\Attributes;
 use App\Models\AttributesValues;
+use App\Models\Blog;
 use App\Models\Faqs;
 use App\Models\General;
 use App\Models\Index;
@@ -160,6 +161,14 @@ class IndexController extends Controller
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
     return view('public.comentario', compact('comentarios', 'contarcomentarios', 'url_env', 'categorias', 'destacados'));
+  }
+
+  public function blogs(){
+    $blogs = Blog::all();
+    $postRecientes = Blog::orderBy('created_at', 'desc')->take(3)->get();
+
+    return view('public.blogs', compact('blogs', 'postRecientes'));   
+     
   }
 
   public function hacerComentario(Request $request)
