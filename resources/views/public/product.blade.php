@@ -42,31 +42,15 @@
     @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
     @endcomponent
     <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto">
-      <div class="grid grid-col-1  gap-1  w-full mt-10">
-        <div class=" col-span-1">
-          <div class="bg-gray-300 w-full  ">
+      <div class="grid grid-col-1 sm:grid-cols-3  gap-1  w-full mt-10 h-max">
+        <div class=" col-span-3 h-max">
 
-          </div>
-        </div>
+          <img class="w-full h-max  object-cover" src="{{ asset($product->imagen) }}" alt="">
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-          <div class=" col-span-1">
-            <div class="bg-gray-300 w-full h-[200px]">
-
-            </div>
-          </div>
-          <div class=" col-span-1">
-            <div class="bg-gray-300 w-full h-[200px]">
-
-            </div>
-          </div>
-          <div class=" col-span-1">
-            <div class="bg-gray-300 w-full h-[200px]">
-
-            </div>
-          </div>
 
         </div>
+
+        <x-product-slider :product="$product" />
       </div>
       <div class="flex flex-col gap-6 w-full mt-10">
         <div class="flex flex-col gap-3">
@@ -78,20 +62,31 @@
           <p class="font-normal text-sm gap-2">SKU: {{ $product->sku }} </p>
 
           <div class="flex flex-row gap-3 content-center items-center">
-            <div class=" content-center flex flex-row gap-2 items-center">
-              <span class="font-bold text-2xl gap-2 text-[#006BF6]">S/ 55.00</span>
+            @if ($product->descuento == 0)
+              <div class=" content-center flex flex-row gap-2 items-center">
+                <span class="font-bold text-2xl gap-2 text-[#006BF6]">S/ {{ $product->precio }}</span>
 
-              <span class="text-[#666666] font-normal line-through text-sm">S/ 75.00</span>
-            </div>
-            <span
-              class="font-medium text-center  content-center text-xs gap-2 bg-[#006BF6] text-white h-8 w-14 rounded-3xl">
-              -27% </span>
+
+              </div>
+            @else
+              <div class=" content-center flex flex-row gap-2 items-center">
+                <span class="font-bold text-2xl gap-2 text-[#006BF6]">S/ {{ $product->descuento }}</span>
+
+                <span class="text-[#666666] font-normal line-through text-sm">S/ {{ $product->precio }}</span>
+              </div>
+              @php
+                $descuento = round((($product->precio - $product->descuento) * 100) / $product->precio);
+              @endphp
+              <span
+                class="font-medium text-center  content-center text-xs gap-2 bg-[#006BF6] text-white h-8 w-14 rounded-3xl">
+                -{{ $descuento }}% </span>
+            @endif
+
 
           </div>
-          <p class="text-sm leading-6 "> Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-            laboriosam,
-            nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
-            voluptate velit esse quam nihil molestiae consequatur.</p>
+          <p class="text-sm leading-6 ">
+            {!! $product->description !!}
+          </p>
 
         </div>
         <div class="flex flex-col gap-6">

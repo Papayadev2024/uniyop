@@ -61,11 +61,14 @@
 
     {{-- seccion Gran Descuento  --}}
 
-    <section class="flex flex-row justify-between bg-[#EEEEEE] mt-14 min-h-[450px] ">
+    @if (count($bannerMid) > 0)
+      <section class="flex flex-row justify-between bg-[#EEEEEE] mt-14 min-h-[450px] ">
 
-      <x-banner-section :banner="$bannerMid" />
+        <x-banner-section :banner="$bannerMid" />
 
-    </section>
+      </section>
+    @endif
+
 
     @if ($productosPupulares->count() > 0)
       {{-- seccion Productos populares  --}}
@@ -115,7 +118,7 @@
         <div class="grid grid-cols-3 mt-14 gap-4">
           @foreach ($blogs as $item)
             <div class="flex flex-col  text-start bg-[#FFFFFF]">
-              <img src="{{ asset($item->url_image) }}" alt="" class="w-full   object-cover">
+              <img src="{{ asset($item->url_image . $item->name_image) }}" alt="" class="w-full   object-cover">
 
               <div class="flex content-between flex-col gap-4 mt-4 w-full">
                 <div class="text-sm w-full">
@@ -138,15 +141,18 @@
 
 
 
-    {{-- gran descuento --}}
-    <section class="w-11/12 mx-auto mt-14 ">
-      <div class="bg-gradient-to-b from-gray-50 to-white flex flex-row justify-between  min-h-[450px] ">
-        <x-banner-section :banner="$bannersBottom" />
+    @if (count($bannersBottom) > 0)
+      {{-- gran descuento --}}
+      <section class="w-11/12 mx-auto mt-14 ">
+        <div class="bg-gradient-to-b from-gray-50 to-white flex flex-row justify-between  min-h-[450px] ">
+          <x-banner-section :banner="$bannersBottom" />
 
-      </div>
+        </div>
 
 
-    </section>
+      </section>
+    @endif
+
 
     @if ($benefit->count() > 0)
       <section class="mt-4 md:mt-14 bg-[#F8F8F8]">

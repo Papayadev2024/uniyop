@@ -100,7 +100,7 @@
         </ul>
       </li>
       <li>
-        <a href="#"
+        <a href="/blog/0"
           class="text-[#272727] font-medium font-poppins text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
           <span class="underline-this">
             <svg
@@ -177,7 +177,7 @@
 
             </div>
 
-            <a href="#" class="py-5  font-medium font-poppins px-3  hover:opacity-75 ">
+            <a href="/blog/0" class="py-5  font-medium font-poppins px-3  hover:opacity-75 ">
               <span class="underline-this">BLOG</span>
             </a>
             <a href="#" class="py-5  font-medium font-poppins px-3 hover:opacity-75 ">
@@ -356,8 +356,6 @@
 
 
 <script>
-
-
   $(document).ready(function() {
     $('#buscarblog').keyup(function() {
 
@@ -398,15 +396,14 @@
 
 <script>
   document.addEventListener('click', function(event) {
-      var input = document.getElementById('buscarblog');
-      var resultados = document.getElementById('resultadosblog');
-      var isClickInsideInput = input.contains(event.target);
-      var isClickInsideResultados = resultados.contains(event.target);
+    var input = document.getElementById('buscarblog');
+    var resultados = document.getElementById('resultadosblog');
+    var isClickInsideInput = input.contains(event.target);
+    var isClickInsideResultados = resultados.contains(event.target);
 
-      if (!isClickInsideInput && !isClickInsideResultados) {
-          input.value = '';
-          $('#resultadosblog').empty();
-      }
+    if (!isClickInsideInput && !isClickInsideResultados) {
+      input.value = '';
+      $('#resultadosblog').empty();
+    }
   });
-
 </script>
