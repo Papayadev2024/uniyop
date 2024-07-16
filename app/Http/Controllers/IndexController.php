@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateIndexRequest;
 use App\Models\Address;
 use App\Models\Attributes;
 use App\Models\AttributesValues;
+use App\Models\Blog;
 use App\Models\Faqs;
 use App\Models\General;
 use App\Models\Index;
@@ -1073,5 +1074,39 @@ class IndexController extends Controller
   {
     $termsAndCondicitions = TermsAndCondition::first();
     return view('public.terminosycondiciones', compact('termsAndCondicitions'));
+  }
+
+  public function blog($filtro)
+    {
+        try {
+            $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+
+            if ($filtro == 0) {
+                $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->get();
+
+                $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+
+                $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->first();
+            } else {
+                $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('category_id', '=', $filtro)->get();
+
+                $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $filtro)->get();
+
+                $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->where('category_id', '=', $filtro)->first();
+            }
+
+            return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastpost'));
+        } catch (\Throwable $th) {
+        }
+    }
+
+  public function detalleBlog($id)
+  {
+      $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $id)->first();
+      $meta_title = $posts->meta_title ?? $posts->title;
+      $meta_description = $posts->meta_description  ?? Str::limit($posts->extract, 160);
+      $meta_keywords = $posts->meta_keywords ?? '';
+
+      return view('public.post', compact('meta_title','meta_description','meta_keywords','posts'));
   }
 }

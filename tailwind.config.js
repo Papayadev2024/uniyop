@@ -22,7 +22,16 @@ export default {
               // Añadir el gradiente personalizado
               backgroundImage: {
                 'custom-gradient': 'linear-gradient(to bottom, #F8F8F8 100%, #FFFFFF 100%)',
-              }
+              },
+              
+              fontFamily: {
+                Inter_Bold: ["Inter_Bold"],
+                Inter_ExtraBold: ["Inter_ExtraBold"],
+                Inter_Light: ["Inter_Light"],
+                Inter_Medium: ["Inter_Medium"],
+                Inter_Regular: ["Inter_Regular"],
+                Inter_SemiBold: ["Inter_SemiBold"],
+            },
 
            
         },

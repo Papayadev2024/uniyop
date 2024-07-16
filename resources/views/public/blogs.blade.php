@@ -8,146 +8,46 @@
 
 @section('content')
 
-  @php
-    $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Blogs', 'url' => '']];
-  @endphp
+    @php
+        $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Blogs', 'url' => '']];
+    @endphp
 
-  @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-  @endcomponent
+    @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+    @endcomponent
 
-  <div class="flex flex-col md:flex-row md:gap-10 w-11/12 mx-auto font-poppins mt-16">
-    <section class="flex flex-col gap-10 md:basis-3/12   ">
-      <button class="w-full h-12 bg-[#F1F1F1] text-[15px] text-center font-medium rounded-lg" type="button"> Limpiar
-        Todo</button>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Precio </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-row gap-4">
-          <input type="text" class="w-24 rounded-xl custom-border" placeholder="S/ 00.00">
-          <input type="text" class="w-24 rounded-xl custom-border" placeholder="S/ 00.00">
+    <section class="flex flex-col md:flex-row md:gap-10 w-full px-[5%] font- py-16">
+
+        <div class="w-full md:w-3/12 gap-10  grid grid-cols-1">
+            <div class="relative w-full lg:w-[80%] pb-8 lg:py-0 border-b lg:border-0">
+                <input id="buscarblog" type="text" placeholder="Buscar..."
+                    class="w-full pl-8 pr-10 py-2 bg-[#F1F1F1] border border-[#F1F1F1] lg:border-[#F1F1F1] rounded-lg focus:border-[#F1F1F1] focus:ring-0 text-[#666666] placeholder:text-[#666666]">
+
+                <span class="absolute top-0 left-0 flex items-start lg:items-center p-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M14.6851 13.6011C14.3544 13.2811 13.8268 13.2898 13.5068 13.6206C13.1868 13.9514 13.1955 14.4789 13.5263 14.7989L14.6851 13.6011ZM16.4206 17.5989C16.7514 17.9189 17.2789 17.9102 17.5989 17.5794C17.9189 17.2486 17.9102 16.7211 17.5794 16.4011L16.4206 17.5989ZM15.2333 9.53333C15.2333 12.6814 12.6814 15.2333 9.53333 15.2333V16.9C13.6018 16.9 16.9 13.6018 16.9 9.53333H15.2333ZM9.53333 15.2333C6.38531 15.2333 3.83333 12.6814 3.83333 9.53333H2.16667C2.16667 13.6018 5.46484 16.9 9.53333 16.9V15.2333ZM3.83333 9.53333C3.83333 6.38531 6.38531 3.83333 9.53333 3.83333V2.16667C5.46484 2.16667 2.16667 5.46484 2.16667 9.53333H3.83333ZM9.53333 3.83333C12.6814 3.83333 15.2333 6.38531 15.2333 9.53333H16.9C16.9 5.46484 13.6018 2.16667 9.53333 2.16667V3.83333ZM13.5263 14.7989L16.4206 17.5989L17.5794 16.4011L14.6851 13.6011L13.5263 14.7989Z"
+                            fill="#666666" class="fill-fillAzulPetroleo lg:fill-fillPink" />
+                    </svg>
+                </span>
+
+                <div class="bg-white z-60 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]" id="resultados">
+                </div>
+            </div>
         </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
 
-      </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Marca </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-col gap-4 ">
-          <div class="flex flex-row gap-2  items-center">
-            <input type="checkbox" class="bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border "> Marca
-              Uno (1)
-            </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border"> Marca
-              Dos
-              (4) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none "> <span class="text-custom-border"> Marca
-              Tres
-              (3) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none"> <span class="text-custom-border"> Marca
-              Cuatro
-              (2)
-            </span>
-
-          </div>
-
-
+        <div class="w-full md:basis-9/12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                @foreach ($posts as $post)
+                    <x-blog.container-post :post="$post" />
+                @endforeach
+            </div>
+            {{-- <div class="col-span-2">
+            <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
+            <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
+          </div> --}}
         </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
 
-      </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Tamaño </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-col gap-4 ">
-          <div class="flex flex-row gap-2  items-center">
-            <input type="checkbox" class="bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border "> Marca
-              Uno (1)
-            </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border"> Marca
-              Dos
-              (4) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none "> <span class="text-custom-border"> Marca
-              Tres
-              (3) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none"> <span class="text-custom-border"> Marca
-              Cuatro
-              (2)
-            </span>
-
-          </div>
-
-
-        </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
-
-      </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Color </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-col gap-4 ">
-          <div class="flex flex-row gap-2  items-center">
-            <input type="checkbox" class="bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border "> Marca
-              Uno (1)
-            </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border"> Marca
-              Dos
-              (4) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none "> <span class="text-custom-border"> Marca
-              Tres
-              (3) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none"> <span class="text-custom-border"> Marca
-              Cuatro
-              (2)
-            </span>
-
-          </div>
-
-
-        </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
-
-      </div>
     </section>
-    <section class="flex flex-col gap-10 md:basis-9/12   ">
-
-      <div class="grid grid-cols-2 gap-4">
-        <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
-        <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
-
-      </div>
-      <div class="w-full h-12     font-medium flex flex-row justify-center items-center">
-        <div><span class="font-normal text-[17px] text-[#666666] ml-3">Paginacion Laravel </span></div>
-
-      </div>
-    </section>
-  </div>
 
 
 
@@ -160,7 +60,7 @@
 @section('scripts_importados')
 
 
-  <script src="{{ asset('js/storage.extend.js') }}"></script>
+    <script src="{{ asset('js/storage.extend.js') }}"></script>
 
 
 @stop
