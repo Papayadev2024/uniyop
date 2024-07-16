@@ -27,6 +27,7 @@ use App\Models\Status;
 use App\Models\TermsAndCondition;
 use App\Models\User;
 use App\Models\UserDetails;
+use Attribute;
 use Culqi\Culqi;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -40,6 +41,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
+use phpseclib3\File\ASN1\Maps\AttributeValue;
 use SoDe\Extend\Response;
 
 use function PHPUnit\Framework\isNull;
@@ -72,88 +75,33 @@ class IndexController extends Controller
     return view('public.index', compact('url_env', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
   }
 
-  public function catalogo(Request $request, ?string $category = '0', ?string $subcategory = '0')
+  public function catalogo(Request $request)
   {
-    $categorias = null;
-    $productos = null;
+    $minPrice = Products::where('descuento', '>', 0)->min('descuento');
+    if ($minPrice) Products::min('precio');
+    $maxPrice = Products::max('precio');
 
-    $rangefrom = $request->query('rangefrom');
-    $rangeto = $request->query('rangeto');
-    $url_env = env('APP_URL');
+    $brands = AttributesValues::where([
+      'attribute_id' => 1,
+      'status' => true
+    ])->get();
+    $colors = AttributesValues::where([
+      'attribute_id' => 2,
+      'status' => true
+    ])->get();
+    $sizes = AttributesValues::where([
+      'attribute_id' => 3,
+      'status' => true
+    ])->get();
 
-
-
-
-    try {
-      $general = General::all();
-      $faqs = Faqs::where('status', '=', 1)->where('visible', '=', 1)->get();
-
-      $categorias = Category::all();
-
-      $testimonie = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
-
-
-
-      if ($category == 0) {
-        $productos = Products::where('status', '=', 1)->where('visible', '=', 1)->paginate(9);
-        $categoria = Category::all();
-      } else {
-        $productos = Products::select('products.*')
-          ->join('categories', 'products.categoria_id', '=', 'categories.id')
-          ->where('categories.slug', '=', $category)
-          ->where('products.status', '=', 1)
-          ->where('products.visible', '=', 1)
-          ->paginate(9);
-        $categoria = Category::where('slug', $category)->first();
-      }
-
-      if ($rangefrom !== null && $rangeto !== null) {
-
-        if ($category == 0) {
-          $productos = Products::where('status', '=', 1)->where('visible', '=', 1)->paginate(9);
-          $categoria = Category::all();
-        } else {
-          $productos = Products::select('products.*')
-            ->join('categories', 'products.categoria_id', '=', 'categories.id')
-            ->where('categories.slug', '=', $category)
-            ->where('products.status', '=', 1)
-            ->where('products.visible', '=', 1)
-            ->paginate(9);
-          $categoria = Category::where('slug', $category)->first();
-        }
-
-        $cleanedData = $productos->filter(function ($value) use ($rangefrom, $rangeto) {
-
-          if ($value['descuento'] == 0) {
-
-            if ($value['precio'] <= $rangeto && $value['precio'] >= $rangefrom) {
-              return $value;
-            }
-          } else {
-
-            if ($value['descuento'] <= $rangeto && $value['descuento'] >= $rangefrom) {
-              return $value;
-            }
-          }
-        });
-
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $productos = new LengthAwarePaginator(
-          $cleanedData->forPage($currentPage, 9), // Obtener los productos por página
-          $cleanedData->count(), // Contar todos los elementos
-          9, // Número de elementos por página
-          $currentPage, // Página actual
-          ['path' => request()->url()] // URL base para la paginación
-        );
-      }
-
-      $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
-        ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
-
-      return view('public.catalogo', compact('url_env', 'general', 'faqs', 'categorias', 'testimonie', 'category', 'productos', 'categoria', 'rangefrom', 'rangeto', 'destacados'));
-    } catch (\Throwable $th) {
-      // dump($th->getMessage());
-    }
+    return Inertia::render('Catalogo', [
+      'component' => 'Catalogo',
+      'minPrice' => $minPrice,
+      'maxPrice' => $maxPrice,
+      'brands' => $brands,
+      'colors' => $colors,
+      'sizes' => $sizes
+    ])->rootView('app');
   }
 
   public function comentario()

@@ -1,8 +1,5 @@
 @php
-  $route = Route::currentRouteName();
-  $component = Router::components[$route];
-  $admintoInstance = isset($component['adminto-instance']) ? $component['adminto-instance'] : false;
-  $sources = ['resources/js/' . $component['component']];
+  $component = Route::currentRouteName();
 @endphp
 
 <!DOCTYPE html>
@@ -18,7 +15,7 @@
   <meta name="keywords"
     content="Wall Panel, Mármol UV, Piedra PU, Piedra Cincelada, Wall Panel Negro, Pisos SPC, Panel Tipo piedra PU" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  @vite(['resources/js/' . $component['component'], 'resources/css/app.css', 'resources/js/app.js'])
+  @vite(['resources/js/' . $component, 'resources/css/app.css', 'resources/js/app.js'])
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
 
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

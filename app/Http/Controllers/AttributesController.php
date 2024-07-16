@@ -26,22 +26,37 @@ class AttributesController extends Controller
    */
   public function create()
   {
-    return view('pages.attributes.create');
+    $attribute = new Attributes();
+    return view('pages.attributes.save', compact('attribute'));
   }
+
+  /**
+   * Show the form for editing the specified resource.
+   */
+  public function edit(string $id)
+  {
+    $attribute = Attributes::find($id);
+
+    return view('pages.attributes.save', compact('attribute'));
+  }
+
 
   /**
    * Store a newly created resource in storage.
    */
   public function store(Request $request)
   {
-    
+
     $request->validate([
       'titulo' => 'required',
     ]);
 
-    $AboutUs = new Attributes();
+    $body = $request->all();
+
     try {
 
+      unset($body['_token']);
+      unset($body['id']);
       if ($request->hasFile("imagen")) {
         $file = $request->file('imagen');
         $routeImg = 'storage/images/imagen/';
@@ -49,19 +64,20 @@ class AttributesController extends Controller
 
         $this->saveImg($file, $routeImg, $nombreImagen);
 
-        $AboutUs->imagen = $routeImg . $nombreImagen;
-        // $AboutUs->name_image = $nombreImagen;
+        $body['imagen'] = $routeImg . $nombreImagen;
       }
 
-      $AboutUs->titulo = $request->titulo;
-      $AboutUs->descripcion = $request->descripcion;
-      $AboutUs->color = $request->color;
-      $AboutUs->type = $request->type;
-      $AboutUs->save();
+      $jpa = Attributes::find($request->id);
+      if (!$jpa) {
+        $body['status'] = true;
+        Attributes::create($body);
+      } else {
+        $jpa->update($body);
+      }
 
       return redirect()->route('attributes.index')->with('success', 'Publicación creado exitosamente.');
     } catch (\Throwable $th) {
-      return response()->json(['messge' => $th], 400);
+      return response()->json(['messge' => $th->getMessage()], 400);
     }
   }
 
@@ -82,17 +98,6 @@ class AttributesController extends Controller
    */
   public function show(Request $request)
   {
-    
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(string $id)
-  {
-    $attributes = Attributes::find($id);
-
-    return view('pages.attributes.edit', compact('attributes'));
   }
 
   /**
@@ -104,32 +109,29 @@ class AttributesController extends Controller
     $request->validate([
       'titulo' => 'required',
     ]);
-		$aboutUs = Attributes::find($id);
-		try {
-			
-			if ($request->hasFile("imagen")) {
-				$file = $request->file('imagen');
-				$routeImg = 'storage/images/imagen/';
-				$nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+    $aboutUs = Attributes::find($id);
+    try {
 
-				$this->saveImg($file, $routeImg, $nombreImagen);
-	
-				$aboutUs->imagen = $routeImg.$nombreImagen;
-				// $aboutUs->name_image = $nombreImagen;
-			}
-	
-			$aboutUs->titulo = $request->titulo;
-			$aboutUs->descripcion = $request->descripcion;
-			$aboutUs->color = $request->color;
-			$aboutUs->save();
+      if ($request->hasFile("imagen")) {
+        $file = $request->file('imagen');
+        $routeImg = 'storage/images/imagen/';
+        $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
 
-			return redirect()->route('attributes.index')->with('success', 'Publicación creado exitosamente.');
- 
+        $this->saveImg($file, $routeImg, $nombreImagen);
 
-		} catch (\Throwable $th) {
-			return response()->json(['messge' => 'Verifique sus datos '], 400); 
-		}
-   
+        $aboutUs->imagen = $routeImg . $nombreImagen;
+        // $aboutUs->name_image = $nombreImagen;
+      }
+
+      $aboutUs->titulo = $request->titulo;
+      $aboutUs->descripcion = $request->descripcion;
+      $aboutUs->color = $request->color;
+      $aboutUs->save();
+
+      return redirect()->route('attributes.index')->with('success', 'Publicación creado exitosamente.');
+    } catch (\Throwable $th) {
+      return response()->json(['messge' => 'Verifique sus datos '], 400);
+    }
   }
 
   /**
@@ -141,7 +143,7 @@ class AttributesController extends Controller
   }
   public function updateVisible(Request $request)
   {
-    
+
     $id = $request->id;
     $stauts = $request->status;
     $Attributes = Attributes::find($id);
@@ -155,12 +157,12 @@ class AttributesController extends Controller
   {
     $Attributes = Attributes::find($request->id);
 
-		
-		if ($Attributes->imagen && file_exists($Attributes->imagen)) {
-			unlink($Attributes->imagen);
-		}
 
-		$Attributes->delete();
-		return response()->json(['message'=>'Atributo eliminado']);
+    if ($Attributes->imagen && file_exists($Attributes->imagen)) {
+      unlink($Attributes->imagen);
+    }
+
+    $Attributes->delete();
+    return response()->json(['message' => 'Atributo eliminado']);
   }
 }

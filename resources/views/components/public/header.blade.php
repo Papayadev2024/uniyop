@@ -171,7 +171,7 @@
               <span class="underline-this">INICIO</span>
             </a>
             <div @mouseenter="openCatalogo = true" @mouseleave="openCatalogo = false" class="px-3 py-5">
-              <a href="/catalogo/0" class="font-medium font-poppins  hover:opacity-75 " aria-haspopup="true">
+              <a href="{{route('Catalogo.jsx')}}" class="font-medium font-poppins  hover:opacity-75 " aria-haspopup="true">
                 <span class="underline-this">PRODUCTOS</span>
               </a>
 

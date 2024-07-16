@@ -150,15 +150,16 @@
                             for="imagen">Imagen del producto</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            id="imagen"  name="imagen" type="file" accept="image/*" title="Cargar imagen de producto" tippy>
+                            id="imagen" name="imagen" type="file" accept="image/*"
+                            title="Cargar imagen de producto" tippy>
                         </div>
                         <div>
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             for="imagen_ambiente">Imagen de ambiente</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*" title="Cargar imagen de ambiente"
-                            tippy>
+                            id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*"
+                            title="Cargar imagen de ambiente" tippy>
                         </div>
                       </div>
                     </div>
@@ -175,8 +176,10 @@
                           @php
                             $uuid = Crypto::randomUUID();
                           @endphp
-                          <div id="galery_container_{{ $uuid }}" class="relative group block w-[120px] h-[160px] rounded-md border" draggable="true">
-                            <div class="absolute top-0 left-0 bottom-0 right-0 rounded-md hover:bg-[#00000075] transition-all flex flex-col items-center justify-center gap-1">
+                          <div id="galery_container_{{ $uuid }}"
+                            class="relative group block w-[120px] h-[160px] rounded-md border" draggable="true">
+                            <div
+                              class="absolute top-0 left-0 bottom-0 right-0 rounded-md hover:bg-[#00000075] transition-all flex flex-col items-center justify-center gap-1">
                               <label for="galery_{{ $uuid }}" title="Cambiar Imagen" tippy
                                 class="text-xl text-white hidden group-hover:block cursor-pointer fa-solid fa-camera-rotate z-10"></label>
                               <i id="btn_delete_galery" data-id="{{ $uuid }}" title="Eliminar Imagen" tippy
@@ -353,7 +356,7 @@
 
                 <div class="md:col-span-5">
                   <label for="producto">Atributos</label>
-                  <div class="flex gap-2 mt-2 relative mb-2 ">
+                  <div class="flex flex-wrap gap-2 mt-2 relative mb-2 ">
                     @foreach ($atributos as $item)
                       <div href="#"
                         class="w-[300px] !important block px-3 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -365,11 +368,13 @@
                         <div class="flex flex-wrap gap-2">
                           @foreach ($valorAtributo as $value)
                             @if ($value->attribute_id == $item->id)
-                              <div class="flex items-center mb-2 ">
-                                <input type="checkbox" id=" {{ $item->titulo }}:{{ $value->valor }} "
-                                  name="{{ $item->titulo }}:{{ $value->valor }}"
-                                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for=" {{ $item->titulo }}:{{ $value->valor }} "
+                              <div class="flex items-center">
+                                <input type="{{ $item->is_multiple ? 'checkbox' : 'radio' }}"
+                                  id="attribute-{{ $item->id }}-{{ $value->id }}"
+                                  name="attributes[{{ $item->id }}]{{ $item->is_multiple ? '[]' : '' }}"
+                                  value="{{ $value->id }}"
+                                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 {{ $item->is_multiple ? 'rounded-sm' : 'rounded-full' }} focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="attribute-{{ $item->id }}-{{ $value->id }}"
                                   class="ml-2">{{ $value->valor }}</label>
                               </div>
                             @endif
@@ -692,7 +697,7 @@
       return data
     }
 
-    $('[data-id="input_img"]').on('change', function () {
+    $('[data-id="input_img"]').on('change', function() {
       const file = this.files[0]
       const url = URL.createObjectURL(file)
 
@@ -755,7 +760,7 @@
       arrow: true
     })
 
-    $(document).on('click', '#btn_delete_galery', function () {
+    $(document).on('click', '#btn_delete_galery', function() {
       $(this).parents('[id^="galery_container_"]').remove()
     })
 
