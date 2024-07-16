@@ -1,5 +1,6 @@
 @php
-  $isIndex = Route::currentRouteName() == 'index';
+  $pagina = Route::currentRouteName();
+  $isIndex = $pagina == 'index';
 @endphp
 
 <style>
@@ -57,7 +58,7 @@
     <ul class="space-y-1">
       <li>
         <a href="/"
-          class="text-[#272727] font-medium font-poppins text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'index' ? 'text-[#FF5E14]' : '' }}">
+          class="text-[#272727] font-medium font-poppins text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $isIndex ? 'text-[#FF5E14]' : '' }}">
           <span class="underline-this">
             <svg
               class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
@@ -352,3 +353,60 @@
   })
 </script>
 <script src="{{ asset('js/storage.extend.js') }}"></script>
+
+
+<script>
+
+
+  $(document).ready(function() {
+    $('#buscarblog').keyup(function() {
+
+      var query = $(this).val().trim();
+
+      if (query !== '') {
+        $.ajax({
+          url: '{{ route('buscarblog') }}',
+          method: 'GET',
+          data: {
+            query: query
+          },
+          success: function(data) {
+            var resultsHtml = '';
+            var url = '{{ asset('') }}';
+            data.forEach(function(result) {
+              resultsHtml +=
+                '<a class="z-50" href="/post/' + result.id +
+                '"> <div class=" z-50 w-full flex flex-row py-2 px-3 hover:bg-slate-200"> ' +
+                ' <div class="w-[30%]"><img class="w-full rounded-md" src="' +
+                url + result.url_image + result.name_image + '" /></div>' +
+                ' <div class="flex flex-col justify-center w-[80%] pl-3"> ' +
+                ' <h2 class="text-left line-clamp-1">' + result.title +
+                '</h2> ' +
+                '</div> ' +
+                '</div></a>';
+            });
+
+            $('#resultadosblog').html(resultsHtml);
+          }
+        });
+      } else {
+        $('#resultadosblog').empty();
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('click', function(event) {
+      var input = document.getElementById('buscarblog');
+      var resultados = document.getElementById('resultadosblog');
+      var isClickInsideInput = input.contains(event.target);
+      var isClickInsideResultados = resultados.contains(event.target);
+
+      if (!isClickInsideInput && !isClickInsideResultados) {
+          input.value = '';
+          $('#resultadosblog').empty();
+      }
+  });
+
+</script>

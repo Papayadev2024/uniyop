@@ -1,5 +1,8 @@
 @php
-  $sources = isset($sources) ? $sources : [];
+  $route = Route::currentRouteName();
+  $component = Router::components[$route];
+  $admintoInstance = isset($component['adminto-instance']) ? $component['adminto-instance'] : false;
+  $sources = ['resources/js/' . $component['component']];
 @endphp
 
 <!DOCTYPE html>
@@ -11,11 +14,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Somos especialistas en Wall Panel, mármol UV, piedra PU y otros productos para ti. Confía en la calidad de Deco TAB y dale otro estilo a tu ambiente favorito.">
-  <title> Venta de decoración de interiores - Deco TAB </title>
+  <title> Boots Peru </title>
   <meta name="keywords"
     content="Wall Panel, Mármol UV, Piedra PU, Piedra Cincelada, Wall Panel Negro, Pisos SPC, Panel Tipo piedra PU" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  @vite([...$sources, 'resources/css/app.css', 'resources/js/app.js'])
+  @vite(['resources/js/' . $component['component'], 'resources/css/app.css', 'resources/js/app.js'])
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
 
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -41,35 +44,15 @@
   <script src="/js/tippy.all.min.js"></script>
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Index</title>
 </head>
 
 <body class="body">
   <div class="overlay"></div>
-  @include('components.public.header')
+  <x-public.header />
+  @inertia
+  <x-public.footer />
 
-  <div class="main">
-    {{-- Aqui va el contenido de cada pagina --}}
-    @yield('content')
-
-  </div>
-
-
-
-  @include('components.public.footer')
-
-
-
-  @yield('scripts_importados')
-  {{-- @vite(['resources/js/functions.js']) --}}
   <script src="{{ asset('js/functions.js') }}?v={{ uniqid() }}"></script>
-
-
-  <script>
-    tippy('[tippy]', {
-      arrow: true
-    })
-  </script>
 </body>
 
 </html>

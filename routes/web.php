@@ -67,7 +67,8 @@ Route::get('/comentario', [IndexController::class, 'comentario'])->name('comenta
 Route::post('/comentario/nuevo', [IndexController::class, 'hacerComentario'])->name('nuevocomentario');
 Route::get('/contacto', [IndexController::class, 'contacto'])->name('contacto');
 Route::get('/libro-de-reclamaciones', [IndexController::class, 'librodereclamaciones'])->name('librodereclamaciones');
-
+Route::get('/blog/{filtro}', [IndexController::class, 'blog'])->name('blog');
+Route::get('/post/{id}', [IndexController::class, 'detalleBlog'])->name('detalleBlog');
 /* Proceso de pago */
 Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
 Route::get('/pago', [IndexController::class, 'pago'])->name('pago');
@@ -75,9 +76,9 @@ Route::post('/procesar/pago', [IndexController::class, 'procesarPago'])->name('p
 Route::get('/agradecimiento', [IndexController::class, 'agradecimiento'])->name('agradecimiento');
 /* Catálogo y producto */
 Route::get('/producto/{id}', [IndexController::class, 'producto'])->name('producto');
-Route::get('/catalogo', [IndexController::class, 'catalogo'])->name('catalogo.all');
-Route::get('/catalogo/{category}', [IndexController::class, 'catalogo'])->name('catalogo');
-Route::get('/catalogo/{category}/{subcategory}', [IndexController::class, 'catalogo'])->name('catalogo.sub');
+// Route::get('/catalogo', [IndexController::class, 'catalogo'])->name('catalogo.all');
+// Route::get('/catalogo/{category}', [IndexController::class, 'catalogo'])->name('catalogo');
+// Route::get('/catalogo/{category}/{subcategory}', [IndexController::class, 'catalogo'])->name('catalogo.sub');
 Route::post('carrito/buscarProducto', [CarritoController::class, 'buscarProducto'])->name('carrito.buscarProducto');
 /* Página 404 */
 Route::get('/404', [IndexController::class, 'error'])->name('error');
@@ -92,7 +93,7 @@ Route::get('/politicas-de-devolucion', [IndexController::class, 'politicasDevolu
 Route::get('/terminos-y-condiciones', [IndexController::class, 'TerminosyCondiciones'])->name('terms_condition');
 
 // Route::post('/payment/culqi', [PaymentController::class, 'culqi'])->name('payment.culqi');
-
+Route::get('/buscarblog', [IndexController::class, 'searchBlog'])->name('buscarblog');
 
 Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {
 

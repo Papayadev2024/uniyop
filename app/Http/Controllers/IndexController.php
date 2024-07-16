@@ -1081,4 +1081,49 @@ class IndexController extends Controller
     $termsAndCondicitions = TermsAndCondition::first();
     return view('public.terminosycondiciones', compact('termsAndCondicitions'));
   }
+
+  public function blog($filtro)
+    {
+        try {
+            $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+
+            if ($filtro == 0) {
+                $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->get();
+
+                $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+
+                $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->first();
+            } else {
+                $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('category_id', '=', $filtro)->get();
+
+                $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $filtro)->get();
+
+                $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->where('category_id', '=', $filtro)->first();
+            }
+
+            return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastpost'));
+        } catch (\Throwable $th) {
+        }
+    }
+
+  public function detalleBlog($id)
+  {
+      $post = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $id)->first();
+      $meta_title = $post->meta_title ?? $post->title;
+      $meta_description = $post->meta_description  ?? Str::limit($post->extract, 160);
+      $meta_keywords = $post->meta_keywords ?? '';
+
+      return view('public.post', compact('meta_title','meta_description','meta_keywords','post'));
+  }
+
+
+  public function searchBlog(Request $request)
+  {   
+      $query = $request->input('query');
+     
+      $resultados = Blog::where('title', 'like', "%$query%")->where('visible', '=', true)->where('status', '=', true)
+                             ->get();
+     
+      return response()->json($resultados);
+  }
 }
