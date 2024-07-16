@@ -39,7 +39,11 @@ class ProductsController extends Controller
   {
     $response =  new dxResponse();
     try {
-      $instance = Products::select();
+      $instance = Products::select([
+        DB::raw('DISTINCT products.*')
+      ])
+        ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
+        ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id');
 
       if ($request->group != null) {
         [$grouping] = $request->group;
@@ -52,20 +56,21 @@ class ProductsController extends Controller
 
       if ($request->filter) {
         $instance->where(function ($query) use ($request) {
-          dxDataGrid::filter($query, $request->filter ?? []);
+          dxDataGrid::filter($query, $request->filter ?? [], false);
         });
       }
 
       if ($request->sort != null) {
         foreach ($request->sort as $sorting) {
-          $selector = \str_replace('.', '__', $sorting['selector']);
+          // $selector = \str_replace('.', '__', $sorting['selector']);
+          $selector = $sorting['selector'];
           $instance->orderBy(
             $selector,
             $sorting['desc'] ? 'DESC' : 'ASC'
           );
         }
       } else {
-        $instance->orderBy('id', 'DESC');
+        $instance->orderBy('products.id', 'DESC');
       }
 
       $totalCount = 0;
@@ -83,16 +88,16 @@ class ProductsController extends Controller
           ->get();
       }
 
-      $results = [];
+      // $results = [];
 
-      foreach ($jpas as $jpa) {
-        $result = JSON::unflatten($jpa->toArray(), '__');
-        $results[] = $result;
-      }
+      // foreach ($jpas as $jpa) {
+      //   $result = JSON::unflatten($jpa->toArray(), '__');
+      //   $results[] = $result;
+      // }
 
       $response->status = 200;
       $response->message = 'Operación correcta';
-      $response->data = $results;
+      $response->data = $jpas;
       $response->totalCount = $totalCount;
     } catch (\Throwable $th) {
       $response->status = 400;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -62,7 +63,7 @@ class Products extends Model
 
   public function attributeValues()
   {
-    return $this->hasMany(AttributesValues::class, 'product_id');
+    return $this->hasMany(AttributeProductValues::class);
   }
 
   public function attributes()
