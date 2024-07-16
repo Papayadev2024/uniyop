@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FilterItem = ({ title, children, className = 'flex flex-col gap-4 w-full', items = [], itemId = 'id', itemName = 'name' }) => {
+const FilterItem = ({ title, children, className = 'flex flex-row gap-4 w-full flex-wrap', items = [], itemId = 'id', itemName = 'name' }) => {
   const relativeId = title.toLowerCase().split(' ').filter(Boolean).join('-')
   return (<div className="flex flex-col gap-4 w-full">
     <h2 className="font-semibold">{title}</h2>

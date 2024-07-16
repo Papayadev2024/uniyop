@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AttributesValues;
+use App\Models\Products;
 use App\Models\Status;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
@@ -12,16 +13,30 @@ class Router
       'component' => 'Catalogo.jsx',
       'adminto-instance' => true,
       'compact' => [
+        'minPrice' => [
+          'query' => Products::min('descuento'),
+        ],
+        'maxPrice' => [
+          'query' => Products::max('descuento'),
+        ],
         'brands' => [
           'class' => AttributesValues::class,
-          'select' => [
-            'id',
-            'valor',
-            'status',
-            'attribute_id'
-          ],
           'filter' => [
             'attribute_id' => 1,
+            'status' => true
+          ]
+        ],
+        'colors' => [
+          'class' => AttributesValues::class,
+          'filter' => [
+            'attribute_id' => 2,
+            'status' => true
+          ]
+        ],
+        'sizes' => [
+          'class' => AttributesValues::class,
+          'filter' => [
+            'attribute_id' => 3,
             'status' => true
           ]
         ]

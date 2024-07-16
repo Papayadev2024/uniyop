@@ -368,7 +368,7 @@
 
                 <div class="md:col-span-5">
                   <label for="producto">Atributos</label>
-                  <div class="flex gap-2 mt-2 relative mb-2 ">
+                  <div class="flex flex-wrap gap-2 mt-2 relative mb-2 ">
                     @foreach ($atributos as $item)
                       <div href="#"
                         class="w-[300px] !important block px-3 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -380,11 +380,13 @@
                         <div class="flex flex-wrap gap-2">
                           @foreach ($valorAtributo as $value)
                             @if ($value->attribute_id == $item->id)
-                              <div class="flex items-center mb-2 ">
-                                <input type="checkbox" id=" {{ $item->titulo }}:{{ $value->valor }} "
-                                  name="{{ $item->titulo }}:{{ $value->valor }}"
-                                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for=" {{ $item->titulo }}:{{ $value->valor }} "
+                              <div class="flex items-center">
+                                <input type="{{ $item->is_multiple ? 'checkbox' : 'radio' }}"
+                                  id="attribute-{{ $item->id }}-{{ $value->id }}"
+                                  name="attributes[{{ $item->id }}]{{ $item->is_multiple ? '[]' : '' }}"
+                                  value="{{ $value->id }}"
+                                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 {{ $item->is_multiple ? 'rounded-sm' : 'rounded-full' }} focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="attribute-{{ $item->id }}-{{ $value->id }}"
                                   class="ml-2">{{ $value->valor }}</label>
                               </div>
                             @endif

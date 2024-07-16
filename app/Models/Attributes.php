@@ -8,19 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Attributes extends Model
 {
     use HasFactory;
-    protected $filiable =  ['titulo',
-    'imagen',
-    'descripcion',
-    'valores',
-    'color',
-    'status'];
+    protected $fillable =  [
+        'titulo',
+        'imagen',
+        'descripcion',
+        'valores',
+        'color',
+        'is_multiple',
+        'status'
+    ];
 
     public function values()
     {
         return $this->hasMany(Attributes::class, 'attribute_id');
     }
 
-    public function attributeValues() 
+    public function attributeValues()
     {
         return $this->hasMany(AttributesValues::class, 'attribute_id');
     }
@@ -29,6 +32,5 @@ class Attributes extends Model
     {
         return $this->belongsToMany(Products::class, 'attribute_product_values', 'attribute_id', 'product_id')
             ->withPivot('attribute_value_id');
-            
     }
 }

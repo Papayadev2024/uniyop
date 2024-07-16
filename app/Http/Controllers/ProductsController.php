@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Classes\dxResponse;
+use App\Models\AttributeProductValues;
 use App\Models\Attributes;
 use App\Models\AttributesValues;
 use App\Models\Category;
+use App\Models\dxDataGrid;
 use App\Models\Galerie;
 use App\Models\Products;
 use App\Models\Specifications;
@@ -16,7 +19,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use SoDe\Extend\JSON;
 
 use function PHPUnit\Framework\isNull;
 
@@ -30,6 +33,76 @@ class ProductsController extends Controller
     $products =  Products::where("status", "=", true)->get();
 
     return view('pages.products.index', compact('products'));
+  }
+
+  public function paginate(Request $request)
+  {
+    $response =  new dxResponse();
+    try {
+      $instance = Products::select();
+
+      if ($request->group != null) {
+        [$grouping] = $request->group;
+        $selector = \str_replace('.', '__', $grouping['selector']);
+        $instance = Products::select([
+          "{$selector} AS key"
+        ])
+          ->groupBy($selector);
+      }
+
+      if ($request->filter) {
+        $instance->where(function ($query) use ($request) {
+          dxDataGrid::filter($query, $request->filter ?? []);
+        });
+      }
+
+      if ($request->sort != null) {
+        foreach ($request->sort as $sorting) {
+          $selector = \str_replace('.', '__', $sorting['selector']);
+          $instance->orderBy(
+            $selector,
+            $sorting['desc'] ? 'DESC' : 'ASC'
+          );
+        }
+      } else {
+        $instance->orderBy('id', 'DESC');
+      }
+
+      $totalCount = 0;
+      if ($request->requireTotalCount) {
+        $totalCount = $instance->count('*');
+      }
+
+      $jpas = [];
+      if (!$request->ignoreData) {
+        $jpas = $request->isLoadingAll
+          ? $instance->get()
+          : $instance
+          ->skip($request->skip ?? 0)
+          ->take($request->take ?? 10)
+          ->get();
+      }
+
+      $results = [];
+
+      foreach ($jpas as $jpa) {
+        $result = JSON::unflatten($jpa->toArray(), '__');
+        $results[] = $result;
+      }
+
+      $response->status = 200;
+      $response->message = 'Operación correcta';
+      $response->data = $results;
+      $response->totalCount = $totalCount;
+    } catch (\Throwable $th) {
+      $response->status = 400;
+      $response->message = $th->getMessage() . " " . $th->getFile() . ' Ln.' . $th->getLine();
+    } finally {
+      return response(
+        $response->toArray(),
+        $response->status
+      );
+    }
   }
 
   /**
@@ -89,7 +162,6 @@ class ProductsController extends Controller
    */
   public function store(Request $request)
   {
-    // dump($request->all());
     try {
       $especificaciones = [];
       $data = $request->all();
@@ -104,7 +176,7 @@ class ProductsController extends Controller
       ]);
 
       // Imagenes
-      $data['descuento'] = $data['descuento'] ?? 0; 
+      $data['descuento'] = $data['descuento'] ?? 0;
       $data['image_texture'] = $this->saveImg($request, 'image_texture');
       $data['imagen_ambiente'] = $this->saveImg($request, 'imagen_ambiente');
       $data['imagen'] = $this->saveImg($request, 'imagen');
@@ -113,13 +185,7 @@ class ProductsController extends Controller
       $data['imagen_4'] = $this->saveImg($request, 'imagen_4');
 
       foreach ($data as $key => $value) {
-
-        if (strstr($key, ':')) {
-          // Separa el nombre del atributo y su valor
-          $atributos = $this->stringToObject($key, $atributos);
-          unset($request[$key]);
-        } elseif (strstr($key, '-')) {
-
+        if (strstr($key, '-')) {
           //strpos primera ocurrencia que enuentre
           if (strpos($key, 'tittle-') === 0 || strpos($key, 'title-') === 0) {
             $num = substr($key, strrpos($key, '-') + 1); // Obtener el número de la especificación
@@ -131,17 +197,12 @@ class ProductsController extends Controller
         }
       }
 
-      $jsonAtributos = json_encode($atributos);
-
       if (array_key_exists('destacar', $data)) {
         if (strtolower($data['destacar']) == 'on') $data['destacar'] = 1;
       }
       if (array_key_exists('recomendar', $data)) {
         if (strtolower($data['recomendar']) == 'on') $data['recomendar'] = 1;
       }
-
-
-      $data['atributes'] = $jsonAtributos;
 
       $cleanedData = Arr::where($data, function ($value, $key) {
         return !is_null($value);
@@ -161,20 +222,24 @@ class ProductsController extends Controller
         $producto = Products::create($cleanedData);
       }
 
-      if (isset($atributos)) {
-        foreach ($atributos as $atributo => $valores) {
-          $idAtributo = Attributes::where('titulo', $atributo)->first();
+      AttributeProductValues::where('product_id', $producto->id)->delete();
 
-          foreach ($valores as $valor) {
-            $idValorAtributo = AttributesValues::where('valor', $valor)->first();
-
-            if ($idAtributo && $idValorAtributo) {
-              DB::table('attribute_product_values')->insert([
+      if (isset($data['attributes']) && is_array($data['attributes'])) {
+        foreach ($data['attributes'] as $attribute_id => $value_id) {
+          if (is_array($value_id)) {
+            foreach ($value_id as $id) {
+              AttributeProductValues::create([
                 'product_id' => $producto->id,
-                'attribute_id' => $idAtributo->id,
-                'attribute_value_id' => $idValorAtributo->id,
+                'attribute_id' => $attribute_id,
+                'attribute_value_id' => $id
               ]);
             }
+          } else {
+            AttributeProductValues::create([
+              'product_id' => $producto->id,
+              'attribute_id' => $attribute_id,
+              'attribute_value_id' => $value_id
+            ]);
           }
         }
       }
