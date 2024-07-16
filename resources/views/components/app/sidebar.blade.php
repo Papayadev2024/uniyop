@@ -121,7 +121,7 @@
           icon="fas fa-question-circle">FAQs</x-menu.item>
         <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fas fa-sliders-h">Sliders</x-menu.item>
         <x-menu.item id="banners" href="{{ route('banners.index') }}"
-          icon="fa-solid fa-tags">Banners</x-menu.item>
+          icon="fa fa-solid fa-image">Banners</x-menu.item>
 
         <x-menu.item id="galerie" href="{{ route('galerie.index') }}" icon="fas fa-images">Galerias</x-menu.item>
       </x-menu.group>
