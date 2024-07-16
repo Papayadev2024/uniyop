@@ -1102,11 +1102,22 @@ class IndexController extends Controller
 
   public function detalleBlog($id)
   {
-      $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $id)->first();
-      $meta_title = $posts->meta_title ?? $posts->title;
-      $meta_description = $posts->meta_description  ?? Str::limit($posts->extract, 160);
-      $meta_keywords = $posts->meta_keywords ?? '';
+      $post = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $id)->first();
+      $meta_title = $post->meta_title ?? $post->title;
+      $meta_description = $post->meta_description  ?? Str::limit($post->extract, 160);
+      $meta_keywords = $post->meta_keywords ?? '';
 
-      return view('public.post', compact('meta_title','meta_description','meta_keywords','posts'));
+      return view('public.post', compact('meta_title','meta_description','meta_keywords','post'));
+  }
+
+
+  public function searchBlog(Request $request)
+  {   
+      $query = $request->input('query');
+     
+      $resultados = Blog::where('title', 'like', "%$query%")->where('visible', '=', true)->where('status', '=', true)
+                             ->get();
+     
+      return response()->json($resultados);
   }
 }

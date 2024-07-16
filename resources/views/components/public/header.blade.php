@@ -355,15 +355,16 @@
 
 
 <script>
-  
+
+
   $(document).ready(function() {
-    $('#buscarproducto').keyup(function() {
+    $('#buscarblog').keyup(function() {
 
       var query = $(this).val().trim();
 
       if (query !== '') {
         $.ajax({
-          url: '{{ route('buscar') }}',
+          url: '{{ route('buscarblog') }}',
           method: 'GET',
           data: {
             query: query
@@ -373,60 +374,22 @@
             var url = '{{ asset('') }}';
             data.forEach(function(result) {
               resultsHtml +=
-                '<a class="bg-white z-50" href="/producto/' + result.id +
-                '"> <div class="bg-white z-50 w-full flex flex-row py-3 px-3 hover:bg-slate-200"> ' +
-                ' <div class="w-[20%]"><img class="w-14 rounded-md" src="' +
-                url + result.imagen + '" /></div>' +
+                '<a class="z-50" href="/post/' + result.id +
+                '"> <div class=" z-50 w-full flex flex-row py-2 px-3 hover:bg-slate-200"> ' +
+                ' <div class="w-[30%]"><img class="w-full rounded-md" src="' +
+                url + result.url_image + result.name_image + '" /></div>' +
                 ' <div class="flex flex-col justify-center w-[80%] pl-3"> ' +
-                ' <h2 class="text-left line-clamp-1">' + result.producto +
+                ' <h2 class="text-left line-clamp-1">' + result.title +
                 '</h2> ' +
-                '<p class="text-text12 text-left line-clamp-1">' + result.categoria.name + '</p></div> ' +
+                '</div> ' +
                 '</div></a>';
             });
 
-            $('#resultados').html(resultsHtml);
+            $('#resultadosblog').html(resultsHtml);
           }
         });
       } else {
-        $('#resultados').empty();
-      }
-    });
-  });
-
-
-  $(document).ready(function() {
-    $('#buscarproducto2').keyup(function() {
-
-      var query = $(this).val().trim();
-
-      if (query !== '') {
-        $.ajax({
-          url: '{{ route('buscar') }}',
-          method: 'GET',
-          data: {
-            query: query
-          },
-          success: function(data) {
-            var resultsHtml = '';
-            var url = '{{ asset('') }}';
-            data.forEach(function(result) {
-              resultsHtml +=
-                '<a class="bg-white z-50" href="/producto/' + result.id +
-                '"> <div class="bg-white z-50 w-full flex flex-row py-3 px-3 hover:bg-slate-200"> ' +
-                ' <div class="w-[20%]"><img class="w-14 rounded-md" src="' +
-                url + result.imagen + '" /></div>' +
-                ' <div class="flex flex-col justify-center w-[80%] pl-3"> ' +
-                ' <h2 class="text-left line-clamp-1">' + result.producto +
-                '</h2> ' +
-                '<p class="text-text12 text-left line-clamp-1">' + result.categoria.name + '</p></div> ' +
-                '</div></a>';
-            });
-
-            $('#resultados2').html(resultsHtml);
-          }
-        });
-      } else {
-        $('#resultados2').empty();
+        $('#resultadosblog').empty();
       }
     });
   });
@@ -434,26 +397,15 @@
 
 <script>
   document.addEventListener('click', function(event) {
-      var input = document.getElementById('buscarproducto');
-      var resultados = document.getElementById('resultados');
+      var input = document.getElementById('buscarblog');
+      var resultados = document.getElementById('resultadosblog');
       var isClickInsideInput = input.contains(event.target);
       var isClickInsideResultados = resultados.contains(event.target);
 
       if (!isClickInsideInput && !isClickInsideResultados) {
           input.value = '';
-          $('#resultados').empty();
+          $('#resultadosblog').empty();
       }
   });
 
-  document.addEventListener('click', function(event) {
-      var input = document.getElementById('buscarproducto2');
-      var resultados = document.getElementById('resultados2');
-      var isClickInsideInput = input.contains(event.target);
-      var isClickInsideResultados = resultados.contains(event.target);
-
-      if (!isClickInsideInput && !isClickInsideResultados) {
-          input.value = '';
-          $('#resultados2').empty();
-      }
-  });
 </script>
