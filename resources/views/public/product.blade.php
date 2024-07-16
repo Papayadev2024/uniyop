@@ -16,6 +16,18 @@
   ?>
 
   <style>
+    .clase_table {
+      border-collapse: separate;
+      border-spacing: 10;
+    }
+
+    .clase_table td {
+      /* border: 1px solid black; */
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      padding: 10px;
+    }
+
     .swiper-pagination-bullet-active {
       background-color: #272727;
     }
@@ -55,7 +67,13 @@
       <div class="flex flex-col gap-6 w-full mt-10">
         <div class="flex flex-col gap-3">
           <h3 class="font-normal text-3xl"> {{ $product->producto }}</h3>
-          <p class="font-normal text-sm gap-2">Disponibilidad: <span class="text-[#006BF6]">Quedan 5 en stock</span> </p>
+          <p class="font-normal text-sm gap-2">Disponibilidad:
+            @if ($product->stock == 0)
+              <span class="text-[#f6000c]">No hay Stock disponible</span>
+          </p>
+        @else
+          <span class="text-[#006BF6]">Quedan {{ round((float) $product->stock) }} en stock</span> </p>
+          @endif
 
         </div>
         <div class="flex flex-col gap-5 ">
@@ -90,41 +108,58 @@
 
         </div>
         <div class="flex flex-col gap-6">
-          <div class="flex flex-row gap-3 text-center">
-            <span>Tamaño:</span>
-            <span class="rounded-md bg-[#006BF6] h-6 w-10 text-white text-sm"> S</span>
-            <span class="rounded-md bg-[#F7F8FA] h-6 w-10 text-sm"> M </span>
-            <span class="rounded-md bg-[#F7F8FA] h-6 w-10 text-sm"> L </span>
-          </div>
-          <div class="flex flex-row gap-3 text-center">
-            <span>Color:</span>
-            <span class="rounded-full bg-[#D9D9D9] h-6 w-6 text-white text-sm"> </span>
-            <span class="rounded-full bg-[#D9D9D9] h-6 w-6 text-sm"> </span>
-            <span class="rounded-full bg-[#D9D9D9] h-6 w-6 text-sm"> </span>
-          </div>
-          <div class="flex flex-row gap-3 text-center">
-            <span>Model:</span>
-            <span class="rounded-md bg-[#006BF6] h-6 w-24 text-white text-sm"> iphone 11</span>
-            <span class="rounded-md bg-[#F7F8FA] h-6 w-24 text-sm"> iphone 12 </span>
-            <span class="rounded-md bg-[#F7F8FA] h-6 w-24 text-sm"> iphone 13 </span>
-          </div>
+          @php
+            $groupedAttributes = $product->attributes->groupBy('titulo');
+          @endphp
+
+          @foreach ($groupedAttributes as $titulo => $items)
+            <div class="flex flex-row gap-3 text-center">
+              <span>{{ $titulo }}:</span>
+              @foreach ($items as $item)
+                @php
+                  // Encuentra el objeto en $valorAtributo que tiene el id igual a $item->pivot->attribute_value_id
+                  $atributo = $valorAtributo->firstWhere('id', $item->pivot->attribute_value_id);
+                @endphp @if ($atributo)
+                  <!-- Muestra el valor del atributo encontrado -->
+                  <span class="bg-[#006BF6] text-white rounded-md px-2 text-[15px]">{{ $atributo->valor }}</span>
+                @endif
+              @endforeach
+            </div>
+          @endforeach
+
+
 
         </div>
+        <p class="font-normal text-sm gap-2">Especificaciones: </p>
+
+        <div class="min-w-full divide-y divide-gray-200">
+          <table class="clase_table divide-y divide-gray-200 ">
+            <tbody>
+              @foreach ($especificaciones as $item)
+                <tr>
+                  <td class="px-4 py-2 whitespace-nowrap border border-gray-200 rounded-lg">
+                    {{ $item->tittle }}
+                  </td>
+                  <td class="px-4 py-2 whitespace-nowrap border border-gray-200 rounded-lg">
+                    {{ $item->specifications }}
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
         <div class="flex flex-row gap-6">
-          <div class="flex flex-row gap-2 items-center">
-            <i class="h-5 w-5 inline-block"
-              style="background-image: url('{{ asset('images/img/regla.png') }}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></i>
-            <a href="" class=""> Guias y mediddas</a>
-          </div>
+
           <div class="flex flex-row gap-2 items-center">
             <i class="h-5 w-5 inline-block"
               style="background-image: url('{{ asset('images/img/carrito.png') }}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></i>
-            <a href="" class=""> Envio</a>
+            <span class=""> Envio a Domicilio</span>
           </div>
           <div class="flex flex-row gap-2 items-center">
             <i class="h-5 w-5 inline-block"
               style="background-image: url('{{ asset('images/img/mail.png') }}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></i>
-            <a href="" class="">Preguntar sobre este producto</a>
+            <a href="https://api.whatsapp.com/send?phone={{ $general->whatsapp }}&text=Hola! Quería solicitar informacion para el producto  {{ $product->producto }}."
+              class="">Preguntar sobre este producto</a>
           </div>
         </div>
 
@@ -147,23 +182,30 @@
         </div>
         <div class="flex flex-col mt-9">
           <h6 class="">Combinalo con: </h6>
-          <div class="grid grid-cols-3 gap-3  mb-6">
-            <div class="flex flex-col items-center justify-center col-span-1  shadow-lg py-2  pb-5">
-              <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
-              <span>Droubook space gray</span>
-              <h2 class="font-bold text-[#006BF6]">S/ 80.00</h2>
-            </div>
-            <div class="flex flex-col items-center justify-center col-span-1 shadow-lg pb-5">
-              <img src="{{ asset('images\img\2.png') }}" alt="" class="h-40 w-40 ">
-              <span>DrouPods Pro white</span>
-              <h2 class="font-bold text-[#006BF6]">S/ 39.00</h2>
-            </div>
-            <div class="flex flex-col items-center justify-center col-span-1 shadow-lg pb-5">
-              <img src="{{ asset('images\img\3.png') }}" alt="" class="h-40 w-40 ">
-              <span>lPhone 13 white color</span>
-              <h2 class="font-bold text-[#006BF6]">S/ 110.00</h2>
-            </div>
 
+          <div class="grid grid-cols-3 gap-3  mb-6">
+            <div class="col-span-3">
+              <div class="swiper productos-relacionados">
+
+                <div class="swiper-wrapper gap-2 h-full">
+                  @foreach ($ProdComplementarios as $item)
+                    <div class="swiper-slide w-full h-full col-span-1">
+                      <div class="flex flex-col items-center justify-center col-span-1  shadow-lg py-2  pb-5">
+                        <a href="/producto/{{ $item->id }}" target="_blanck">
+                          <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
+                          <span>Droubook space gray</span>
+                          <h2 class="font-bold text-[#006BF6]">S/ 80.00</h2>
+
+                        </a>
+
+                      </div>
+
+                    </div>
+                  @endforeach
+
+                </div>
+              </div>
+            </div>
 
           </div>
 
@@ -202,54 +244,13 @@
               src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
         <div class="grid grid-cols-4 gap-4 mt-14 w-full">
-          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
-            <img src="{{ asset('images\img\img1.png') }}" alt="" class="w-full   object-cover">
-            <h2 class="text-xl mt-4  ">
-              Drou watch ultra
-            </h2>
-            <div class="flex content-between flex-row gap-4">
-              <span class="text-[#006BF6] text-base font-semibold">S/ 70.00</span>
-              <span class="text-sm text-[#15294C] opacity-60 line-through">S/ 85.00</span>
-            </div>
-
-          </div>
-          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
-            <img src="{{ asset('images\img\img2.png') }}" alt="" class="w-full   object-cover">
-            <h2 class="text-xl mt-4 ">
-              Laptop Lenovo Gris
-            </h2>
-            <div class="flex content-between flex-row gap-4">
-              <span class="text-[#006BF6] text-base font-semibold">S/ 80.00</span>
+          @foreach ($ProdComplementarios->take(4) as $item)
+            <x-product.container width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" />
+          @endforeach
 
 
-            </div>
-
-          </div>
-          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
-            <img src="{{ asset('images\img\img3.png') }}" alt="" class="w-full   object-cover">
-            <h2 class="text-xl mt-4 ">
-              Homepod mini 2022
-            </h2>
-            <div class="flex content-between flex-row gap-4">
-              <span class="text-[#006BF6] text-base font-semibold">S/ 39.00</span>
-              <span class="text-sm text-[#15294C] opacity-60 line-through">S/ 60.00</span>
-            </div>
 
 
-          </div>
-          <div class="col-span-1 flex flex-col justify-center items-center text-center bg-white shadow-lg py-2  pb-5">
-            <img src="{{ asset('images\img\img4.png') }}" alt="" class="w-full   object-cover">
-            <h2 class="text-xl mt-4 ">
-              DroSafe Charger
-            </h2>
-            <div class="flex content-between flex-row gap-4">
-
-              <span class="text-[#006BF6] text-base font-semibold">S/ 55.00</span>
-              <span class="text-sm text-[#15294C] opacity-60 line-through">S/ 75.00</span>
-
-            </div>
-
-          </div>
         </div>
       </div>
 
@@ -316,6 +317,40 @@
   </main>
 
 @section('scripts_importados')
+  <script>
+    var headerServices = new Swiper(".productos-relacionados", {
+      slidesPerView: 3,
+      spaceBetween: 0,
+      loop: true,
+      centeredSlides: false,
+      initialSlide: 0, // Empieza en el cuarto slide (índice 3) */
+      /* pagination: {
+        el: ".swiper-pagination-estadisticas",
+        clickable: true,
+      }, */
+      //allowSlideNext: false,  //Bloquea el deslizamiento hacia el siguiente slide
+      //allowSlidePrev: false,  //Bloquea el deslizamiento hacia el slide anterior
+      allowTouchMove: true, // Bloquea el movimiento táctil
+      autoplay: {
+        delay: 5500,
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true
+      },
+
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+          centeredSlides: false,
+          loop: true,
+        },
+        1024: {
+          slidesPerView: 3,
+          centeredSlides: false,
+
+        },
+      },
+    });
+  </script>
 
 
 @stop

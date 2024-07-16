@@ -165,6 +165,7 @@ class ProductsController extends Controller
     try {
       $especificaciones = [];
       $data = $request->all();
+      dump($data);
       $atributos = null;
       $tagsSeleccionados = $request->input('tags_id');
       // $valorprecio = $request->input('precio') - 0.1;

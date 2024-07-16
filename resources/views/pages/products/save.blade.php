@@ -282,11 +282,12 @@
                       placeholder="Costo por articulo">
                   </div>
                 </div>
-                <div class="md:col-span-5">
+                <div class="md:col-span-3">
                   <label for="sku">Sku</label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i class="text-lg text-gray-500 dark:text-gray-400 fa-solid fa-barcode"></i>
+
 
                     </div>
                     <input type="text" id="sku" name="sku" value="{{ $product->sku }}"
@@ -294,6 +295,7 @@
                       placeholder="Sku">
                   </div>
                 </div>
+
                 <div class="md:col-span-5">
                   <label for="categoria_id">Categoria <span class="text-red-500 font-bold">*</span></label>
                   <div class="relative mb-2  mt-2">

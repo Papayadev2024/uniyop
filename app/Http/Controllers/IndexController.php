@@ -573,7 +573,9 @@ class IndexController extends Controller
 
     $galery = Galerie::where('product_id', $product->id)->get();
 
-    return view('public.product', compact('atributos', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
+    $general = General::first();
+
+    return view('public.product', compact('atributos', 'general','valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
   }
 
   //  --------------------------------------------
