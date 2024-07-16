@@ -44,7 +44,7 @@
     <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto">
       <div class="grid grid-col-1  gap-1  w-full mt-10">
         <div class=" col-span-1">
-          <div class="bg-gray-300 w-full h-[400px] ">
+          <div class="bg-gray-300 w-full  ">
 
           </div>
         </div>
@@ -70,12 +70,12 @@
       </div>
       <div class="flex flex-col gap-6 w-full mt-10">
         <div class="flex flex-col gap-3">
-          <h3 class="font-normal text-3xl"> Cargador DRosafe</h3>
+          <h3 class="font-normal text-3xl"> {{ $product->producto }}</h3>
           <p class="font-normal text-sm gap-2">Disponibilidad: <span class="text-[#006BF6]">Quedan 5 en stock</span> </p>
 
         </div>
         <div class="flex flex-col gap-5 ">
-          <p class="font-normal text-sm gap-2">SKU: 202 </p>
+          <p class="font-normal text-sm gap-2">SKU: {{ $product->sku }} </p>
 
           <div class="flex flex-row gap-3 content-center items-center">
             <div class=" content-center flex flex-row gap-2 items-center">

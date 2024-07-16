@@ -102,7 +102,7 @@
           Terminos y Condiciones
         </x-menu.item>
         <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-wrench">Servicios</x-menu.item>
-        {{-- <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item> --}}
+        <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item>
         <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Logos cliente</x-menu.item>
         <x-menu.item id="staff" href="{{ route('staff.index') }}" icon="fas fa-users">Personal</x-menu.item>
         <x-menu.item id="strength" href="{{ route('strength.index') }}">Beneficios</x-menu.item>
@@ -120,6 +120,9 @@
         <x-menu.item id="faqs" href="{{ route('faqs.index') }}"
           icon="fas fa-question-circle">FAQs</x-menu.item>
         <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fas fa-sliders-h">Sliders</x-menu.item>
+        <x-menu.item id="banners" href="{{ route('banners.index') }}"
+          icon="fa-solid fa-tags">Banners</x-menu.item>
+
         <x-menu.item id="galerie" href="{{ route('galerie.index') }}" icon="fas fa-images">Galerias</x-menu.item>
       </x-menu.group>
     </div>

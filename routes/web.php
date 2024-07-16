@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AttributesController;
+use App\Http\Controllers\BannersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -66,7 +67,8 @@ Route::get('/comentario', [IndexController::class, 'comentario'])->name('comenta
 Route::post('/comentario/nuevo', [IndexController::class, 'hacerComentario'])->name('nuevocomentario');
 Route::get('/contacto', [IndexController::class, 'contacto'])->name('contacto');
 Route::get('/libro-de-reclamaciones', [IndexController::class, 'librodereclamaciones'])->name('librodereclamaciones');
-
+Route::get('/blog/{filtro}', [IndexController::class, 'blog'])->name('blog');
+Route::get('/post/{id}', [IndexController::class, 'detalleBlog'])->name('detalleBlog');
 /* Proceso de pago */
 Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
 Route::get('/pago', [IndexController::class, 'pago'])->name('pago');
@@ -91,7 +93,7 @@ Route::get('/politicas-de-devolucion', [IndexController::class, 'politicasDevolu
 Route::get('/terminos-y-condiciones', [IndexController::class, 'TerminosyCondiciones'])->name('terms_condition');
 
 // Route::post('/payment/culqi', [PaymentController::class, 'culqi'])->name('payment.culqi');
-
+Route::get('/buscarblog', [IndexController::class, 'searchBlog'])->name('buscarblog');
 
 Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {
 
@@ -213,6 +215,11 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/galerie', [GalerieController::class, 'store'])->name('galerie.store');
         Route::post('/galerie/updateVisible', [GalerieController::class, 'updateVisible'])->name('galerie.updateVisible');
         Route::post('/galerie/borrar', [GalerieController::class, 'borrar'])->name('galerie.borrar');
+
+        Route::resource('/banners', BannersController::class);
+        Route::post('/banners/deleteBanner', [BannersController::class, 'store'])->name('banners.deleteBanner');
+        Route::post('/banners/updateVisible', [BannersController::class, 'store'])->name('banner.updateVisible');
+      
 
 
         Route::fallback(function () {

@@ -31,7 +31,8 @@ class Products extends Model
     'subcategory_id',
     'color',
     'image_texture',
-    'slug'
+    'slug',
+    'sku'
   ];
 
   public function categoria()

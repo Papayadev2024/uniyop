@@ -353,3 +353,60 @@
   })
 </script>
 <script src="{{ asset('js/storage.extend.js') }}"></script>
+
+
+<script>
+
+
+  $(document).ready(function() {
+    $('#buscarblog').keyup(function() {
+
+      var query = $(this).val().trim();
+
+      if (query !== '') {
+        $.ajax({
+          url: '{{ route('buscarblog') }}',
+          method: 'GET',
+          data: {
+            query: query
+          },
+          success: function(data) {
+            var resultsHtml = '';
+            var url = '{{ asset('') }}';
+            data.forEach(function(result) {
+              resultsHtml +=
+                '<a class="z-50" href="/post/' + result.id +
+                '"> <div class=" z-50 w-full flex flex-row py-2 px-3 hover:bg-slate-200"> ' +
+                ' <div class="w-[30%]"><img class="w-full rounded-md" src="' +
+                url + result.url_image + result.name_image + '" /></div>' +
+                ' <div class="flex flex-col justify-center w-[80%] pl-3"> ' +
+                ' <h2 class="text-left line-clamp-1">' + result.title +
+                '</h2> ' +
+                '</div> ' +
+                '</div></a>';
+            });
+
+            $('#resultadosblog').html(resultsHtml);
+          }
+        });
+      } else {
+        $('#resultadosblog').empty();
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('click', function(event) {
+      var input = document.getElementById('buscarblog');
+      var resultados = document.getElementById('resultadosblog');
+      var isClickInsideInput = input.contains(event.target);
+      var isClickInsideResultados = resultados.contains(event.target);
+
+      if (!isClickInsideInput && !isClickInsideResultados) {
+          input.value = '';
+          $('#resultadosblog').empty();
+      }
+  });
+
+</script>
