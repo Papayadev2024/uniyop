@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateIndexRequest;
 use App\Models\Address;
 use App\Models\Attributes;
 use App\Models\AttributesValues;
+use App\Models\Banners;
+use App\Models\Blog;
 use App\Models\Faqs;
 use App\Models\General;
 use App\Models\Index;
@@ -54,6 +56,11 @@ class IndexController extends Controller
     // $productos = Products::all();
     $url_env = env('APP_URL');
     $productos =  Products::with('tags')->get();
+    $ultimosProductos = Products::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(5)->get();
+    $productosPupulares = Products::where('status', '=', 1)->where('visible', '=', 1)->where('destacar', '=', 1)->orderBy('id', 'desc')->take(8)->get();
+    $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(3)->get();
+    $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
+
     $categorias = Category::where('destacar', '=', 1)->get();
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
@@ -61,7 +68,7 @@ class IndexController extends Controller
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
 
     $general = General::all();
-    $benefit = Strength::where('status', '=', 1)->get();
+    $benefit = Strength::where('status', '=', 1)->take(3)->get();
     $faqs = Faqs::where('status', '=', 1)->where('visible', '=', 1)->get();
     $testimonie = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
     $slider = Slider::where('status', '=', 1)->where('visible', '=', 1)->get();
@@ -69,7 +76,7 @@ class IndexController extends Controller
 
 
 
-    return view('public.index', compact('url_env', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
+    return view('public.index', compact('url_env','banners','blogs', 'productosPupulares','ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
   }
 
   public function catalogo(Request $request, ?string $category = '0', ?string $subcategory = '0')

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AttributesController;
+use App\Http\Controllers\BannersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -213,6 +214,11 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/galerie', [GalerieController::class, 'store'])->name('galerie.store');
         Route::post('/galerie/updateVisible', [GalerieController::class, 'updateVisible'])->name('galerie.updateVisible');
         Route::post('/galerie/borrar', [GalerieController::class, 'borrar'])->name('galerie.borrar');
+
+        Route::resource('/banners', BannersController::class);
+        Route::post('/banners/deleteBanner', [BannersController::class, 'store'])->name('banners.deleteBanner');
+        Route::post('/banners/updateVisible', [BannersController::class, 'store'])->name('banner.updateVisible');
+      
 
 
         Route::fallback(function () {

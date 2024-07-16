@@ -150,15 +150,16 @@
                             for="imagen">Imagen del producto</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            id="imagen"  name="imagen" type="file" accept="image/*" title="Cargar imagen de producto" tippy>
+                            id="imagen" name="imagen" type="file" accept="image/*"
+                            title="Cargar imagen de producto" tippy>
                         </div>
                         <div>
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             for="imagen_ambiente">Imagen de ambiente</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*" title="Cargar imagen de ambiente"
-                            tippy>
+                            id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*"
+                            title="Cargar imagen de ambiente" tippy>
                         </div>
                       </div>
                     </div>
@@ -175,8 +176,10 @@
                           @php
                             $uuid = Crypto::randomUUID();
                           @endphp
-                          <div id="galery_container_{{ $uuid }}" class="relative group block w-[120px] h-[160px] rounded-md border" draggable="true">
-                            <div class="absolute top-0 left-0 bottom-0 right-0 rounded-md hover:bg-[#00000075] transition-all flex flex-col items-center justify-center gap-1">
+                          <div id="galery_container_{{ $uuid }}"
+                            class="relative group block w-[120px] h-[160px] rounded-md border" draggable="true">
+                            <div
+                              class="absolute top-0 left-0 bottom-0 right-0 rounded-md hover:bg-[#00000075] transition-all flex flex-col items-center justify-center gap-1">
                               <label for="galery_{{ $uuid }}" title="Cambiar Imagen" tippy
                                 class="text-xl text-white hidden group-hover:block cursor-pointer fa-solid fa-camera-rotate z-10"></label>
                               <i id="btn_delete_galery" data-id="{{ $uuid }}" title="Eliminar Imagen" tippy
@@ -277,6 +280,18 @@
                     <input type="number" id="costo_x_art" name="costo_x_art" value="{{ $product->costo_x_art }}"
                       class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Costo por articulo">
+                  </div>
+                </div>
+                <div class="md:col-span-5">
+                  <label for="sku">Sku</label>
+                  <div class="relative mb-2  mt-2">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <i class="text-lg text-gray-500 dark:text-gray-400 fa-solid fa-barcode"></i>
+
+                    </div>
+                    <input type="text" id="sku" name="sku" value="{{ $product->sku }}"
+                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Sku">
                   </div>
                 </div>
                 <div class="md:col-span-5">
@@ -692,7 +707,7 @@
       return data
     }
 
-    $('[data-id="input_img"]').on('change', function () {
+    $('[data-id="input_img"]').on('change', function() {
       const file = this.files[0]
       const url = URL.createObjectURL(file)
 
@@ -755,7 +770,7 @@
       arrow: true
     })
 
-    $(document).on('click', '#btn_delete_galery', function () {
+    $(document).on('click', '#btn_delete_galery', function() {
       $(this).parents('[id^="galery_container_"]').remove()
     })
 

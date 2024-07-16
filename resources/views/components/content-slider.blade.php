@@ -2,7 +2,7 @@
   <div class="relative z-20">
     <h2 class="text-[#006BF6]  text-[29px] text-center">{{ $item->botontext1 }} 1</h2>
     <h1 class=" text-[56px] font-semibold text-center">{{ $item->title }}</h1>
-    <div class="flex flex-col items-center justify-center w-[591px] mx-auto">
+    <div class="flex flex-col items-center justify-center w-full md:w-[591px] mx-auto">
       <h3 class="text-[17px]  text-center leading-9">{{ $item->description }}</h3>
     </div>
     <div class="flex flex-col items-center justify-center  mx-auto mt-3">
