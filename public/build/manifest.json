@@ -1,14 +1,28 @@
 {
+  "_axios-GZ4oqQ7_.js": {
+    "file": "assets/axios-GZ4oqQ7_.js"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-mLJtPRgY.css",
+    "file": "assets/app-xaHBeAu-.css",
     "isEntry": true,
     "src": "resources/css/app.css"
+  },
+  "resources/js/Catalogo.jsx": {
+    "file": "assets/Catalogo-isJSeMl9.js",
+    "imports": [
+      "_axios-GZ4oqQ7_.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/Catalogo.jsx"
   },
   "resources/js/app.js": {
     "css": [
       "assets/app-dGvTjJ5y.css"
     ],
-    "file": "assets/app-Eor_iKiU.js",
+    "file": "assets/app-mKLfJ5sG.js",
+    "imports": [
+      "_axios-GZ4oqQ7_.js"
+    ],
     "isEntry": true,
     "src": "resources/js/app.js"
   }
