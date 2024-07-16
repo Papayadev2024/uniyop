@@ -5,6 +5,7 @@ import FilterContainer from './components/Filter/FilterContainer'
 import ProductContainer from './components/Product/ProductContainer'
 import { Fetch } from 'sode-extend-react'
 import FilterPagination from './components/Filter/FilterPagination'
+import arrayJoin from './Utils/ArrayJoin'
 
 const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [] }) => {
   const take = 10
@@ -112,7 +113,7 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [] }) 
       method: 'POST',
       body: JSON.stringify({
         requireTotalCount: true,
-        filter: filterBody,
+        filter: arrayJoin(filterBody, 'and'),
         take,
         skip: take * (currentPage - 1)
       })
