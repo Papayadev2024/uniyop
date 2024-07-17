@@ -45,7 +45,7 @@
 
                     </div>
                   </div>
-                  <div class="col-span-5 md:col-span-2">
+                  {{-- <div class="col-span-5 md:col-span-2">
 
                     <label for="color">Color <span class="text-red-500 font-bold">*</span></label>
 
@@ -59,7 +59,7 @@
 
 
                     </div>
-                  </div>
+                  </div> --}}
                   <div class="col-span-5 md:col-span-5 mt-2">
 
                     <label for="extract">Extracto</label>
@@ -123,12 +123,11 @@
                         @else
                           <img id="imagen_ambiente_previewer" x-show="showAmbiente"
                             x-transition:enter="transition ease-out duration-300 transform"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
-                            x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/img/noimagen.jpg') }}"
-                            alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+                            class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @endif
                       </div>
                       <div>
@@ -435,7 +434,7 @@
                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <i class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen"></i>
                       </div>
-                      <input type="number" id="peso" name="peso" value="{{ $product->peso }}"
+                      <input type="string" id="peso" name="peso" value="{{ $product->peso }}"
                         step="0.1"
                         class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Peso">
