@@ -46,14 +46,16 @@
     $x = $product->toArray();
     $i = 1;
   @endphp
-  <main class="font-poppins" id="mainSection">
+  @php
+    $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Producto', 'url' => '']];
+  @endphp
+  @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+  @endcomponent
+  <main class="font-poppins px-5" id="mainSection">
     @csrf
-    @php
-      $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Producto', 'url' => '']];
-    @endphp
 
-    @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-    @endcomponent
+
+
     <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto">
       <div class="grid grid-col-1 sm:grid-cols-3  gap-1  w-full mt-10 h-max">
         <div class=" col-span-3 h-max">
@@ -67,7 +69,7 @@
       </div>
       <div class="flex flex-col gap-6 w-full mt-10">
         <div class="flex flex-col gap-3">
-          <h3 class="font-normal text-3xl"> {{ $product->producto }}</h3>
+          <h3 class="font-normal text-[32.41px]"> {{ $product->producto }}</h3>
           <p class="font-normal text-sm gap-2">Disponibilidad:
             @if ($product->stock == 0)
               <span class="text-[#f6000c]">No hay Stock disponible</span>

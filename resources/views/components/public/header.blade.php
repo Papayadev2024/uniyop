@@ -48,7 +48,7 @@
   }
 </style>
 
-<div class="navigation shadow-xl" style="z-index: 9999; background-color: #fff !important">
+<div class="navigation shadow-xl px-5" style="z-index: 9999; background-color: #fff !important">
   <button aria-label="hamburguer" type="button" class="hamburger" id="position" onclick="show()">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M18 2L2 18M18 18L2 2" stroke="#272727" stroke-width="2.66667" stroke-linecap="round" />
@@ -133,10 +133,10 @@
 </div>
 
 
-<header>
+<header class="">
   @foreach ($datosgenerales as $item)
     <div class="bg-[#006BF6] p-[1px] ">
-      <div class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto py-5  text-[17px]  ">
+      <div class="px-5 flex justify-center md:justify-end gap-5 w-11/12 mx-auto py-5  text-[17px]  ">
         <div class="text-white font-normal font-poppins text-[17px] text-start w-1/3">
           (51)
           987 456 243 | <a href="#">Direccion</a>
@@ -152,7 +152,7 @@
   @endforeach
 
   <div class="">
-    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto py-2  text-[17px]">
+    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto py-2  text-[17px] px-5">
       <div id="menu-burguer" class="md:hidden z-10 w-max">
         <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}" alt="menu hamburguesa"
           onclick="show()" />

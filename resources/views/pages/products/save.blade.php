@@ -131,19 +131,7 @@
                         @endif
                       </div>
                       <div>
-                        <div class="mb-4">
-                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            for="image_texture">Imagen de textura <span
-                              class="text-red-500 font-bold">*</span></label>
-                          <label class="block w-max" for="image_texture" title="Cambiar imagen de textura" tippy>
-                            <img id="image_texture_previewer"
-                              class="w-40 h-10 border rounded-md object-cover object-center cursor-pointer"
-                              src="{{ $product->image_texture ? asset($product->image_texture) : asset('images/img/noimagen.jpg') }}"
-                              alt="">
-                          </label>
-                          <input data-id="input_img" class="hidden" id="image_texture" name="image_texture"
-                            type="file" accept="image/*">
-                        </div>
+
                         <div class="mb-4">
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             for="imagen">Imagen del producto</label>
@@ -154,7 +142,7 @@
                         </div>
                         <div>
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            for="imagen_ambiente">Imagen de ambiente</label>
+                            for="imagen_ambiente">Imagen Secundaria</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*"
