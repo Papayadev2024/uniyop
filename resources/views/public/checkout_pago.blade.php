@@ -193,7 +193,8 @@
                     </h2>
                     <ul class="grid w-full gap-6 md:grid-cols-3">
                       <li>
-                        <input type="radio" name="envio" id="react-option" value="" class="hidden peer" required="">
+                        <input type="radio" name="envio" id="react-option" value="" class="hidden peer"
+                          required="">
                         <label for="react-option"
                           class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                           <div class="block">
@@ -466,7 +467,7 @@
             </div>
 
             <a id="btnPagar" href="/agradecimiento"
-                class="text-white bg-[#74A68D] w-full py-4 rounded-3xl cursor-pointer font-semibold text-[16px] inline-block text-center">Pagar</a>
+              class="text-white bg-[#74A68D] w-full py-4 rounded-3xl cursor-pointer font-semibold text-[16px] inline-block text-center">Pagar</a>
           </div>
         </div>
       </div>
@@ -612,7 +613,8 @@
 
       let tipoEnvio = 0
       if (carrito.length !== 0) {
-        tipoEnvio = carrito[0]["tipo_envio"]
+
+        tipoEnvio = carrito[0]["tipo_envio"] ?? 0
       }
       // carrito = [...carrito, carrito.total]
       Local.set("carrito", carrito)
