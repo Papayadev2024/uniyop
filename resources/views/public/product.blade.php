@@ -56,8 +56,8 @@
 
 
 
-    <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto">
-      <div class="grid grid-col-1 sm:grid-cols-3  gap-1  w-full mt-10 h-max">
+    <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto mt-10">
+      <div class="grid grid-col-1 sm:grid-cols-3  gap-1  mt-10 h-max w-6/12">
         <div class=" col-span-3 h-max">
 
           <img class="w-full h-max  object-cover" src="{{ asset($product->imagen) }}" alt="">
@@ -67,10 +67,10 @@
 
         <x-product-slider :product="$product" />
       </div>
-      <div class="flex flex-col gap-6 w-full mt-10">
+      <div class="flex flex-col gap-6 w-7/12 mt-10 ">
         <div class="flex flex-col gap-3">
-          <h3 class="font-normal text-[32.41px]"> {{ $product->producto }}</h3>
-          <p class="font-normal text-sm gap-2">Disponibilidad:
+          <h3 class="font-Inter_Regular text-[34.41px] text-[#333333]"> {{ $product->producto }}</h3>
+          <p class="font-Inter_Regular text-[14.77px] gap-2">Disponibilidad:
             @if ($product->stock == 0)
               <span class="text-[#f6000c]">No hay Stock disponible</span>
           </p>
@@ -80,7 +80,7 @@
 
         </div>
         <div class="flex flex-col gap-5 ">
-          <p class="font-normal text-sm gap-2">SKU: {{ $product->sku }} </p>
+          <p class="font-Inter_Regular text-[13.34px] gap-2 text-[#666666]">SKU: {{ $product->sku }} </p>
 
           <div class="flex flex-row gap-3 content-center items-center">
             @if ($product->descuento == 0)

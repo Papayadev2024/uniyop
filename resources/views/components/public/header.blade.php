@@ -135,8 +135,8 @@
 
 <header class="">
   @foreach ($datosgenerales as $item)
-    <div class="bg-[#006BF6] p-[1px] ">
-      <div class="px-5 flex justify-center md:justify-end gap-5 w-11/12 mx-auto py-5  text-[17px]  ">
+    <div class="bg-[#006BF6]  h-[43px] ">
+      <div class="px-5 flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-1 text-[17px] items-center ">
         <div class="text-white font-normal font-poppins text-[17px] text-start w-1/3">
           (51)
           987 456 243 | <a href="#">Direccion</a>
@@ -151,8 +151,8 @@
     </div>
   @endforeach
 
-  <div class="">
-    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto py-2  text-[17px] px-5">
+  <div>
+    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-2  text-[17px] px-5">
       <div id="menu-burguer" class="md:hidden z-10 w-max">
         <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}" alt="menu hamburguesa"
           onclick="show()" />
