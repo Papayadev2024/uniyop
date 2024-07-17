@@ -16,7 +16,12 @@
   // }
   ?>
 
+
   <style>
+    /* imagen de fondo transparente para calcar el dise;o */
+
+
+
     .clase_table {
       border-collapse: separate;
       border-spacing: 10;
@@ -49,15 +54,24 @@
   @php
     $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Producto', 'url' => '']];
   @endphp
+  @php
+    $stock = $product->stock;
+    if ($stock >= 100) {
+        $stock = 100;
+    } else {
+        # calculamos en % cuanto queda en base a 100
+        $stock = ($stock * 100) / 100;
+    }
+  @endphp
   @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
   @endcomponent
-  <main class="font-poppins px-5" id="mainSection">
+  <main class="font-poppins   " id="mainSection">
     @csrf
 
 
 
-    <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto mt-10">
-      <div class="grid grid-col-1 sm:grid-cols-3  gap-1  mt-10 h-max w-6/12">
+    <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto ">
+      <div class="grid grid-col-1 sm:grid-cols-3  gap-1  mt-5 h-max w-6/12">
         <div class=" col-span-3 h-max">
 
           <img class="w-full h-max  object-cover" src="{{ asset($product->imagen) }}" alt="">
@@ -67,7 +81,7 @@
 
         <x-product-slider :product="$product" />
       </div>
-      <div class="flex flex-col gap-6 w-7/12 mt-10 ">
+      <div class="flex flex-col gap-6 w-7/12 mt-5 ">
         <div class="flex flex-col gap-3">
           <h3 class="font-Inter_Regular text-[34.41px] text-[#333333]"> {{ $product->producto }}</h3>
           <p class="font-Inter_Regular text-[14.77px] gap-2">Disponibilidad:
@@ -78,6 +92,9 @@
           <span class="text-[#006BF6]">Quedan {{ round((float) $product->stock) }} en stock</span> </p>
           @endif
 
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+          <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $stock }}%"></div>
         </div>
         <div class="flex flex-col gap-5 ">
           <p class="font-Inter_Regular text-[13.34px] gap-2 text-[#666666]">SKU: {{ $product->sku }} </p>

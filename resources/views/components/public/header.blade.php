@@ -47,6 +47,22 @@
     z-index: 30;
   }
 </style>
+<style>
+  .bg-image {
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 900;
+  }
+</style>
+<img src="{{ asset('images/Producto_Detalle.jpg') }}" class="absolute top-0 left-0 w-full z-[99999] opacity-0"></img>
 
 <div class="navigation shadow-xl px-5" style="z-index: 9999; background-color: #fff !important">
   <button aria-label="hamburguer" type="button" class="hamburger" id="position" onclick="show()">
@@ -133,18 +149,21 @@
 </div>
 
 
-<header class="">
+<header class="font-Inter_Regular">
   @foreach ($datosgenerales as $item)
-    <div class="bg-[#006BF6]  h-[43px] ">
-      <div class="px-5 flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-1 text-[17px] items-center ">
-        <div class="text-white font-normal font-poppins text-[17px] text-start w-1/3">
-          (51)
-          987 456 243 | <a href="#">Direccion</a>
+    <div class="bg-[#006BF6]  h-[50px] ">
+      <div class=" flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-3 text-[17px] items-center px-16">
+        <div class="text-white font-Inter_Regular text-[17px] text-start w-1/3 flex gap-3">
+          <div>(51)
+            987 456 243</div>
+          <div>|</div>
+          <div> <a href="#">Direccion</a></div>
+
         </div>
-        <div class="text-white font-normal font-poppins  text-center w-2/3">
+        <div class="text-white font-Inter_Regular  text-center w-2/3 ml-[100px]">
           Cuéntale a un amigo sobre Boost y consigue un 20% de descuento *
         </div>
-        <div class="text-white font-normal font-poppins  text-end w-1/3">
+        <div class="text-white font-Inter_Regular  text-end w-1/3">
           <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
         </div>
       </div>
@@ -152,25 +171,25 @@
   @endforeach
 
   <div>
-    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-2  text-[17px] px-5">
+    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-6  text-[17px] px-16">
       <div id="menu-burguer" class="md:hidden z-10 w-max">
         <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}" alt="menu hamburguesa"
           onclick="show()" />
       </div>
       <div class="w-1/3">
         <a href="#">
-          <img id="logo-boostperu" class="py-2"
+          <img id="logo-boostperu" class="w-[209px]"
             src="{{ asset($isIndex ? 'images\img\LogoBoost.png' : 'images\img\LogoBoost.png') }}" alt="boostperu" />
         </a>
       </div>
 
-      <div class="hidden md:flex items-center w-2/3">
+      <div class="hidden md:flex items-center w-2/3 ml-[134px] ">
         <div>
           <nav id="menu-items" class=" text-[#272727]  flex gap-5 items-center justify-center" x-data="{ openCatalogo: false, openSubMenu: null }">
-            <a href="/" class="py-5  font-medium font-poppins text-[17px] px-3 hover:opacity-75 ">
+            <a href="/" class="py-4  font-medium font-poppins text-[17px] px-3 hover:opacity-75 ">
               <span class="underline-this">INICIO</span>
             </a>
-            <div @mouseenter="openCatalogo = true" @mouseleave="openCatalogo = false" class="px-3 py-5">
+            <div @mouseenter="openCatalogo = true" @mouseleave="openCatalogo = false" class="px-3 py-4">
               <a href="{{ route('Catalogo.jsx') }}" class="font-medium font-poppins  hover:opacity-75 "
                 aria-haspopup="true">
                 <span class="underline-this">PRODUCTOS</span>
@@ -178,10 +197,10 @@
 
             </div>
 
-            <a href="/blog/0" class="py-5  font-medium font-poppins px-3  hover:opacity-75 ">
+            <a href="/blog/0" class="py-4  font-medium font-poppins px-3  hover:opacity-75 ">
               <span class="underline-this">BLOG</span>
             </a>
-            <a href="#" class="py-5  font-medium font-poppins px-3 hover:opacity-75 ">
+            <a href="#" class="py-4  font-medium font-poppins px-3 hover:opacity-75 ">
               <span class="underline-this">CONTACTO</span>
             </a>
           </nav>
