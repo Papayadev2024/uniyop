@@ -145,7 +145,7 @@
           Cuéntale a un amigo sobre Boost y consigue un 20% de descuento *
         </div>
         <div class="text-white font-normal font-poppins  text-end w-1/3">
-          Log In / Sign Up
+          <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
         </div>
       </div>
     </div>
