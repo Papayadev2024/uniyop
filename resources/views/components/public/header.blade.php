@@ -171,7 +171,8 @@
               <span class="underline-this">INICIO</span>
             </a>
             <div @mouseenter="openCatalogo = true" @mouseleave="openCatalogo = false" class="px-3 py-5">
-              <a href="{{route('Catalogo.jsx')}}" class="font-medium font-poppins  hover:opacity-75 " aria-haspopup="true">
+              <a href="{{ route('Catalogo.jsx') }}" class="font-medium font-poppins  hover:opacity-75 "
+                aria-haspopup="true">
                 <span class="underline-this">PRODUCTOS</span>
               </a>
 
@@ -398,12 +399,16 @@
   document.addEventListener('click', function(event) {
     var input = document.getElementById('buscarblog');
     var resultados = document.getElementById('resultadosblog');
-    var isClickInsideInput = input.contains(event.target);
-    var isClickInsideResultados = resultados.contains(event.target);
 
-    if (!isClickInsideInput && !isClickInsideResultados) {
-      input.value = '';
-      $('#resultadosblog').empty();
+    // Check if both elements exist
+    if (input && resultados) {
+      var isClickInsideInput = input.contains(event.target);
+      var isClickInsideResultados = resultados.contains(event.target);
+
+      if (!isClickInsideInput && !isClickInsideResultados) {
+        input.value = '';
+        $('#resultadosblog').empty();
+      }
     }
   });
 </script>

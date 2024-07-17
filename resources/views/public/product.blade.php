@@ -165,14 +165,21 @@
 
         <div class="flex flex-col gap-4">
           <div class="flex flex-row gap-5">
-            <div class="flex flex-row border border-[#CCCCCC] rounded-lg">
-              <button type="button" class=" w-4 px-4 ">-</button>
-              <input type="text" class="w-12 text-center  rounded-md border-none" value="1">
-              <button type="button" class="w-4 px-4">+</button>
-
+            <div class="flex mb-4">
+              <div class="flex justify-center items-center bg-[#F5F5F5] cursor-pointer hover:bg-slate-300">
+                <button class="py-2.5 px-5 text-lg font-semibold" id=disminuir type="button">-</button>
+              </div>
+              <div id=cantidadSpan
+                class="py-2.5 px-5 flex justify-center items-center bg-[#F5F5F5] text-lg font-semibold">
+                <span>1</span>
+              </div>
+              <div class="flex justify-center items-center bg-[#F5F5F5] cursor-pointer hover:bg-slate-300">
+                <button class="py-2.5 px-5 text-lg font-semibold" id=aumentar type="button">+</button>
+              </div>
             </div>
 
-            <button class="bg-[#0D2E5E] w-60 text-white text-center rounded-3xl font-bold"> Agregar al Carrito </button>
+            <button id="btnAgregarCarrito" class="bg-[#0D2E5E] w-60 text-white text-center rounded-3xl font-bold"> Agregar
+              al Carrito </button>
             <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center">
               <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
             </button>
@@ -325,6 +332,212 @@
         },
       },
     });
+  </script>
+  <script>
+    // $(document).ready(function() {
+
+
+    function capitalizeFirstLetter(string) {
+      string = string.toLowerCase()
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    // })
+    $('#disminuir').on('click', function() {
+      let cantidad = Number($('#cantidadSpan span').text())
+      if (cantidad > 0) {
+        cantidad--
+        $('#cantidadSpan span').text(cantidad)
+      }
+
+
+    })
+    // cantidadSpan
+    $('#aumentar').on('click', function() {
+      let cantidad = Number($('#cantidadSpan span').text())
+      cantidad++
+      $('#cantidadSpan span').text(cantidad)
+
+    })
+  </script>
+  <script>
+    let articulosCarrito = [];
+
+
+    function deleteOnCarBtn(id, operacion) {
+      const prodRepetido = articulosCarrito.map(item => {
+        if (item.id === id && item.cantidad > 0) {
+          item.cantidad -= Number(1);
+          return item; // retorna el objeto actualizado 
+        } else {
+          return item; // retorna los objetos que no son duplicados 
+        }
+
+      });
+      Local.set('carrito', articulosCarrito)
+      limpiarHTML()
+      PintarCarrito()
+
+
+    }
+
+    function calcularTotal() {
+      let articulos = Local.get('carrito')
+      let total = articulos.map(item => {
+        let monto
+        if (Number(item.descuento) !== 0) {
+          monto = item.cantidad * Number(item.descuento)
+        } else {
+          monto = item.cantidad * Number(item.precio)
+
+        }
+        return monto
+
+      })
+      const suma = total.reduce((total, elemento) => total + elemento, 0);
+
+      $('#itemsTotal').text(`S/. ${suma} `)
+
+    }
+
+    function addOnCarBtn(id, operacion) {
+
+      const prodRepetido = articulosCarrito.map(item => {
+        if (item.id === id) {
+          item.cantidad += Number(1);
+          return item; // retorna el objeto actualizado 
+        } else {
+          return item; // retorna los objetos que no son duplicados 
+        }
+
+      });
+      Local.set('carrito', articulosCarrito)
+      // localStorage.setItem('carrito', JSON.stringify(articulosCarrito));
+      limpiarHTML()
+      PintarCarrito()
+
+
+    }
+
+    function deleteItem(id) {
+      articulosCarrito = articulosCarrito.filter(objeto => objeto.id !== id);
+
+      Local.set('carrito', articulosCarrito)
+      limpiarHTML()
+      PintarCarrito()
+    }
+
+    var appUrl = <?php echo json_encode($url_env); ?>;
+    $(document).ready(function() {
+      articulosCarrito = Local.get('carrito') || [];
+
+      PintarCarrito();
+    });
+
+    function limpiarHTML() {
+      //forma lenta 
+      /* contenedorCarrito.innerHTML=''; */
+      $('#itemsCarrito').html('')
+
+
+    }
+
+    $('#btnAgregarCarrito').on('click', function() {
+      let url = window.location.href;
+      let partesURl = url.split('/')
+      let item = partesURl[partesURl.length - 1]
+      let cantidad = Number($('#cantidadSpan span').text())
+      item = item.replace('#', '')
+
+
+
+      // id='nodescuento'
+
+
+      $.ajax({
+
+        url: `{{ route('carrito.buscarProducto') }}`,
+        method: 'POST',
+        data: {
+          _token: $('input[name="_token"]').val(),
+          id: item,
+          cantidad
+
+        },
+        success: function(success) {
+          let {
+            producto,
+            id,
+            descuento,
+            precio,
+            imagen,
+            color
+          } = success.data
+          let cantidad = Number(success.cantidad)
+          let detalleProducto = {
+            id,
+            producto,
+            descuento,
+            precio,
+            imagen,
+            cantidad,
+            color
+
+          }
+          let existeArticulo = articulosCarrito.some(item => item.id === detalleProducto.id)
+          if (existeArticulo) {
+            //sumar al articulo actual 
+            const prodRepetido = articulosCarrito.map(item => {
+              if (item.id === detalleProducto.id) {
+                item.cantidad += Number(detalleProducto.cantidad);
+                return item; // retorna el objeto actualizado 
+              } else {
+                return item; // retorna los objetos que no son duplicados 
+              }
+
+            });
+          } else {
+            articulosCarrito = [...articulosCarrito, detalleProducto]
+
+          }
+
+          Local.set('carrito', articulosCarrito)
+          let itemsCarrito = $('#itemsCarrito')
+          let ItemssubTotal = $('#ItemssubTotal')
+          let itemsTotal = $('#itemsTotal')
+          limpiarHTML()
+          PintarCarrito()
+          mostrarTotalItems()
+
+          Swal.fire({
+
+            icon: "success",
+            title: `Producto agregado correctamente`,
+            showConfirmButton: true
+
+
+          });
+        },
+        error: function(error) {
+          console.log(error)
+        }
+
+      })
+
+
+
+      // articulosCarrito = {...articulosCarrito , detalleProducto }
+    })
+    // $('#openCarrito').on('click', function() {
+    //   $('.main').addClass('blur')
+    // })
+    // $('#closeCarrito').on('click', function() {
+
+    //   $('.cartContainer').addClass('hidden')
+    //   $('#check').prop('checked', false);
+    //   $('.main').removeClass('blur')
+
+
+    // })
   </script>
 
 
