@@ -192,9 +192,11 @@
                     <div class="swiper-slide w-full h-full col-span-1">
                       <div class="flex flex-col items-center justify-center col-span-1  shadow-lg py-2  pb-5">
                         <a href="/producto/{{ $item->id }}" target="_blanck">
-                          <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
-                          <span>Droubook space gray</span>
-                          <h2 class="font-bold text-[#006BF6]">S/ 80.00</h2>
+                          {{-- <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
+                          <span> {{ $item->producto }}</span>
+                          <h2 class="font-bold text-[#006BF6]">S/ 80.00</h2> --}}
+                          <x-product.container width="" bgcolor="bg-[#FFFFFF]" :item="$item" />
+
 
                         </a>
 
@@ -260,51 +262,24 @@
         <h3 class="text-[30px] font-medium"> ¿Qué dicen los clientes sobre nosotros?</h3>
 
         <div class="grid grid-cols-3 w-full gap-8 pt-20">
-          <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
-            <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
-              <p class="font-medium text-[20px] flex-1">Gran calidad</p>
-              <!-- flex-1 hace que el texto ocupe el espacio disponible -->
-              <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
-                class="w-10 h-10 rounded-full">
+          @foreach ($testimonios->take(3) as $item)
+            <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
+              <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
+                <p class="font-medium text-[20px] flex-1">Gran calidad</p>
+                <!-- flex-1 hace que el texto ocupe el espacio disponible -->
+                <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
+                  class="w-10 h-10 rounded-full">
+              </div>
+              <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
+                mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
+              </p>
+              <div class="font-bold text-[20px] w-5">
+                Ademir Neyra
+              </div>
+              <p class="text-[13px] font-normal">Lima, Peru</p>
             </div>
-            <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
-              mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
-            </p>
-            <div class="font-bold text-[20px] w-5">
-              Ademir Neyra
-            </div>
-            <p class="text-[13px] font-normal">Lima, Peru</p>
-          </div>
-          <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
-            <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
-              <p class="font-medium text-[20px] flex-1">Gran calidad</p>
-              <!-- flex-1 hace que el texto ocupe el espacio disponible -->
-              <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
-                class="w-10 h-10 rounded-full">
-            </div>
-            <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
-              mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
-            </p>
-            <div class="font-bold text-[20px] w-5">
-              Ademir Neyra
-            </div>
-            <p class="text-[13px] font-normal">Lima, Peru</p>
-          </div>
-          <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
-            <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
-              <p class="font-medium text-[20px] flex-1">Gran calidad</p>
-              <!-- flex-1 hace que el texto ocupe el espacio disponible -->
-              <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
-                class="w-10 h-10 rounded-full">
-            </div>
-            <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
-              mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
-            </p>
-            <div class="font-bold text-[20px] w-5">
-              Ademir Neyra
-            </div>
-            <p class="text-[13px] font-normal">Lima, Peru</p>
-          </div>
+          @endforeach
+
         </div>
 
 

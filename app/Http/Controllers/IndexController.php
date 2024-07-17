@@ -574,8 +574,9 @@ class IndexController extends Controller
     $galery = Galerie::where('product_id', $product->id)->get();
 
     $general = General::first();
+    $testimonios = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-    return view('public.product', compact('atributos', 'general','valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
+    return view('public.product', compact('atributos','testimonios', 'general','valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
   }
 
   //  --------------------------------------------
