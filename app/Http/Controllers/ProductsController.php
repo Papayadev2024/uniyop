@@ -170,7 +170,7 @@ class ProductsController extends Controller
     try {
       $especificaciones = [];
       $data = $request->all();
-      dump($data);
+      // dump($data);
       $atributos = null;
       $tagsSeleccionados = $request->input('tags_id');
       // $valorprecio = $request->input('precio') - 0.1;
@@ -271,7 +271,7 @@ class ProductsController extends Controller
 
       return redirect()->route('products.index')->with('success', 'Publicación creado exitosamente.');
     } catch (\Throwable $th) {
-      dump($th->getMessage());
+      // dump($th->getMessage());
     }
   }
 

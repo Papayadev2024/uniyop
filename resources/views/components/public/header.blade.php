@@ -159,8 +159,8 @@
       </div>
       <div class="w-1/3">
         <a href="#">
-          <img id="logo-decotab" class="py-2"
-            src="{{ asset($isIndex ? 'images\img\LogoBoost.png' : 'images\img\LogoBoost.png') }}" alt="decotab" />
+          <img id="logo-boostperu" class="py-2"
+            src="{{ asset($isIndex ? 'images\img\LogoBoost.png' : 'images\img\LogoBoost.png') }}" alt="boostperu" />
         </a>
       </div>
 
@@ -197,7 +197,7 @@
               @click.prevent="open = !open" :aria-expanded="open">
               <div class="flex items-center truncate">
                 <span id="username"
-                  class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 {{ $isIndex ? 'text-white' : 'text-[#272727]' }}">{{ Auth::user()->name }}</span>
+                  class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-[#272727] ">{{ Auth::user()->name }}</span>
                 <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
                   <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                 </svg>
