@@ -45,7 +45,7 @@
 
                     </div>
                   </div>
-                  {{-- <div class="col-span-5 md:col-span-2">
+                  <div class="col-span-5 md:col-span-2">
 
                     <label for="color">Color <span class="text-red-500 font-bold">*</span></label>
 
@@ -55,11 +55,11 @@
                       </div>
                       <input type="text" id="color" name="color" value="{{ $product->color }}"
                         class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Color" required>
+                        placeholder="Color">
 
 
                     </div>
-                  </div> --}}
+                  </div>
                   <div class="col-span-5 md:col-span-5 mt-2">
 
                     <label for="extract">Extracto</label>
@@ -123,14 +123,28 @@
                         @else
                           <img id="imagen_ambiente_previewer" x-show="showAmbiente"
                             x-transition:enter="transition ease-out duration-300 transform"
-                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
-                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-                            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
-                            class="w-full h-full object-cover absolute inset-0 rounded-lg" />
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/img/noimagen.jpg') }}"
+                            alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @endif
                       </div>
                       <div>
+                        <div class="mb-4">
+                          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            for="image_texture">Imagen de textura <span
+                              class="text-red-500 font-bold">*</span></label>
+                          <label class="block w-max" for="image_texture" title="Cambiar imagen de textura" tippy>
+                            <img id="image_texture_previewer"
+                              class="w-40 h-10 border rounded-md object-cover object-center cursor-pointer"
+                              src="{{ $product->image_texture ? asset($product->image_texture) : asset('images/img/noimagen.jpg') }}"
+                              alt="">
+                          </label>
+                          <input data-id="input_img" class="hidden" id="image_texture" name="image_texture"
+                            type="file" accept="image/*">
+                        </div>
 
                         <div class="mb-4">
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
