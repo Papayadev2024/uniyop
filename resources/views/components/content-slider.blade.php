@@ -6,12 +6,12 @@
       <h3 class="text-[17px]  text-center leading-9">{{ $item->description }}</h3>
     </div>
     <div class="flex flex-col items-center justify-center  mx-auto mt-3">
-      <button href="{{ $item->link2 }}"
+      <a href="{{ $item->link2 }}"
         class="bg-[#006BF6] text-sm font-semibold text-white text-center p-3 rounded-3xl flex items-center justify-center"
         type="button">
         {{ $item->botontext2 }}
         <img src="{{ asset('images/img/Vector.png') }}" alt="Icono" class="ml-2">
-      </button>
+      </a>
     </div>
 
   </div>

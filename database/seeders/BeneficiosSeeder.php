@@ -14,9 +14,10 @@ class BeneficiosSeeder extends Seeder
     public function run(): void
     {
         Strength::create([
-            'titulo' => 'Beneficios de nuestros productos',
+            'titulo' => 'Entrega gratis',
             'descripcionshort' => 'Descubre Una Amplia Gama de Pisos, Tableros y Paneles',
-            'descripcion' => '<p>Los productos de Deco Tab te ayudar&aacute;n a renovar y transformar tus ambientes de forma r&aacute;pida, sencilla y econ&oacute;mica. Un claro ejemplo es el <strong>Wall Panel </strong>que funciona como un revestimiento de paredes fabricado con poliuretano de alta densidad que imita la textura y aspecto de la piedra, ladrillo, metal, entre otros.</p>',
+            'descripcion' => '<p>Y devoluciones gratuitas. Ver pago para fechas de entrega.</p>',
+            'icono' => 'images\img\box.png'    
         ]);
     }
 }

@@ -14,10 +14,14 @@ class SliderSeeder extends Seeder
     public function run(): void
     {
         Slider::create([
-            'title' => 'Renueva como un profesional con los productos de Deco Tab',
-            'description' => 'Te presentamos las mejores opciones para renovar tus paredes y pisos, como Wall Panel, Mármol UV, Piedra Cincelada, Wall Panel Negro, entre otros materiales de calidad.',
-            'botontext1' => 'Ver categorías',
+            'title' => 'Serie de Cargadores Premium',
+            'description' => 'Funciones empaquetadas a un mejor precio que nunca Potentes sensores para
+controla tu estado físico',
+            'botontext1' => 'VENTA HASTA 30% DE DESCUENTO',
             'link1' => '/catalogo/0',
+            'botontext2' => 'Comprar Ahora',
+            'link1' => '#',
+
         ]);
     }
 }
