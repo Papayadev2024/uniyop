@@ -257,7 +257,7 @@
           </div>
 
         </div>
-        <div class="flex flex-col mt-14 gap-4 ">
+        <div class="flex flex-col mt-14 gap-4 pb-20">
           <span>
             Pago seguro garantizado
           </span>
@@ -284,7 +284,7 @@
       </div>
     </section>
     <section class="bg-[#F8F8F8]">
-      <div class="w-11/12 mx-auto pt-56 px-14 ">
+      <div class="w-11/12 mx-auto pt-36 px-14 ">
         <div class="flex flex-row justify-between w-full ">
           <h1 class="text-[33.4px] font-Inter_SemiBold">Productos Relacionados</h1>
           <a href="" class="flex items-center text-[20px] font-Inter_SemiBold text-[#006BF6] ">Ver todos los
