@@ -69,7 +69,7 @@
                       </g>
                     </svg>
                   </div>
-                  <x-form.quill id="descripcion" />
+                  <x-form.quill id="descripcion" :value="" />
 
                   >
                 </div>
