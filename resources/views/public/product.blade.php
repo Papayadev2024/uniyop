@@ -359,11 +359,11 @@
       //allowSlideNext: false,  //Bloquea el deslizamiento hacia el siguiente slide
       //allowSlidePrev: false,  //Bloquea el deslizamiento hacia el slide anterior
       allowTouchMove: true, // Bloquea el movimiento táctil
-      /* autoplay: {
+      autoplay: {
         delay: 5500,
         disableOnInteraction: true,
         pauseOnMouseEnter: true
-      }, */
+      },
 
       breakpoints: {
         0: {
