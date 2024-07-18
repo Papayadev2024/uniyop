@@ -124,10 +124,8 @@
 
           </div>
           <p class="font-Inter_Regular text-[18px] w-full mt-6">
-            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
-            ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-            molestiae consequatur.
-            {{-- {!! $product->description !!} --}}
+
+            {!! $product->description !!}
 
           </p>
 
@@ -220,12 +218,12 @@
           </div>
 
         </div>
-        <div class="w-full flex -mt-2 justify-center items-center content-center ">
+        {{-- <div class="w-full flex -mt-2 justify-center items-center content-center ">
           <a id="btnAgregarCarrito" href="{{ route('carrito') }}"
             class="bg-[#006BF6] w-full h-14 justify-center items-center content-center text-white text-center rounded-full font-Inter_SemiBold text-[18px] mr-[172px]">
             Comprar ahora
           </a>
-        </div>
+        </div> --}}
         <div class="flex flex-col mt-14">
           <h6 class="text-[18px]">Combinalo con: </h6>
 
