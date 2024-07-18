@@ -212,7 +212,7 @@
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: titleSlider + " a sido modificado",
+            title: " Visibilidad actualizada",
             showConfirmButton: false,
             timer: 1500
 

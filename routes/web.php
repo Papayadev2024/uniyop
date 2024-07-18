@@ -217,8 +217,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/galerie/borrar', [GalerieController::class, 'borrar'])->name('galerie.borrar');
 
         Route::resource('/banners', BannersController::class);
-        Route::post('/banners/deleteBanner', [BannersController::class, 'store'])->name('banners.deleteBanner');
-        Route::post('/banners/updateVisible', [BannersController::class, 'store'])->name('banner.updateVisible');
+        Route::post('/banners/deleteBanner', [BannersController::class, 'deleteBanner'])->name('banners.deleteBanner');
+        Route::post('/banners/updateVisible', [BannersController::class, 'updateVisible'])->name('banner.updateVisible');
       
 
 

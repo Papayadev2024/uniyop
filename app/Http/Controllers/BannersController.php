@@ -113,4 +113,29 @@ class BannersController extends Controller
     {
         //
     }
+    public function deleteBanner(Request $request)
+    {
+        $banner = Banners::find($request->id);
+        $banner->delete();
+        return response()->json(['success' => 'Banner eliminado correctamente']);
+    }
+    public function updateVisible(Request $request)
+  {
+    $id = $request->id;
+    $field = $request->field;
+    $status = $request->status;
+
+    // Verificar si el producto existe
+    $banner = Banners::find($id);
+
+    if (!$banner) {
+      return response()->json(['message' => 'Producto no encontrado'], 404);
+    }
+
+    // Actualizar el campo dinámicamente
+    $banner->update([
+      $field => $status
+    ]);
+    return response()->json(['message' => 'registro actualizado']);
+  }
 }

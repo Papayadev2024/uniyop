@@ -65,6 +65,7 @@ class IndexController extends Controller
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
     $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();
+    $categoriasAll = Category::where('visible', '=', 1)->get();
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
     $descuentos = Products::where('descuento', '>', 0)->where('status', '=', 1)
@@ -79,7 +80,7 @@ class IndexController extends Controller
 
 
 
-    return view('public.index', compact('url_env','banners','blogs', 'productosPupulares','ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
+    return view('public.index', compact('url_env','banners','blogs','categoriasAll', 'productosPupulares','ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
   }
 
   public function catalogo(Request $request)

@@ -37,13 +37,13 @@
     @endif
 
     @if ($ultimosProductos->count() > 0)
-      <section class="w-11/12 mx-auto">
-        <div class="flex flex-row justify-between mt-20 w-full">
+      <section class="w-11/12 mx-auto ">
+        <div class="flex flex-row justify-between mt-20 w-full px-16">
           <h1 class="text-[29px] font-semibold">Últimos productos</h1>
           <a href="/catalogo" class="flex items-center font-semibold text-[#006BF6] ">Ver todos los productos <img
               src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
-        <div class="grid grid-cols-5 md:flex-row gap-4 mt-14 w-full ">
+        <div class="grid grid-cols-1 md:grid-cols-5 md:flex-row gap-4 mt-14 w-full px-16">
 
           @foreach ($ultimosProductos as $item)
             <x-product.container width="col-span-1 " bgcolor="" :item="$item" />
@@ -73,21 +73,28 @@
     @if ($productosPupulares->count() > 0)
       {{-- seccion Productos populares  --}}
       <section class=" bg-[#F8F8F8]">
-        <div class="w-11/12 mx-auto pt-[75px]  pb-[75px]">
+        <div class="w-11/12 mx-auto pt-[75px]  pb-[75px] px-16">
           <div class="flex flex-row justify-between w-full">
             <h1 class="text-[29px] font-semibold text-[#323232]">Productos Populares</h1>
             <div class="flex  flex-col md:flex-row gap-2 md:gap-8">
-              <a href="" class="flex items-center font-semibold  text-base ">Todos </a>
-              <a href="" class="flex items-center font-semibold text-[#006BF6] text-base ">Accesorios </a>
-              <a href="" class="flex items-center font-semibold  text-base ">Tablet </a>
-              <a href="" class="flex items-center font-semibold  text-base ">Celulares</a>
+
+              <a href="/catalogo" class="flex items-center   font-Inter_Medium  hover:text-[#006BF6] ">Todos
+              </a>
+
+              @foreach ($categoriasAll as $item)
+                <a href="/catalogo/{{ $item->id }}"
+                  class="flex items-center font-Inter_Medium  hover:text-[#006BF6]  transition ease-out duration-300 transform  ">{{ $item->name }}
+                </a>
+              @endforeach
+
+
             </div>
 
           </div>
 
 
           @foreach ($productosPupulares->chunk(4) as $taken)
-            <div class="flex flex-col md:flex-row gap-4 mt-4 w-full">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full">
               @foreach ($taken as $item)
                 <x-product.container width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" />
                 {{-- <x-productos-card width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" /> --}}
@@ -110,15 +117,18 @@
       {{-- Seccion Blog --}}
 
       <section class="w-11/12 mx-auto mt-14">
-        <div class="flex flex-row justify-between w-full">
+        <div class="flex flex-row justify-between w-full px-16">
           <h1 class="text-[29px] font-semibold text-[#323232]">Blog & Eventos</h1>
-          <a href="" class="flex items-center font-semibold text-[#006BF6] ">Ver todos las Publicaciones <img
+          <a href="/blog/0" class="flex items-center font-semibold text-[#006BF6] ">Ver todos las Publicaciones <img
               src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
-        <div class="grid grid-cols-3 mt-14 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 mt-14 gap-4 px-16">
           @foreach ($blogs as $item)
             <div class="flex flex-col  text-start bg-[#FFFFFF]">
-              <img src="{{ asset($item->url_image . $item->name_image) }}" alt="" class="w-full   object-cover">
+
+              <a href="/post/{{ $item->id }}">
+                <img src="{{ asset($item->url_image . $item->name_image) }}" alt="" class="w-full   object-cover">
+              </a>
 
               <div class="flex content-between flex-col gap-4 mt-4 w-full">
                 <div class="text-sm w-full">
@@ -157,12 +167,12 @@
     @if ($benefit->count() > 0)
       <section class="mt-4 md:mt-14 bg-[#F8F8F8]">
 
-        <div class="grid grid-cols-1 md:grid-cols-3 w-11/12 mx-auto p-2 md:p-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 w-11/12 mx-auto p-2 md:p-10 ">
           @foreach ($benefit as $item)
-            <div class="flex flex-col items-center w-full gap-4 justify-center text-center">
+            <div class="flex flex-col items-center w-full gap-3 justify-center text-center">
               <img src="{{ asset($item->icono) }}" alt="">
               <h4 class="text-xl font-bold"> {{ $item->titulo }} </h4>
-              <span class="text-lg p-9 leading-8">{!! $item->descripcion !!}</span>
+              <span class="text-lg py-2 px-5 2xl:px-16 leading-8">{!! $item->descripcion !!}</span>
             </div>
           @endforeach
 
