@@ -28,7 +28,7 @@
 
       <x-sections.simple title="Categorias">
 
-        @foreach ($categorias as $item)
+        @foreach ($categorias->take(2) as $item)
           <x-content-categoria :item="$item" />
         @endforeach
 
