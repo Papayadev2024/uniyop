@@ -62,7 +62,7 @@
     z-index: 900;
   }
 </style>
-<img src="{{ asset('images/Producto_Detalle.jpg') }}" class="absolute top-0 left-0 w-full z-[99999] opacity-50"></img>
+{{-- <img src="{{ asset('images/Producto_Detalle.jpg') }}" class="absolute top-0 left-0 w-full z-[99999] opacity-50"></img> --}}
 
 <div class="navigation shadow-xl px-5" style="z-index: 9999; background-color: #fff !important">
   <button aria-label="hamburguer" type="button" class="hamburger" id="position" onclick="show()">
