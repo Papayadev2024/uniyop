@@ -65,25 +65,26 @@
   @endphp
   @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
   @endcomponent
-  <main class="font-poppins   " id="mainSection">
+  <main class="font-Inter_Regular  mb-28 " id="mainSection">
     @csrf
 
 
 
-    <section class="flex flex-col gap-10 md:flex-row md:gap-24 w-11/12 m-auto ">
-      <div class="grid grid-col-1 sm:grid-cols-3  gap-1  mt-5 h-max w-6/12">
-        <div class=" col-span-3 h-max">
+    <section class="flex flex-col gap-10 md:flex-row md:gap-16 w-11/12 m-auto ">
+      <div class="grid grid-col-1 sm:grid-cols-3  gap-6  mt-5 h-max w-6/12 pl-[56px] pr-[48px] ml-2">
+        <div class=" col-span-3 h-max md:h-[400px] 2xl:h-[580px] ">
 
-          <img class="w-full h-max  object-cover" src="{{ asset($product->imagen) }}" alt="">
+          <img class="w-full h-max md:h-[400px] 2xl:h-[580px] object-cover" src="{{ asset($product->imagen) }}"
+            alt="">
 
 
         </div>
 
         <x-product-slider :product="$product" />
       </div>
-      <div class="flex flex-col gap-6 w-7/12 mt-5 ">
+      <div class="flex flex-col gap-6 w-7/12 mt-4 pr-14">
         <div class="flex flex-col gap-3">
-          <h3 class="font-Inter_Regular text-[34.41px] text-[#333333]"> {{ $product->producto }}</h3>
+          <h3 class="font-Inter_Regular text-[37.41px] text-[#333333]"> {{ $product->producto }}</h3>
           <p class="font-Inter_Regular text-[14.77px] gap-2">Disponibilidad:
             @if ($product->stock == 0)
               <span class="text-[#f6000c]">No hay Stock disponible</span>
@@ -91,43 +92,47 @@
         @else
           <span class="text-[#006BF6]">Quedan {{ round((float) $product->stock) }} en stock</span> </p>
           @endif
+          <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+            <div class="bg-blue-600 h-1.5 rounded-full" style="width: {{ $stock }}%"></div>
+          </div>
+        </div>
 
-        </div>
-        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-          <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $stock }}%"></div>
-        </div>
         <div class="flex flex-col gap-5 ">
-          <p class="font-Inter_Regular text-[13.34px] gap-2 text-[#666666]">SKU: {{ $product->sku }} </p>
+          <p class="font-Inter_Regular text-[15.34px] gap-2 text-[#666666] mt-2">SKU: {{ $product->sku }} </p>
 
-          <div class="flex flex-row gap-3 content-center items-center">
+          <div class="flex flex-row gap-3 content-center items-center mt-6">
             @if ($product->descuento == 0)
               <div class=" content-center flex flex-row gap-2 items-center">
-                <span class="font-bold text-2xl gap-2 text-[#006BF6]">S/ {{ $product->precio }}</span>
+                <span class="font-Inter_SemiBold text-[29px] gap-2 text-[#006BF6]">S/ {{ $product->precio }}</span>
 
 
               </div>
             @else
               <div class=" content-center flex flex-row gap-2 items-center">
-                <span class="font-bold text-2xl gap-2 text-[#006BF6]">S/ {{ $product->descuento }}</span>
+                <span class="font-Inter_SemiBold text-[29px] gap-2 text-[#006BF6]">S/ {{ $product->descuento }}</span>
 
-                <span class="text-[#666666] font-normal line-through text-sm">S/ {{ $product->precio }}</span>
+                <span class="text-[#666666] font-Inter_Regular line-through text-sm">S/ {{ $product->precio }}</span>
               </div>
               @php
                 $descuento = round((($product->precio - $product->descuento) * 100) / $product->precio);
               @endphp
               <span
-                class="font-medium text-center  content-center text-xs gap-2 bg-[#006BF6] text-white h-8 w-14 rounded-3xl">
+                class=" ml-2 font-Inter_Medium text-center  content-center text-xs gap-2 bg-[#006BF6] text-white h-9 w-16 rounded-3xl px-2">
                 -{{ $descuento }}% </span>
             @endif
 
 
           </div>
-          <p class="text-sm leading-6 ">
-            {!! $product->description !!}
+          <p class="font-Inter_Regular text-[18px] w-full mt-6">
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
+            ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
+            molestiae consequatur.
+            {{-- {!! $product->description !!} --}}
+
           </p>
 
         </div>
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-8 mt-6 font-Inter_Regular text-[18px]">
           @php
             $groupedAttributes = $product->attributes->groupBy('titulo');
           @endphp
@@ -139,9 +144,10 @@
                 @php
                   // Encuentra el objeto en $valorAtributo que tiene el id igual a $item->pivot->attribute_value_id
                   $atributo = $valorAtributo->firstWhere('id', $item->pivot->attribute_value_id);
-                @endphp @if ($atributo)
+                @endphp
+                @if ($atributo)
                   <!-- Muestra el valor del atributo encontrado -->
-                  <span class="bg-[#006BF6] text-white rounded-md px-2 text-[15px]">{{ $atributo->valor }}</span>
+                  <span class="bg-[#006BF6] text-white rounded-md px-5 text-[15px]">{{ $atributo->valor }}</span>
                 @endif
               @endforeach
             </div>
@@ -150,7 +156,7 @@
 
 
         </div>
-        <p class="font-normal text-sm gap-2">Especificaciones: </p>
+        <p class="font-Inter_Regular text-[18px] gap-2">Especificaciones: </p>
 
         <div class="min-w-full divide-y divide-gray-200">
           <table class="clase_table divide-y divide-gray-200 ">
@@ -168,7 +174,7 @@
             </tbody>
           </table>
         </div>
-        <div class="flex flex-row gap-6">
+        <div class="flex flex-row gap-6 font-Inter_Regular text-[18px]">
 
           <div class="flex flex-row gap-2 items-center">
             <i class="h-5 w-5 inline-block"
@@ -187,32 +193,45 @@
           <div class="flex flex-row gap-5">
             <div class="flex mb-4">
               <div class="flex justify-center items-center bg-[#F5F5F5] cursor-pointer hover:bg-slate-300">
-                <button class="py-2.5 px-5 text-lg font-semibold" id=disminuir type="button">-</button>
+                <button class="py-2.5 px-5 text-lg font-Inter_SemiBold" id=disminuir type="button">-</button>
               </div>
               <div id=cantidadSpan
-                class="py-2.5 px-5 flex justify-center items-center bg-[#F5F5F5] text-lg font-semibold">
+                class="py-2.5 px-5 flex justify-center items-center bg-[#F5F5F5] text-lg font-Inter_SemiBold">
                 <span>1</span>
               </div>
               <div class="flex justify-center items-center bg-[#F5F5F5] cursor-pointer hover:bg-slate-300">
-                <button class="py-2.5 px-5 text-lg font-semibold" id=aumentar type="button">+</button>
+                <button class="py-2.5 px-5 text-lg font-Inter_SemiBold" id=aumentar type="button">+</button>
               </div>
             </div>
+            <div class="ml-8 flex flex-row gap-5">
+              <button id="btnAgregarCarrito"
+                class="bg-[#0D2E5E] w-[286px] h-16  text-white text-center rounded-full font-Inter_Bold text-[18px] ">
+                Agregar
+                al Carrito
+              </button>
+              <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center">
+                <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
+              </button>
 
-            <button id="btnAgregarCarrito" class="bg-[#0D2E5E] w-60 text-white text-center rounded-3xl font-bold"> Agregar
-              al Carrito </button>
-            <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center">
-              <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
-            </button>
+            </div>
+
+
 
           </div>
 
         </div>
-        <div class="flex flex-col mt-9">
-          <h6 class="">Combinalo con: </h6>
+        <div class="w-full flex -mt-2 justify-center items-center content-center ">
+          <a id="btnAgregarCarrito" href="{{ route('carrito') }}"
+            class="bg-[#006BF6] w-full h-14 justify-center items-center content-center text-white text-center rounded-full font-Inter_SemiBold text-[18px] mr-[172px]">
+            Comprar ahora
+          </a>
+        </div>
+        <div class="flex flex-col mt-14">
+          <h6 class="text-[18px]">Combinalo con: </h6>
 
           <div class="grid grid-cols-3 gap-3  mb-6">
             <div class="col-span-3">
-              <div class="swiper productos-relacionados">
+              <div class="swiper productos-relacionados h-[350px]">
 
                 <div class="swiper-wrapper gap-2 h-full">
                   @foreach ($ProdComplementarios as $item)
@@ -221,8 +240,9 @@
                         <a href="/producto/{{ $item->id }}" target="_blanck">
                           {{-- <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
                           <span> {{ $item->producto }}</span>
-                          <h2 class="font-bold text-[#006BF6]">S/ 80.00</h2> --}}
-                          <x-product.container width="" bgcolor="bg-[#FFFFFF]" :item="$item" />
+                          <h2 class="font-Inter_Bold text-[#006BF6]">S/ 80.00</h2> --}}
+                          <x-product.container-combinalo width="" height="h-[230px]" bgcolor="bg-[#FFFFFF]"
+                            textpx="text-[17px]" :item="$item" />
 
 
                         </a>
@@ -239,11 +259,11 @@
           </div>
 
         </div>
-        <div class="flex flex-col mt-9 gap-2">
+        <div class="flex flex-col mt-14 gap-4 ">
           <span>
             Pago seguro garantizado
           </span>
-          <div class="flex flex-row gap-4">
+          <div class="flex flex-row gap-2 px-1">
             <img src="{{ asset('images\svg\amazon.png') }}" alt="" class="h-9 w-14">
             <img src="{{ asset('images\svg\american.svg') }}" alt="" class="h-9 w-14">
             <img src="{{ asset('images\svg\applepay.png') }}" alt="" class="h-9 w-14">
@@ -266,15 +286,16 @@
       </div>
     </section>
     <section class="bg-[#F8F8F8]">
-      <div class="w-11/12 mx-auto pt-20 ">
+      <div class="w-11/12 mx-auto pt-56 px-14 ">
         <div class="flex flex-row justify-between w-full ">
-          <h1 class="text-[29px] font-semibold">Productos Relacionados</h1>
-          <a href="" class="flex items-center font-semibold text-[#006BF6] ">Ver todos los productos <img
-              src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
+          <h1 class="text-[33.4px] font-Inter_SemiBold">Productos Relacionados</h1>
+          <a href="" class="flex items-center text-[20px] font-Inter_SemiBold text-[#006BF6] ">Ver todos los
+            productos <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-5 "></a>
         </div>
         <div class="grid grid-cols-4 gap-4 mt-14 w-full">
           @foreach ($ProdComplementarios->take(4) as $item)
-            <x-product.container width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" />
+            <x-product.container-combinalo width="" height="h-[400px]" bgcolor="bg-[#FFFFFF]"
+              textpx="text-[20px]" :item="$item" />
           @endforeach
 
 
@@ -285,25 +306,28 @@
 
     </section>
     <section class="">
-      <div class="w-11/12 mx-auto pt-20 ">
-        <h3 class="text-[30px] font-medium"> ¿Qué dicen los clientes sobre nosotros?</h3>
+      <div class="w-11/12 mx-auto pt-48 px-14">
+        <h3 class="text-[34.7px] font-Inter_Medium "> ¿Qué dicen los clientes sobre nosotros?</h3>
 
-        <div class="grid grid-cols-3 w-full gap-8 pt-20">
+        <div class="grid grid-cols-3 w-full gap-8 pt-16">
           @foreach ($testimonios->take(3) as $item)
-            <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-7 gap-6">
-              <div class="flex items-center gap-4"> <!-- Contenedor Flex para la imagen y el texto -->
-                <p class="font-medium text-[20px] flex-1">Gran calidad</p>
+            <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-12 gap-4">
+              <div class="flex items-center gap-4 pt-3"> <!-- Contenedor Flex para la imagen y el texto -->
+                <p class="font-Inter_Medium text-[24px] flex-1">Gran calidad</p>
                 <!-- flex-1 hace que el texto ocupe el espacio disponible -->
                 <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
                   class="w-10 h-10 rounded-full">
               </div>
-              <p class="font-normal text-[16px]">Duis auctor eros id risus fringilla, eget porta leo vestibulum. Morbi
+              <p class="font-Inter_Medium text-[19px] pt-1 leading-8">Duis auctor eros id risus fringilla, eget porta
+                leo
+                vestibulum.
+                Morbi
                 mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
               </p>
-              <div class="font-bold text-[20px] w-5">
+              <div class="font-Inter_Bold text-[24px] w-5">
                 Ademir Neyra
               </div>
-              <p class="text-[13px] font-normal">Lima, Peru</p>
+              <p class="text-[16px] font-Inter_Regular">Lima, Peru</p>
             </div>
           @endforeach
 
@@ -333,11 +357,11 @@
       //allowSlideNext: false,  //Bloquea el deslizamiento hacia el siguiente slide
       //allowSlidePrev: false,  //Bloquea el deslizamiento hacia el slide anterior
       allowTouchMove: true, // Bloquea el movimiento táctil
-      autoplay: {
+      /* autoplay: {
         delay: 5500,
         disableOnInteraction: true,
         pauseOnMouseEnter: true
-      },
+      }, */
 
       breakpoints: {
         0: {

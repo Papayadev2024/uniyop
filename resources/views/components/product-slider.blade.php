@@ -2,7 +2,7 @@
   <!-- Asegúrate de que este div tome todo el alto disponible -->
   <div class="swiper h-full img-complementarias"> <!-- Asegura que el swiper tome todo el alto -->
 
-    <div class="swiper-wrapper gap-2 h-full"> <!-- Asegura que el wrapper tome todo el alto -->
+    <div class="swiper-wrapper gap-6 h-full"> <!-- Asegura que el wrapper tome todo el alto -->
       @foreach ($product->galeria as $image)
         <div class="swiper-slide w-full h-full col-span-1"> <!-- Asegura que cada slide tome todo el alto -->
           <div class="flex gap-2 items-center justify-start h-full">
