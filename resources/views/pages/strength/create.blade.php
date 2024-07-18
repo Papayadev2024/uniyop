@@ -69,7 +69,7 @@
                       </g>
                     </svg>
                   </div>
-                  <x-form.quill id="descripcion" value="" />
+                  <x-textarea id="descripcion" name="descripcion" value="" />
 
 
                 </div>
