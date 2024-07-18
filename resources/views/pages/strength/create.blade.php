@@ -71,7 +71,7 @@
                   </div>
                   <x-form.quill id="descripcion" value="" />
 
-                  >
+
                 </div>
               </div>
               <div class="md:col-span-5">
