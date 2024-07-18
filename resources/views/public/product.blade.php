@@ -283,7 +283,7 @@
 
       </div>
     </section>
-    <section class="bg-[#F8F8F8]">
+    <section class="bg-[#F8F8F8] pb-20">
       <div class="w-11/12 mx-auto pt-36 px-14 ">
         <div class="flex flex-row justify-between w-full ">
           <h1 class="text-[33.4px] font-Inter_SemiBold">Productos Relacionados</h1>
@@ -305,7 +305,7 @@
     </section>
     @if ($testimonios->count() > 0)
       <section class="">
-        <div class="w-11/12 mx-auto pt-48 px-14">
+        <div class="w-11/12 mx-auto pt-20 px-14">
           <h3 class="text-[34.7px] font-Inter_Medium "> ¿Qué dicen los clientes sobre nosotros?</h3>
 
           <div class="grid grid-cols-3 w-full gap-8 pt-16">
