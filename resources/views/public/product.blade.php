@@ -287,8 +287,14 @@
       <div class="w-11/12 mx-auto pt-36 px-14 ">
         <div class="flex flex-row justify-between w-full ">
           <h1 class="text-[33.4px] font-Inter_SemiBold">Productos Relacionados</h1>
-          <a href="" class="flex items-center text-[20px] font-Inter_SemiBold text-[#006BF6] ">Ver todos los
-            productos <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-5 "></a>
+          @php
+            $url = '#';
+            if (isset($ProdComplementarios) && count($ProdComplementarios) > 0) {
+                $url = "/catalogo/{$ProdComplementarios[0]->categoria_id}";
+            }
+          @endphp
+          <a href="{{ $url }}" class="flex items-center text-[20px] font-Inter_SemiBold text-[#006BF6] ">Ver
+            todos los productos <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-5 "></a>
         </div>
         <div class="grid grid-cols-4 gap-4 mt-14 w-full">
           @foreach ($ProdComplementarios->take(4) as $item)
@@ -312,19 +318,19 @@
             @foreach ($testimonios->take(3) as $item)
               <div class="flex flex-col bg-[#F7F7F7] col-span-1 p-12 gap-4">
                 <div class="flex items-center gap-4 pt-3"> <!-- Contenedor Flex para la imagen y el texto -->
-                  <p class="font-Inter_Medium text-[24px] flex-1">Gran calidad</p>
+                  <p class="font-Inter_Medium text-[24px] flex-1">{{ $item->name }}</p>
                   <!-- flex-1 hace que el texto ocupe el espacio disponible -->
                   <img src="{{ asset('images\svg\icons8-comillas-48.png') }}" alt=""
                     class="w-10 h-10 rounded-full">
                 </div>
-                <p class="font-Inter_Medium text-[19px] pt-1 leading-8">Duis auctor eros id risus fringilla, eget porta
-                  leo
-                  vestibulum.
-                  Morbi
-                  mollis ligula non dui consectetur, a rhoncus nulla dictum. Etiam mattis pulvinar ipsum.
-                </p>
+                <div class="min-h-[130px]">
+                  <p class="font-Inter_Medium text-[19px] pt-1 leading-8 ">
+                    {{ $item->testimonie }}
+                  </p>
+                </div>
+
                 <div class="font-Inter_Bold text-[24px] w-5">
-                  Ademir Neyra
+                  {{ $item->ocupation }}
                 </div>
                 <p class="text-[16px] font-Inter_Regular">Lima, Peru</p>
               </div>

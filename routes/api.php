@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SaleDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +26,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/products/paginate', [ProductsController::class, 'paginate'])->name('products.paginate');
 
+Route::post('/payment/culqi', [PaymentController::class, 'culqi'])->name('payment.culqi');
+
+Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
+
+    Route::get('/dashboard/top-products/{orderBy}', [DashboardController::class, 'topProducts'])->name('dashboard.top-products');
+
+    Route::post('/address', [AddressController::class, 'save'])->name('address.save');
+    Route::delete('/address/{id}', [AddressController::class, 'delete'])->name('address.delete');
+    Route::patch('/address/markasfavorite', [AddressController::class, 'markasfavorite'])->name('address.markasfavorite');
+
+    Route::post('/sales/paginate', [SaleController::class, 'paginate'])->name('sales.paginate');
+    Route::post('/sales/confirmation', [SaleController::class, 'confirmation'])->name('sales.confirmation');
+    Route::patch('/sales/status', [SaleController::class, 'status'])->name('sales.status');
+    Route::get('/saledetails/{sale}', [SaleDetailController::class, 'bySale'])->name('sale.bySale');
+});
