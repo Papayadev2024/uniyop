@@ -6,6 +6,7 @@ import ProductContainer from './components/Product/ProductContainer'
 import { Fetch } from 'sode-extend-react'
 import FilterPagination from './components/Filter/FilterPagination'
 import arrayJoin from './Utils/ArrayJoin'
+import ProductCard from './components/Product/ProductCard'
 
 const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [] }) => {
   const take = 10
@@ -136,7 +137,7 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [] }) 
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {items.map((item, i) => <ProductContainer key={`item-${i}`} item={item} />)}
+          {items.map((item, i) => <ProductCard item={item} bgcolor={'bg-white'} />)}
         </div>
         <div className="w-full h-12     font-medium flex flex-row justify-center items-center">
           <FilterPagination current={currentPage} setCurrent={setCurrentPage} pages={Math.ceil(totalCount / take)} />
