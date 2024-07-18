@@ -3,7 +3,20 @@
   <div class="swiper h-full img-complementarias"> <!-- Asegura que el swiper tome todo el alto -->
 
     <div class="swiper-wrapper gap-6 h-full"> <!-- Asegura que el wrapper tome todo el alto -->
-      @foreach ($product->galeria as $image)
+      <div class="swiper-slide w-full h-full col-span-1"> <!-- Asegura que cada slide tome todo el alto -->
+        <div class="flex gap-2 items-center justify-start h-full">
+          <!-- Asegura que este div tome todo el alto -->
+          <div class="flex justify-center items-center h-full">
+            <!-- Asegura que este div tome todo el alto -->
+
+            {{-- Verifica si la imagen no es la carátula --}}
+            <img class="size-full object-cover h-full w-full shadow-xl" id="img-complementariaPROD-0"
+              src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}" />
+
+          </div>
+        </div>
+      </div>
+      @foreach ($product->galeria as $index => $image)
         <div class="swiper-slide w-full h-full col-span-1"> <!-- Asegura que cada slide tome todo el alto -->
           <div class="flex gap-2 items-center justify-start h-full">
             <!-- Asegura que este div tome todo el alto -->
@@ -12,6 +25,7 @@
 
               {{-- Verifica si la imagen no es la carátula --}}
               <img class="size-full object-cover h-full w-full shadow-xl"
+                id="img-complementariaPROD-{{ $index }}"
                 src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}" />
 
             </div>
@@ -54,5 +68,22 @@
 
       },
     },
+  });
+</script>
+
+<script>
+  //crear un script que detecte el onclick de un img-complementariaPROD  y lo ponga en #containerProductosdetail
+  var imgComplementaria = document.getElementById('img-complementariaPROD');
+
+  $(document).on("click", "[id^='img-complementariaPROD-']", function() {
+
+    let img = document.createElement('img');
+    img.src = $(this).attr('src');
+
+    img.classList.add('w-full', 'h-max', 'md:h-[400px]', '2xl:h-[580px]', 'object-cover', 'ease-in', 'duration-300',
+      'transform', 'hover:scale-105');
+
+    $("#containerProductosdetail").html(img)
+
   });
 </script>

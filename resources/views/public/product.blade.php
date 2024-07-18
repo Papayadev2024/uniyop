@@ -72,7 +72,7 @@
 
     <section class="flex flex-col gap-10 md:flex-row md:gap-16 w-11/12 m-auto ">
       <div class="grid grid-col-1 sm:grid-cols-3  gap-6  mt-5 h-max w-6/12 pl-[56px] pr-[48px] ml-2">
-        <div class=" col-span-3 h-max md:h-[400px] 2xl:h-[580px] ">
+        <div class=" col-span-3 h-max md:h-[400px] 2xl:h-[580px]  " id="containerProductosdetail">
 
           <img class="w-full h-max md:h-[400px] 2xl:h-[580px] object-cover" src="{{ asset($product->imagen) }}"
             alt="">
