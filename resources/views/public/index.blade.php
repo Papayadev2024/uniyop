@@ -40,13 +40,13 @@
       <section class="w-11/12 mx-auto">
         <div class="flex flex-row justify-between mt-20 w-full">
           <h1 class="text-[29px] font-semibold">Últimos productos</h1>
-          <a href="/catalogo/0" class="flex items-center font-semibold text-[#006BF6] ">Ver todos los productos <img
+          <a href="/catalogo" class="flex items-center font-semibold text-[#006BF6] ">Ver todos los productos <img
               src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
-        <div class="flex flex-col md:flex-row gap-4 mt-14 w-full">
+        <div class="grid grid-cols-5 md:flex-row gap-4 mt-14 w-full ">
 
           @foreach ($ultimosProductos as $item)
-            <x-product.container width="w-1/5" bgcolor="" :item="$item" />
+            <x-product.container width="col-span-1 " bgcolor="" :item="$item" />
 
             {{-- <x-productos-card width="w-1/5" bgcolor="" :item="$item" /> --}}
           @endforeach

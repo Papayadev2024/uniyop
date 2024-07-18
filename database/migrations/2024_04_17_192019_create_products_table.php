@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('descuento', 12, 2)->default(0);
             $table->decimal('stock', 12, 2)->default(0);
             $table->decimal('costo_x_art', 12, 2)->default(0);
-            $table->decimal('peso', 12, 2)->default(0);
+            $table->string('peso')->nullable();
             $table->string('imagen')->nullable();
             $table->json('atributes')->nullable();
             $table->string('sku')->nullable();
