@@ -12,6 +12,6 @@
   </div>
   <div class="h-60 relative z-10">
     <img class="block h-80  mx-auto w-[75%] object-cover bottom-0 left-0 -mt-20"
-      src="{{ asset('images/img/Container.png') }}" alt="">
+      src="{{ asset($item->url_image . $item->name_image) }}" alt="">
   </div>
 </div>
