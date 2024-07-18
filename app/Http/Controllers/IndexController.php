@@ -64,7 +64,7 @@ class IndexController extends Controller
     $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(3)->get();
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
-    $categorias = Category::where('destacar', '=', 1)->get();
+    $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
     $descuentos = Products::where('descuento', '>', 0)->where('status', '=', 1)
