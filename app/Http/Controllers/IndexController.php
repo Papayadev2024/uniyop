@@ -710,13 +710,14 @@ class IndexController extends Controller
             <table
               style="
                 width: 600px;
-                height: 700px;
+                height: 900px;
                 margin: 0 auto;
                 text-align: center;
                 background-image:url('.$appUrl.'images/Ellipse_18.png),  url('.$appUrl.'images/Tabpanel.png);
                 background-repeat: no-repeat, no-repeat;
                 background-position: center bottom , center bottom;;
                 background-size: fit , fit;
+                background-color: #f9f9f9;
               "
             >
               <thead>
