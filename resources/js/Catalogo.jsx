@@ -144,10 +144,10 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 pr-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 pr-4">
           {items.map((item, i) => <ProductCard item={item} bgcolor={'bg-white'} />)}
         </div>
-        <div className="w-full h-12     font-medium flex flex-row justify-center items-center">
+        <div className="w-full font-medium flex flex-row justify-center items-center">
           <FilterPagination current={currentPage} setCurrent={setCurrentPage} pages={Math.ceil(totalCount / take)} />
         </div>
       </section>
