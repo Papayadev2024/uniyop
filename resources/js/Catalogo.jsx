@@ -132,7 +132,7 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
   }
 
   return (<>
-    <form className="flex flex-col md:flex-row gap-6 w-full p-10 mx-auto font-poppins bg-[#F1F1F1]">
+    <form className="flex flex-col md:flex-row gap-6  p-10 mx-auto font-poppins bg-[#F1F1F1] w-11/12">
       <section className="flex flex-col gap-6 md:basis-3/12 bg-white p-6 rounded-lg h-max md:sticky top-2">
         <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} brands={brands} sizes={sizes} colors={colors} />
       </section>
@@ -144,7 +144,7 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 pr-4">
           {items.map((item, i) => <ProductCard item={item} bgcolor={'bg-white'} />)}
         </div>
         <div className="w-full h-12     font-medium flex flex-row justify-center items-center">
