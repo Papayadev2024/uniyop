@@ -105,7 +105,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
       method: 'POST',
       body: JSON.stringify({
         requireTotalCount: true,
-        filter: arrayJoin(filterBody, 'and'),
+        filter: arrayJoin([...filterBody, ['visible', '=', true]], 'and'),
         take,
         skip: take * (currentPage - 1)
       })
