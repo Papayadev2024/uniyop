@@ -67,23 +67,24 @@
 
 
     </section>
-    <section class="font-Inter_Regular mb-40">
+    <form class="font-Inter_Regular mb-40" id="formContactos">
       <div class=" grid grid-cols-1 w-11/12 m-auto px-16 pt-11">
         <h2 class="font-Inter_Medium text-[30px] text-center">Pregúntanos cualquier cosa aquí </h2>
         <div class="grid grid-cols-2 gap-4 mt-12 w-full">
           <div class="col-span-1 w-full">
-            <input type="text" placeholder="Nombre Completo " class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
+            <input type="text" placeholder="Nombre Completo " name="name"
+              class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
           </div>
           <div class="col-span-1 w-full">
-            <input type="text" placeholder="Correo Electronico"
+            <input type="text" placeholder="Correo Electronico" name="email" id="email"
               class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
           </div>
           <div class="col-span-2 w-full mt-8">
-            <input type="text" placeholder="Asunto " class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
+            <input type="text" placeholder="Asunto " name="asunto"
+              class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
           </div>
           <div class="col-span-2 w-full mt-8">
-            <textarea type="text" placeholder="Mensaje " class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
-            </textarea>
+            <textarea type="text" placeholder="Mensaje " name="message" class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none"></textarea>
           </div>
         </div>
 
@@ -94,7 +95,7 @@
           Mensaje</button>
       </div>
 
-    </section>
+    </form>
 
   </main>
 
@@ -142,6 +143,10 @@
             title: response.message,
             icon: "success",
           });
+
+          if (!window.location.href.includes('#FormularioEnviado')) {
+            window.location.href = window.location.href.split('#')[0] + '#FormularioEnviado';
+          }
 
         },
         error: function(error) {

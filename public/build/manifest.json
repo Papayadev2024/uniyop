@@ -8,7 +8,10 @@
     "src": "resources/css/app.css"
   },
   "resources/js/Catalogo.jsx": {
-    "file": "assets/Catalogo-tR-XfzEp.js",
+    "css": [
+      "assets/Catalogo-C64i7G0l.css"
+    ],
+    "file": "assets/Catalogo-yWyCDzVV.js",
     "imports": [
       "_axios-GZ4oqQ7_.js"
     ],
