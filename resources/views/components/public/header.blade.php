@@ -132,8 +132,8 @@
         </a>
       </li>
       <li>
-        <a href="#"
-          class="text-[#272727] font-medium font-poppins text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'comentario' ? 'text-[#FF5E14]' : '' }}">
+        <a href="/contacto"
+          class="text-[#272727] font-medium font-poppins text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
           <span class="underline-this">
             <svg
               class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
