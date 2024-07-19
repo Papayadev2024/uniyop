@@ -1,5 +1,5 @@
 <div x-data="{ showAmbiente: false }" @mouseenter="showAmbiente = true" @mouseleave="showAmbiente = false"
-    class="flex flex-col relative w-full md:{{ $width }} {{ $bgcolor }}">
+    class="flex flex-col relative w-full md:{{ $width }} {{ $bgcolor }}" >
     <div class="{{ $bgcolor }} product_container basis-4/5 flex flex-col justify-center relative">
         {{-- @php
       echo json_encode($item->tags);
@@ -62,10 +62,10 @@
         </div>
     </div>
     <a href="{{ route('producto', $item->id) }}">
-        <h2 class="text-base mt-4 text-center font-Inter_Medium tracking-tight line-clamp-2 truncate">
+        <h2 class="text-base mt-4 text-center font-Inter_Medium tracking-tight cortartexto" >
             {{ $item->producto }}
         </h2>
-        <div class="flex content-between flex-row gap-4 items-center justify-center font-Inter_Medium">
+        <div class="flex content-between flex-row gap-4 items-center justify-center font-Inter_Medium pb-4">
             @if ($item->descuento == 0)
                 <span class="text-[#006BF6] text-base font-bold">{{ $item->precio }}</span>
             @else
@@ -76,3 +76,13 @@
     </a>
 
 </div>
+
+<style>
+    .cortartexto {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      max-height: 60px;
+    }
+  </style>
