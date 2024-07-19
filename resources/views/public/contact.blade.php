@@ -84,8 +84,7 @@
               class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
           </div>
           <div class="col-span-2 w-full mt-8">
-            <textarea type="text" placeholder="Mensaje " name="message" class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none">
-            </textarea>
+            <textarea type="text" placeholder="Mensaje " name="message" class="w-full h-14 bg-[#F8F8F8] rounded-xl border-none"></textarea>
           </div>
         </div>
 

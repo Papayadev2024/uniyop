@@ -692,7 +692,7 @@ class IndexController extends Controller
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fit2finance</title>
+    <title>BoostPeru</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -712,11 +712,12 @@ class IndexController extends Controller
       <table
         style="
           width: 600px;
+          height: 700px;
           margin: 0 auto;
           text-align: center;
           
           
-          background-image: url("'.$appUrl.'/images/Ellipse_18.png") ,url("'.$appUrl.'/images/Tabpanel.png");
+          background-image: url("'.$appUrl.'images/Ellipse_18.png") ,url("'.$appUrl.'images/Tabpanel.png");
           background-repeat: no-repeat ,no-repeat;
           background-position: center bottom , center bottom;
           background-size: fit, fit;
@@ -726,7 +727,7 @@ class IndexController extends Controller
         <thead>
           <tr>
             <th style="text-align: center; padding-top: 50px">
-              <img src="'.$appUrl.'/images/Group1.png" alt="mundo web" />
+              <img src="'.$appUrl.'images/Group1.png" alt="mundo web" />
             </th>
           </tr>
         </thead>
