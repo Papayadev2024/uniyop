@@ -15,8 +15,8 @@ const FilterPagination = ({ current, setCurrent, pages }) => {
   }
 
   return (<>
-    <nav aria-label="Page navigation example">
-      <ul className="flex items-center gap-1 -space-x-px h-10 text-base">
+    <nav aria-label="Page navigation example w-full">
+      <ul className="flex flex-wrap items-center gap-1 -space-x-px text-base justify-center">
         <li>
           <button className="cursor-pointer flex items-center justify-center px-4 h-10 w-10 leading-tight text-gray-500 hover:bg-white rounded-full bg-gray-100 hover:text-gray-700" onClick={onPrevPageClicked} type='button'>
             <span className="sr-only">Previous</span>
@@ -27,7 +27,12 @@ const FilterPagination = ({ current, setCurrent, pages }) => {
         </li>
         {
           array.map((x, i) => {
-            return <li>
+            if ((i + 1) == current - 4 || (i + 1) == current + 4) {
+              return <li>
+                <button aria-current="page" className='z-10 flex items-center justify-center px-4 h-10 w-10 leading-tight  hover:bg-white rounded-full bg-transparent text-gray-500 hover:text-gray-700' type='button'>···</button>
+              </li>
+            }
+            return <li className={(i + 1) > current - 4 && (i + 1) < current + 4 ? 'block' : 'hidden'}>
               <button aria-current="page" className={`cursor-pointer z-10 flex items-center justify-center px-4 h-10 w-10 leading-tight  hover:bg-white rounded-full ${current == i + 1 ? 'bg-[#006BF6] text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-700'}`} onClick={() => setCurrent(i + 1)} type='button'>{i + 1}</button>
             </li>
           })
