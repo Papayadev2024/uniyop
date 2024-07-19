@@ -1,27 +1,27 @@
 <footer class="font-Inter_Medium bg-[#FFFFFF] mt-5">
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] py-8 lg:py-16 ">
-    
+
     <div class="flex flex-col text-[#444444] text-base gap-1">
       <h3 class="font-bold text-xl text-[#333333] pb-3">Contacta con Nosotros</h3>
-      <p>Boots Perú</p>
-      <p>No. 1259 Av. Aviación, San Borja</p>
-      <p>Lima - Perú</p>
-      <p>+51 987 654 321</p>
-      <p>hola@mail.com</p>
+      <p>{{ config('app.name') }}</p>
+      <p>{{ $datosgenerales->address }}</p>
+      <p> {{ $datosgenerales->city }} - {{ $datosgenerales->country }}</p>
+      <p>{{ $datosgenerales->cellphone }}</p>
+      <p>{{ $datosgenerales->email }}</p>
     </div>
 
     <div class="flex flex-col text-[#444444] text-base gap-1">
       <h3 class="font-bold text-xl text-[#333333] pb-3">Información</h3>
       <a href="/">Inicio</a>
       <a href="{{ route('Catalogo.jsx') }}">Productos</a>
-      <a href="{{ route('contacto') }}">Blog</a>
+      <a href="{{ route('blog', 0) }}">Blog</a>
     </div>
 
     <div class="flex flex-col text-[#444444] text-base gap-1">
       <h3 class="font-bold text-xl text-[#333333] pb-3">Servicio al Cliente</h3>
-      <a href="/">Contacto</a>
-      <a href="/">Politicas y Reglas </a>
+      <a href="/contacto">Contacto</a>
+      <a href="#">Politicas y Reglas </a>
       {{--  <a href="{{ route('librodereclamaciones') }}"><img class="w-28"
            src="{{ asset('images/img/reclamaciones.png') }}" /></a> --}}
     </div>
