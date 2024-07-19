@@ -40,6 +40,10 @@ class Products extends Model
   {
     return Category::find($this->categoria_id);
   }
+  public function category()
+    {
+        return $this->belongsTo(Category::class, 'categoria_id');
+    }
 
   public function subcategory()
   {
