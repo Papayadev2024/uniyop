@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 
-                @if ($product->attributes)
+                @if (!is_null($product->attributes))
                   <div class="flex flex-col gap-8 mt-4 font-Inter_Regular text-lg">
                       @php
                           $groupedAttributes = $product->attributes->groupBy('titulo');
