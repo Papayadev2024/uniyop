@@ -144,6 +144,10 @@
             icon: "success",
           });
 
+          if (!window.location.href.includes('#FormularioEnviado')) {
+            window.location.href = window.location.href.split('#')[0] + '#FormularioEnviado';
+          }
+
         },
         error: function(error) {
           const obj = error.responseJSON.message;
