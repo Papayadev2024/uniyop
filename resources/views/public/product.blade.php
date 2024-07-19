@@ -244,11 +244,11 @@
 
                 </div>
 
-                <div class="flex flex-col mt-4 gap-2 pb-20">
+                <div class="flex flex-col gap-2 pb-8 lg:pb-16">
                     <span class="text-base font-Inter_Medium">
                         Pago seguro garantizado
                     </span>
-                    <div class="flex flex-row gap-2 px-1 mt-2">
+                    <div class="flex flex-wrap gap-2 px-1 mt-2">
                         <img src="{{ asset('images\svg\amazon.png') }}" alt="" class="h-9 w-14">
                         <img src="{{ asset('images\svg\american.svg') }}" alt="" class="h-9 w-14">
                         <img src="{{ asset('images\svg\applepay.png') }}" alt="" class="h-9 w-14">
