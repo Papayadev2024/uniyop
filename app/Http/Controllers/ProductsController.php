@@ -150,7 +150,7 @@ class ProductsController extends Controller
       // $route = 'storage/images/imagen/';
       $route = "storage/images/productos/$request->categoria_id/";
       // $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
-      $nombreImagen = $request->sku.'jpg';
+      $nombreImagen = $request->sku.'.jpg';
       $manager = new ImageManager(new Driver());
       $img =  $manager->read($file);
       // $img->coverDown(340, 340, 'center');
