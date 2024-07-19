@@ -32,6 +32,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LibroReclamacionesController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PolyticsConditionController;
+use App\Http\Controllers\PopupController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SaleController;
@@ -220,7 +221,9 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/banners/deleteBanner', [BannersController::class, 'deleteBanner'])->name('banners.deleteBanner');
         Route::post('/banners/updateVisible', [BannersController::class, 'updateVisible'])->name('banner.updateVisible');
       
-
+        Route::resource('/popup', PopupController::class);
+        Route::post('/popup/deleteBanner', [PopupController::class, 'deleteBanner'])->name('popup.deleteBanner');
+        Route::post('/popup/updateVisible', [PopupController::class, 'updateVisible'])->name('popup.updateVisible');
 
         Route::fallback(function () {
             return view('pages/utility/404');
