@@ -61,7 +61,7 @@ class CategoryController extends Controller
             $img =  $manager->read($request->file('imagen'));
 
             // Obtener las dimensiones de la imagen que se esta subiendo
-            $img->coverDown(640, 640, 'center');
+            // $img->coverDown(640, 640, 'center');
 
             $ruta = 'storage/images/categories/';
 

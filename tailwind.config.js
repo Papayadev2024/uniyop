@@ -18,11 +18,11 @@ export default {
                 'custom-gray': '#F8F8F8',
                 'custom-white': '#FFFFFF',
                 'custom-border': 'rgba(21, 41, 76, 0.4)', // Defin
-              },
+            },
               // Añadir el gradiente personalizado
               backgroundImage: {
                 'custom-gradient': 'linear-gradient(to bottom, #F8F8F8 100%, #FFFFFF 100%)',
-              },
+            },
               
               fontFamily: {
                 Inter_Bold: ["Inter_Bold"],
@@ -31,6 +31,17 @@ export default {
                 Inter_Medium: ["Inter_Medium"],
                 Inter_Regular: ["Inter_Regular"],
                 Inter_SemiBold: ["Inter_SemiBold"],
+            },
+            
+            screens: {
+                xs: '320px',
+                "2xs": "420px",
+                sm: "640px",
+                md: "768px",
+                "2md": "850px",
+                lg: "1024px",
+                xl: "1280px",
+                "2xl": "1536px",
             },
 
            

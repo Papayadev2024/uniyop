@@ -6,14 +6,10 @@
   <div class="swiper-wrapper">
     @foreach ($items as $item)
       <div class="swiper-slide">
-
-
         <x-content-slider :item="$item" />
       </div>
     @endforeach
-
   </div>
-
 </div>
 
 <script>

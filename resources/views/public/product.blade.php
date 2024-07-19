@@ -79,7 +79,7 @@
 
         </div>
 
-        <x-product-slider :product="$product" />
+          <x-product-slider :product="$product" />
       </div>
       <div class="flex flex-col gap-6 w-7/12 mt-5 ">
         <div class="flex flex-col gap-3">
@@ -168,6 +168,7 @@
             </tbody>
           </table>
         </div>
+        
         <div class="flex flex-row gap-6">
 
           <div class="flex flex-row gap-2 items-center">

@@ -47,6 +47,7 @@
     z-index: 30;
   }
 </style>
+
 <style>
   .bg-image {
     background-image: url('');
@@ -62,6 +63,7 @@
     z-index: 900;
   }
 </style>
+
 {{-- <img src="{{ asset('images/Producto_Detalle.jpg') }}" class="absolute top-0 left-0 w-full z-[99999] opacity-0"></img> --}}
 
 <div class="navigation shadow-xl px-5" style="z-index: 9999; background-color: #fff !important">
@@ -151,67 +153,67 @@
 
 <header class="font-Inter_Regular">
   @foreach ($datosgenerales as $item)
-    <div class="bg-[#006BF6]  h-[50px] ">
-      <div class=" flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-3 text-[17px] items-center px-16">
-        <div class="text-white font-Inter_Regular text-[17px] text-start w-1/3 flex gap-3">
-          <div>(51)
-            987 456 243</div>
+      <div class="bg-[#006BF6] h-[50px] flex lg:justify-between justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
+        <div class="text-white font-Inter_Regular text-[17px] text-start flex gap-3">
+          <h3>(51)
+            987 456 243</h3>
           <div>|</div>
-          <div> <a href="#">Direccion</a></div>
+          <a href="#">Direccion</a>
 
         </div>
-        <div class="text-white font-Inter_Regular  text-center w-2/3 ml-[100px]">
+        <h3 class="text-white font-Inter_Regular  text-center hidden lg:flex">
           Cuéntale a un amigo sobre Boost y consigue un 20% de descuento *
-        </div>
-        <div class="text-white font-Inter_Regular  text-end w-1/3">
+        </h3>
+        <div class="text-white font-Inter_Regular  text-end hidden lg:flex">
           <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
         </div>
       </div>
-    </div>
   @endforeach
 
   <div>
-    <div id="header-menu " class="flex justify-center md:justify-end gap-5 w-11/12 mx-auto pt-6  text-[17px] px-16">
-      <div id="menu-burguer" class="md:hidden z-10 w-max">
+    <div id="header-menu" class="flex justify-between gap-5 w-full px-[5%] xl:px-[8%] py-4  text-[17px] ">
+      
+      <div id="menu-burguer" class="lg:hidden z-10 w-max">
         <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}" alt="menu hamburguesa"
           onclick="show()" />
       </div>
-      <div class="w-1/3">
+
+      <div class="w-auto">
         <a href="#">
-          <img id="logo-boostperu" class="w-[209px]"
+          <img id="logo-boostperu" class="w-[170px] md:w-[200px]"
             src="{{ asset($isIndex ? 'images\img\LogoBoost.png' : 'images\img\LogoBoost.png') }}" alt="boostperu" />
         </a>
       </div>
 
-      <div class="hidden md:flex items-center w-2/3 ml-[134px] ">
+      <div class="hidden lg:flex items-center justify-center">
         <div>
-          <nav id="menu-items" class=" text-[#272727]  flex gap-5 items-center justify-center" x-data="{ openCatalogo: false, openSubMenu: null }">
-            <a href="/" class="py-4  font-medium font-poppins text-[17px] px-3 hover:opacity-75 ">
+          <nav id="menu-items" class=" text-[#333] text-base font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center" x-data="{ openCatalogo: false, openSubMenu: null }">
+            <a href="/" class="font-medium hover:opacity-75 ">
               <span class="underline-this">INICIO</span>
             </a>
-            <div @mouseenter="openCatalogo = true" @mouseleave="openCatalogo = false" class="px-3 py-4">
-              <a href="{{ route('Catalogo.jsx') }}" class="font-medium font-poppins  hover:opacity-75 "
-                aria-haspopup="true">
+            
+            <a href="{{ route('Catalogo.jsx') }}" class="font-medium hover:opacity-75">
                 <span class="underline-this">PRODUCTOS</span>
-              </a>
-
-            </div>
-
-            <a href="/blog/0" class="py-4  font-medium font-poppins px-3  hover:opacity-75 ">
+            </a>
+           
+            <a href="/blog/0" class="font-medium hover:opacity-75 ">
               <span class="underline-this">BLOG</span>
             </a>
-            <a href="#" class="py-4  font-medium font-poppins px-3 hover:opacity-75 ">
+
+            <a href="#" class="font-medium hover:opacity-75 ">
               <span class="underline-this">CONTACTO</span>
             </a>
           </nav>
         </div>
       </div>
-      <div class="flex justify-end md:w-auto md:justify-center items-center  w-1/3">
+
+      <div class="flex justify-end md:w-auto md:justify-center items-center gap-2">
+       
         @if (Auth::user() == null)
-          <a href="{{ route('login') }}"><img class="bg-white rounded-lg p-1"
+          <a class="hidden md:flex" href="{{ route('login') }}"><img class="bg-white rounded-lg"
               src="{{ asset('images/svg/header_user.svg') }}" alt="user" /></a>
         @else
-          <div class="relative inline-flex" x-data="{ open: false }">
+          <div class="relative  hidden md:inline-flex" x-data="{ open: false }">
             <button class="px-3 py-5 inline-flex justify-center items-center group" aria-haspopup="true"
               @click.prevent="open = !open" :aria-expanded="open">
               <div class="flex items-center truncate">
@@ -256,11 +258,17 @@
         {{-- <div class="bg-[#EB5D2C] flex justify-center items-center rounded-full w-7 h-7">
             <span id="itemsCount" class="text-white"></span>
           </div> --}}
-        <div class="flex justify-center items-center pl-1">
-          <div id="open-cart" class="relative inline-block cursor-pointer">
+         
+          <div class="relative inline-block cursor-pointer">
+              <img src="{{ asset('images/svg/search_boost.svg') }}"
+                class="bg-white rounded-lg max-w-full h-auto cursor-pointer" />
+          </div>
+            
+          <div class="flex justify-center items-center">
+          <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
             <span id="itemsCount"
-              class="bg-[#EB5D2C] text-xs font-medium text-white text-center p-1 leading-none rounded-full px-2 absolute -translate-y-1/2 translate-x-1/2 left-auto top-0 right-0">0</span>
-            <img src="{{ asset('images/svg/header_bag.svg') }}"
+              class="bg-[#EB5D2C] text-xs font-medium text-white text-center px-[7px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
+            <img src="{{ asset('images/svg/bag_boost.svg') }}"
               class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" />
           </div>
           {{-- <input type="checkbox" class="bag__modal" id="check" /> --}}
@@ -301,10 +309,13 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
 </header>
+
+
 <script>
   $('#open-cart').on('click', () => {
     $('#cart-modal').modal({
