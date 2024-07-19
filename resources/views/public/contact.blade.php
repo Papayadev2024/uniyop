@@ -41,8 +41,21 @@
           <img class="absolute" src="{{ asset('images\call.png') }}" alt="">
           <div class="pl-14 gap-3 flex flex-col">
             <p class="text-[25px] font-Inter_SemiBold">Contacto</p>
-            <p class="text-[20px]">Móvil: {{ $general->cellphone }}</p>
-            <p class="text-[20px]">Móvil: {{ $general->office_phone }}</p>
+            <p class="text-[20px]">
+              @isset($general->whatsapp)
+                WhatsApp: {{ $general->whatsapp }}
+              @endisset
+            </p>
+            <p class="text-[20px]">
+              @isset($general->office_phone)
+                Oficina: {{ $general->office_phone }}
+              @endisset
+            </p>
+            <p class="text-[20px]">
+              @isset($general->cellphone)
+                Celular: {{ $general->cellphone }}
+              @endisset
+            </p>
           </div>
           <p class="text-[20px] pl-14">Correo: {{ $general->email }}</p>
 
