@@ -132,7 +132,7 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
   }
 
   return (<>
-    <form className="flex flex-col md:flex-row gap-6  p-10 mx-auto font-poppins bg-[#F1F1F1] w-11/12">
+    <form className="flex flex-col md:flex-row gap-6  mx-auto font-poppins bg-[#F1F1F1] w-full" style={{padding:'40px'}}>
       <section className="flex flex-col gap-6 md:basis-3/12 bg-white p-6 rounded-lg h-max md:sticky top-2">
         <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} brands={brands} sizes={sizes} colors={colors} />
       </section>
