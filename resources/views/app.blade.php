@@ -178,7 +178,9 @@
       /* margin-left: 0.25rem; */
       margin-left: 0;
       padding: 0;
-      display: inline-block
+      display: inline-block;
+      height: 22px;
+      margin-top: 0;
       /* ml-1 */
     }
   </style>
