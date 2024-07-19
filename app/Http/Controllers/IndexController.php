@@ -692,7 +692,7 @@ class IndexController extends Controller
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fit2finance</title>
+    <title>BoostPeru</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -712,6 +712,7 @@ class IndexController extends Controller
       <table
         style="
           width: 600px;
+          height: 700px;
           margin: 0 auto;
           text-align: center;
           
