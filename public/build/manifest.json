@@ -3,12 +3,12 @@
     "file": "assets/axios-GZ4oqQ7_.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-5ZLwn3HM.css",
+    "file": "assets/app-f6k1KNfl.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/Catalogo.jsx": {
-    "file": "assets/Catalogo-tR-XfzEp.js",
+    "file": "assets/Catalogo-Jz5qk1me.js",
     "imports": [
       "_axios-GZ4oqQ7_.js"
     ],
