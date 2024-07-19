@@ -8,13 +8,16 @@ import FilterPagination from './components/Filter/FilterPagination'
 import arrayJoin from './Utils/ArrayJoin'
 import ProductCard from './components/Product/ProductCard'
 
-const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [] }) => {
+const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id_cat }) => {
   const take = 10
 
   const [items, setItems] = useState([])
   const [filter, setFilter] = useState({})
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
+
+
+
 
   useEffect(() => {
     setCurrentPage(1)
@@ -29,6 +32,11 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [] }) 
     const filterBody = []
 
     // Filtro de precios
+    if (id_cat > 0) {
+      filterBody.push([
+        ['categoria_id', '=', id_cat]
+      ])
+    }
     if (filter.maxPrice || filter.minPrice) {
       if (filter.maxPrice && filter.minPrice) {
         filterBody.push([

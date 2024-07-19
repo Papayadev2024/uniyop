@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 // require __DIR__ . '/router.php';
 
-Route::get('/catalogo', [IndexController::class, 'catalogo'])->name('Catalogo.jsx');
+Route::get('/catalogo/{id?}', [IndexController::class, 'catalogo'])->name('Catalogo.jsx');
 // foreach (Router::components as $path => $page) {
 //   if (Auth::check()) {
 //     Auth::user()->getAllPermissions();
