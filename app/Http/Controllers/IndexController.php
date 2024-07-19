@@ -716,7 +716,7 @@ class IndexController extends Controller
           text-align: center;
           
           
-          background-image: url("'.$appUrl.'/images/Ellipse_18.png") ,url("'.$appUrl.'/images/Tabpanel.png");
+          background-image: url("'.$appUrl.'images/Ellipse_18.png") ,url("'.$appUrl.'images/Tabpanel.png");
           background-repeat: no-repeat ,no-repeat;
           background-position: center bottom , center bottom;
           background-size: fit, fit;
@@ -726,7 +726,7 @@ class IndexController extends Controller
         <thead>
           <tr>
             <th style="text-align: center; padding-top: 50px">
-              <img src="'.$appUrl.'/images/Group1.png" alt="mundo web" />
+              <img src="'.$appUrl.'images/Group1.png" alt="mundo web" />
             </th>
           </tr>
         </thead>
