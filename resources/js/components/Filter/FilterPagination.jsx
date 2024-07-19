@@ -28,11 +28,11 @@ const FilterPagination = ({ current, setCurrent, pages }) => {
         {
           array.map((x, i) => {
             if ((i + 1) == current - 4 || (i + 1) == current + 4) {
-              return <li>
+              return <li key={`item-${i}`}>
                 <button aria-current="page" className='z-10 flex items-center justify-center px-4 h-10 w-10 leading-tight  hover:bg-white rounded-full bg-transparent text-gray-500 hover:text-gray-700' type='button'>···</button>
               </li>
             }
-            return <li className={(i + 1) > current - 4 && (i + 1) < current + 4 ? 'block' : 'hidden'}>
+            return <li key={`item-${i}`} className={(i + 1) > current - 4 && (i + 1) < current + 4 ? 'block' : 'hidden'}>
               <button aria-current="page" className={`cursor-pointer z-10 flex items-center justify-center px-4 h-10 w-10 leading-tight  hover:bg-white rounded-full ${current == i + 1 ? 'bg-[#006BF6] text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-700'}`} onClick={() => setCurrent(i + 1)} type='button'>{i + 1}</button>
             </li>
           })

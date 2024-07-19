@@ -44,7 +44,8 @@ class ProductsController extends Controller
       ])
         ->with('category')
         ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
-        ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id');
+        ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
+        ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id');
 
       if ($request->group != null) {
         [$grouping] = $request->group;

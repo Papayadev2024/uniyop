@@ -6,9 +6,6 @@ const ProductCard = ({ item, width, bgcolor }) => {
   const [showAmbiente, setShowAmbiente] = useState(false);
   const category = item.category;
 
-
-
-
   return (
     <div
       onMouseEnter={() => setShowAmbiente(true)}

@@ -8,16 +8,13 @@ import FilterPagination from './components/Filter/FilterPagination'
 import arrayJoin from './Utils/ArrayJoin'
 import ProductCard from './components/Product/ProductCard'
 
-const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id_cat }) => {
+const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category }) => {
   const take = 10
 
   const [items, setItems] = useState([])
-  const [filter, setFilter] = useState({})
+  const [filter, setFilter] = useState(selected_category ? { category_id: [selected_category] }: {})
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-
-
-
 
   useEffect(() => {
     setCurrentPage(1)
@@ -31,12 +28,6 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
   const getItems = async () => {
     const filterBody = []
 
-    // Filtro de precios
-    if (id_cat > 0) {
-      filterBody.push([
-        ['categoria_id', '=', id_cat]
-      ])
-    }
     if (filter.maxPrice || filter.minPrice) {
       if (filter.maxPrice && filter.minPrice) {
         filterBody.push([
@@ -67,55 +58,47 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
       }
     }
 
-    // Filtro de marcas
-    if (filter['attribute-1'] && filter['attribute-1'].length > 0) {
-      const marcaFilter = []
-      filter['attribute-1'].forEach((x, i) => {
+    if (filter['txp.tag_id'] && filter['txp.tag_id'].length > 0) {
+      const tagsFilter = []
+      filter['txp.tag_id'].forEach((x, i) => {
         if (i == 0) {
-          marcaFilter.push(['apv.attribute_value_id', '=', x])
+          tagsFilter.push(['txp.tag_id', '=', x])
         } else {
-          marcaFilter.push('or', ['apv.attribute_value_id', '=', x])
+          tagsFilter.push('or', ['txp.tag_id', '=', x])
+        }
+      })
+      filterBody.push(tagsFilter)
+    }
+
+    for (const key in filter) {
+      if (!key.startsWith('attribute-')) continue
+      if (filter[key].length == 0) continue
+      const [, attribute_id] = key.split('-')
+      const attributeFilter = []
+      filter[key].forEach((x, i) => {
+        if (i == 0) {
+          attributeFilter.push(['apv.attribute_value_id', '=', x])
+        } else {
+          attributeFilter.push('or', ['apv.attribute_value_id', '=', x])
         }
       })
       filterBody.push([
-        ['a.id', '=', 1],
+        ['a.id', '=', attribute_id],
         'and',
-        marcaFilter
+        attributeFilter
       ])
     }
 
-    // Filtro de colores
-    if (filter['attribute-2'] && filter['attribute-2'].length > 0) {
-      const colorFilter = []
-      filter['attribute-2'].forEach((x, i) => {
+    if (filter['category_id'] && filter['category_id'].length > 0) {
+      const categoryFilter = []
+      filter['category_id'].forEach((x, i) => {
         if (i == 0) {
-          colorFilter.push(['apv.attribute_value_id', '=', x])
+          categoryFilter.push(['categoria_id', '=', x])
         } else {
-          colorFilter.push('or', ['apv.attribute_value_id', '=', x])
+          categoryFilter.push('or', ['categoria_id', '=', x])
         }
       })
-      filterBody.push([
-        ['a.id', '=', 2],
-        'and',
-        colorFilter
-      ])
-    }
-
-    // Filtro de tamaño
-    if (filter['attribute-3'] && filter['attribute-3'].length > 0) {
-      const tamañoFilter = []
-      filter['attribute-3'].forEach((x, i) => {
-        if (i == 0) {
-          tamañoFilter.push(['apv.attribute_value_id', '=', x])
-        } else {
-          tamañoFilter.push('or', ['apv.attribute_value_id', '=', x])
-        }
-      })
-      filterBody.push([
-        ['a.id', '=', 3],
-        'and',
-        tamañoFilter
-      ])
+      filterBody.push(categoryFilter)
     }
 
     const { status, result } = await Fetch('/api/products/paginate', {
@@ -131,10 +114,20 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
     setTotalCount(result?.totalCount ?? 0)
   }
 
+  const attributes = attribute_values.reduce((acc, item) => {
+    // If the attribute_id does not exist in the accumulator, create a new array for it
+    if (!acc[item.attribute_id]) {
+      acc[item.attribute_id] = [];
+    }
+    // Add the current item to the array corresponding to its attribute_id
+    acc[item.attribute_id].push(item);
+    return acc;
+  }, {});
+
   return (<>
-    <form className="flex flex-col md:flex-row gap-6  mx-auto font-poppins bg-[#F1F1F1] w-full" style={{padding:'40px'}}>
-      <section className="flex flex-col gap-6 md:basis-3/12 bg-white p-6 rounded-lg h-max md:sticky top-2">
-        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} brands={brands} sizes={sizes} colors={colors} />
+    <form className="flex flex-col md:flex-row gap-6  mx-auto font-poppins bg-[#F1F1F1] w-full" style={{ padding: '40px' }}>
+      <section className="flex flex-col gap-4 md:basis-3/12 bg-white p-6 rounded-lg h-max md:sticky top-2">
+        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} attribute_values={Object.values(attributes)} selected_category={selected_category} />
       </section>
       <section className="flex flex-col gap-6 md:basis-9/12">
         <div className="w-full bg-white rounded-lg font-medium flex flex-row justify-between items-center px-2 py-3">
@@ -145,7 +138,7 @@ const Catalogo = ({ minPrice, maxPrice, brands = [], sizes = [], colors = [], id
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 pr-4">
-          {items.map((item, i) => <ProductCard item={item} bgcolor={'bg-white'} />)}
+          {items.map((item, i) => <ProductCard key={`product-${item.id}`} item={item} bgcolor={'bg-white'} />)}
         </div>
         <div className="w-full font-medium flex flex-row justify-center items-center">
           <FilterPagination current={currentPage} setCurrent={setCurrentPage} pages={Math.ceil(totalCount / take)} />

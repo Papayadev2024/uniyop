@@ -1,10 +1,13 @@
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 const plugin = require('tailwindcss/plugin');
+const preline = require('preline/plugin')
+
 
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
+        './node_modules/preline/dist/*.js',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -64,7 +67,6 @@ export default {
                 modifySelectors(({ className }) => `.sidebar-expanded .${e(`sidebar-expanded${separator}${className}`)}`);
             });
         }),
-
-
+        preline
     ],
 };
