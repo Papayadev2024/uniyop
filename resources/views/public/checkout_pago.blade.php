@@ -378,13 +378,13 @@
       const precioEnvio = getCostoEnvio()
 
       Culqi.settings({
-        title: 'Decotab',
+        title: 'Boost .its more',
         currency: 'PEN',
         amount: Math.round((precioProductos + precioEnvio) * 100),
       });
       Culqi.options({
         style: {
-          logo: 'http://decotab.mundoweb.localhost/images/svg/logo_decotab_header.svg',
+          logo: `${location.origin}/images/svg/logo_boost_header.svg`,
           bannerColor: '#272727'
         }
       })
