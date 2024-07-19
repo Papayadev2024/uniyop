@@ -83,6 +83,6 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       text-overflow: ellipsis;
-      height: 55px;
+      height: 60px;
     }
   </style>
