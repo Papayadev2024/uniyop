@@ -688,11 +688,11 @@ class IndexController extends Controller
     try {
       $mail->addAddress($data['email']);
       $mail->Body = '
-      <html lang="en">
+     <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BoostPeru</title>
+    <title>Mundo web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -715,89 +715,88 @@ class IndexController extends Controller
           height: 700px;
           margin: 0 auto;
           text-align: center;
-          
-          
           background-image: url("'.$appUrl.'images/Ellipse_18.png") ,url("'.$appUrl.'images/Tabpanel.png");
           background-repeat: no-repeat ,no-repeat;
           background-position: center bottom , center bottom;
-          background-size: fit, fit;
-          background-color: #f9f9f9;
+          background-size: fit , fit;
         "
       >
         <thead>
           <tr>
-            <th style="text-align: center; padding-top: 50px">
+            <th
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                margin: 40px;
+              "
+            >
               <img src="'.$appUrl.'images/Group1.png" alt="mundo web" />
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>
+            <td style="height: 10px">
+              <p
+                style="
+                  
+                  font-weight: 500;
+                  font-size: 18px;
+                  text-align: center;
+                  width: 500px;
+                  margin: 0 auto;
+                  font-family: Montserrat, sans-serif;
+                  line-height: 30px;
+                "
+              >
+                <span style="display: block">Hola </span>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="height: 10px">
+              <p
+                style="
+                  
+                  font-size: 40px;
+                  font-family: Montserrat, sans-serif;
+                  line-height: 60px;
+                "
+              >
+                <span style="display: block">' . $name . ' </span>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="height: 10px">
+              <p
+                style="
+                 
+                  font-size: 40px;
+                  font-family: Montserrat, sans-serif;
+                  font-weight: bold;
+                  line-height: 60px;
+                "
+              >
+                !Gracias
+                <span >por escribirnos!</span>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="height: 10px">
               <p
                 style="
                   color: #ffffff;
                   font-weight: 500;
                   font-size: 18px;
                   text-align: center;
-                  width: 500px;
+                  width: 250px;
                   margin: 0 auto;
-                  padding: 20px 0;
                   font-family: Montserrat, sans-serif;
-                "
-              ></p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p
-                style="
-                  color: #e38533;
-                  font-size: 40px;
-                  line-height: 20px;
-                  font-family: Montserrat, sans-serif;
-                "
-              ></p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p
-                style="
-                  font-size: 40px;
-                  line-height: 70px;
-                  font-family: Montserrat, sans-serif;
-                  font-weight: bold;
-                "
-              >
-                <span>¡Gracias por escribirnos!</span>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p
-                style="
-                  font-weight: 500;
-                  font-size: 18px;
-                  text-align: center;
-                  width: 500px;
-                  margin: 0 auto;
-                  padding: 20px 0;
-                  font-family: Montserrat, sans-serif;
-                "
-              >
-                !Hola [nombre Cliente]
-              </p>
-              <p
-                style="
-                  font-weight: 500;
-                  font-size: 18px;
-                  text-align: center;
-                  width: 500px;
-                  margin: 0 auto;
-                  padding: 20px 0;
-                  font-family: Montserrat, sans-serif;
+                  line-height: 30px;
                 "
               >
                 En breve estaremos comunicandonos contigo.
@@ -805,7 +804,7 @@ class IndexController extends Controller
             </td>
           </tr>
           <tr>
-            <td>
+            <td style="text-align: center">
               <a
                 target="_blank"
                 href="'.$appUrl.'"
@@ -826,15 +825,6 @@ class IndexController extends Controller
               >
                 <span>Visita nuestra Web</span>
               </a>
-            </td>
-          </tr>
-          <tr style="height: 300px">
-            <td style="text-align: center">
-              <img src="./Face.svg" alt="" srcset="" />
-              <img src="./Insta.svg" alt="" srcset="" />
-              <img src="./X.svg" alt="" srcset="" />
-              <img src="./Linkedin(2).svg" alt="" srcset="" />
-              <img src="./Youtube.svg" alt="" srcset="" />
             </td>
           </tr>
         </tbody>
