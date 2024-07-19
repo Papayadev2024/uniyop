@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import FilterItem from './FilterItem'
+import FilterItemSelect2 from './FilterItemSelect2'
 
-const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, brands = [], sizes = [], colors = [] }) => {
+const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], brands = [], sizes = [], colors = [], attribute_values, selected_category }) => {
+  const categoryRef = useRef()
 
   const setMinPrice = (e) => {
     const newFilter = structuredClone(filter)
@@ -19,7 +21,13 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, brands = [], s
     if (!newFilter[key]) newFilter[key] = []
     if (checked) newFilter[key].push(value)
     else newFilter[key] = newFilter[key].filter(x => x != value)
-  setFilter(newFilter)
+    setFilter(newFilter)
+  }
+
+  const onCategoryChange = () => {
+    const newFilter = structuredClone(filter)
+    newFilter['category_id'] = $(categoryRef.current).val()
+    setFilter(newFilter)
   }
 
   return (<>
@@ -32,16 +40,30 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, brands = [], s
       <input type="number" className="w-28 rounded-md border" placeholder="Hasta" min={minPrice} max={maxPrice} step={0.01} onChange={setMaxPrice} />
     </FilterItem>
     {
-      brands.length > 0 &&
-      <FilterItem title="Marca" items={brands} itemName='valor' onClick={onClick} />
+      categories.length > 0 &&
+      <FilterItemSelect2 eRef={categoryRef} label='Categoría' onChange={onCategoryChange} filter={filter} multiple defaultValue={[selected_category]}>
+        {categories.map(x => (
+          <option key={x.id} value={x.id}>{x.name}</option>
+        ))}
+      </FilterItemSelect2>
     }
     {
-      colors.length > 0 &&
-      <FilterItem title="Color" items={colors} itemName='valor' onClick={onClick} />
+      tags.length > 0 && <div className="flex flex-col gap-4 w-full">
+        <h2 className="font-semibold">Etiquetas</h2>
+        <div className='flex flex-row gap-4 w-full flex-wrap'>
+          {tags.map(item => {
+            return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="text-custom-border flex flex-row gap-2  items-center cursor-pointer">
+                <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)} />
+                {item.name}
+              </label>)
+          })}
+        </div>
+      </div>
     }
     {
-      sizes.length > 0 &&
-      <FilterItem title="Tamaño" items={sizes} itemName='valor' onClick={onClick} />
+      attribute_values.map((x, i) => (
+        <FilterItem key={`attribute-${i}`} title={x[0].attribute.titulo} items={x} itemName='valor' onClick={onClick} />
+      ))
     }
     <button className="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24" type="submit">
       Filtrar

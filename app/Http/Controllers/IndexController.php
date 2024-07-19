@@ -27,6 +27,7 @@ use App\Models\Price;
 use App\Models\Sale;
 use App\Models\Specifications;
 use App\Models\Status;
+use App\Models\Tag;
 use App\Models\TermsAndCondition;
 use App\Models\User;
 use App\Models\UserDetails;
@@ -89,31 +90,30 @@ class IndexController extends Controller
   public function catalogo(Request $request, string $id_cat = null)
   {
 
-   
-    $minPrice = Products::where('descuento', '>', 0)->min('descuento');
-    if ($minPrice) Products::min('precio');
+    $categories = Category::where('visible', true)->get();
+    $tags = Tag::where('visible', true)->get();
+
+    $minPrice = Products::select()
+      ->where('visible', true)
+      ->where('descuento', '>', 0)
+      ->min('descuento');
+    if ($minPrice) Products::where('visible', true)->min('precio');
     $maxPrice = Products::max('precio');
 
-    $brands = AttributesValues::where([
-      'attribute_id' => 1,
-      'status' => true
-    ])->get();
-    $colors = AttributesValues::where([
-      'attribute_id' => 2,
-      'status' => true
-    ])->get();
-    $sizes = AttributesValues::where([
-      'attribute_id' => 3,
-      'status' => true
-    ])->get();
+    $attribute_values = AttributesValues::select('attributes_values.*')
+    ->with('attribute')
+      ->join('attributes', 'attributes.id', '=', 'attributes_values.attribute_id')
+      ->where('attributes_values.visible', true)
+      ->where('attributes.visible', true)
+      ->get();
 
     return Inertia::render('Catalogo', [
       'component' => 'Catalogo',
       'minPrice' => $minPrice,
       'maxPrice' => $maxPrice,
-      'brands' => $brands,
-      'colors' => $colors,
-      'sizes' => $sizes,
+      'categories' => $categories,
+      'tags' => $tags,
+      'attribute_values' => $attribute_values,
       'id_cat' => $id_cat
     ])->rootView('app');
   }
@@ -583,7 +583,7 @@ class IndexController extends Controller
     $general = General::first();
     $testimonios = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-    return view('public.product', compact('atributos','testimonios', 'general','valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
+    return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
   }
 
   //  --------------------------------------------
@@ -716,7 +716,7 @@ class IndexController extends Controller
                 height: 800px;
                 margin: 0 auto;
                 text-align: center;
-                background-image:url('.$appUrl.'images/Ellipse_18.png),  url('.$appUrl.'images/Tabpanel.png);
+                background-image:url(' . $appUrl . 'images/Ellipse_18.png),  url(' . $appUrl . 'images/Tabpanel.png);
                 background-repeat: no-repeat, no-repeat;
                 background-position: center bottom , center bottom;;
                 background-size: fit , fit;
@@ -734,7 +734,7 @@ class IndexController extends Controller
                       margin: 40px;
                     "
                   >
-                    <img src="'.$appUrl.'images/Group1.png" alt="mundo web"  style="
+                    <img src="' . $appUrl . 'images/Group1.png" alt="mundo web"  style="
                     margin: auto;
                   "/>
                   </th>
@@ -814,7 +814,7 @@ class IndexController extends Controller
                   "
                   >
                     <a
-                      href="'.$appUrl.'"
+                      href="' . $appUrl . '"
                       style="
                         text-decoration: none;
                         background-color: #006bf6;
@@ -1042,47 +1042,47 @@ class IndexController extends Controller
   }
 
   public function blog($filtro)
-    {
-        try {
-            $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+  {
+    try {
+      $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-            if ($filtro == 0) {
-                $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->get();
+      if ($filtro == 0) {
+        $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-                $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+        $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-                $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->first();
-            } else {
-                $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('category_id', '=', $filtro)->get();
+        $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->first();
+      } else {
+        $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('category_id', '=', $filtro)->get();
 
-                $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $filtro)->get();
+        $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $filtro)->get();
 
-                $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->where('category_id', '=', $filtro)->first();
-            }
+        $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->where('category_id', '=', $filtro)->first();
+      }
 
-            return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastpost'));
-        } catch (\Throwable $th) {
-        }
+      return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastpost'));
+    } catch (\Throwable $th) {
     }
+  }
 
   public function detalleBlog($id)
   {
-      $post = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $id)->first();
-      $meta_title = $post->meta_title ?? $post->title;
-      $meta_description = $post->meta_description  ?? Str::limit($post->extract, 160);
-      $meta_keywords = $post->meta_keywords ?? '';
+    $post = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $id)->first();
+    $meta_title = $post->meta_title ?? $post->title;
+    $meta_description = $post->meta_description  ?? Str::limit($post->extract, 160);
+    $meta_keywords = $post->meta_keywords ?? '';
 
-      return view('public.post', compact('meta_title','meta_description','meta_keywords','post'));
+    return view('public.post', compact('meta_title', 'meta_description', 'meta_keywords', 'post'));
   }
 
 
   public function searchBlog(Request $request)
-  {   
-      $query = $request->input('query');
-     
-      $resultados = Blog::where('title', 'like', "%$query%")->where('visible', '=', true)->where('status', '=', true)
-                             ->get();
-     
-      return response()->json($resultados);
+  {
+    $query = $request->input('query');
+
+    $resultados = Blog::where('title', 'like', "%$query%")->where('visible', '=', true)->where('status', '=', true)
+      ->get();
+
+    return response()->json($resultados);
   }
 }
