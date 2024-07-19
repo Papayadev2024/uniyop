@@ -224,7 +224,7 @@
     rowAlternationEnabled: true,
     showBorders: true,
     paging: {
-      pageSize: 5,
+      pageSize: 10,
     },
     pager: {
       visible: true,
