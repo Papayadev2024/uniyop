@@ -22,6 +22,7 @@ use App\Models\Category;
 use App\Models\Department;
 use App\Models\Galerie;
 use App\Models\PolyticsCondition;
+use App\Models\Popup;
 use App\Models\Price;
 use App\Models\Sale;
 use App\Models\Specifications;
@@ -72,6 +73,8 @@ class IndexController extends Controller
     $descuentos = Products::where('descuento', '>', 0)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
 
+      $popups = Popup::where('status', '=', 1)->where('visible', '=', 1)->get();
+
     $general = General::all();
     $benefit = Strength::where('status', '=', 1)->take(3)->get();
     $faqs = Faqs::where('status', '=', 1)->where('visible', '=', 1)->get();
@@ -81,7 +84,7 @@ class IndexController extends Controller
 
 
 
-    return view('public.index', compact('url_env', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
+    return view('public.index', compact('url_env','popups' ,'banners','blogs','categoriasAll', 'productosPupulares','ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)

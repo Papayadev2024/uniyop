@@ -24,7 +24,7 @@
     {{-- Seccion Categoria  --}}
     @if ($categorias->count() > 0)
       <x-sections.simple title="Categorias">
-          <x-swipper-card-categoria :items="$categorias" />
+        <x-swipper-card-categoria :items="$categorias" />
       </x-sections.simple>
     @endif
 
@@ -34,8 +34,8 @@
       <section class="w-full px-[5%] py-10 lg:py-20">
         <div class="flex flex-col md:flex-row justify-between w-full gap-3">
           <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Últimos productos agregados</h1>
-          <a href="/catalogo" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6] ">Ver todos los productos <img
-              src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
+          <a href="/catalogo" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6] ">Ver todos
+            los productos <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 md:flex-row gap-4 mt-14 w-full">
           @foreach ($ultimosProductos as $item)
@@ -45,7 +45,7 @@
         </div>
       </section>
     @endif
-    
+
 
     {{-- seccion Gran Descuento  --}}
     @if (count($bannerMid) > 0)
@@ -54,7 +54,7 @@
       </section>
     @endif
 
-    {{-- seccion Productos populares  --}}  
+    {{-- seccion Productos populares  --}}
     @if ($productosPupulares->count() > 0)
       <section class=" bg-[#F8F8F8]">
         <div class="w-full px-[5%] py-14 lg:py-20">
@@ -86,8 +86,8 @@
       <section class="w-full px-[5%] py-7 lg:py-14">
         <div class="flex flex-col md:flex-row justify-between w-full gap-3">
           <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Blog & Eventos</h1>
-          <a href="/blog/0" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6]">Ver todos las Publicaciones <img
-              src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
+          <a href="/blog/0" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6]">Ver todos
+            las Publicaciones <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-14 gap-10 sm:gap-5">
           @foreach ($blogs as $post)
@@ -126,11 +126,42 @@
 
 
   </main>
+  {{-- modalOfertas --}}
+
+
+
+  <!-- Modal toggle -->
+
+
+  <!-- Main modal -->
+
+  <div id="modalofertas" class="modal">
+
+    <!-- Modal body -->
+    <div class="p-1 ">
+      <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+    </div>
+
+
+  </div>
 
 
 @section('scripts_importados')
 
+  <script>
+    let pops = @json($popups);
+    $(document).ready(function() {
+      console.log(pops.length)
+      if (pops.length > 0) {
+        $('#modalofertas').modal({
+          show: true,
+          fadeDuration: 100
+        })
 
+      }
+
+    })
+  </script>
 
 
 @stop
