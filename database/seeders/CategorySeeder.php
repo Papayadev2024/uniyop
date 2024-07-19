@@ -15,7 +15,8 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         //
-        $cat = ['Accesorios', 'Tablet', 'Celulares'];
+        $cat = ['Accesorios de Oficina','Accesorios para Auto','Accesorios Gamer','Accesorios para celular','Accesorios para Laptop','Accesorios para Ipad / tablets','Accesorios Audio y Video','Accesorios Home','Accesorios de Reloj','Packs'];
+
         foreach ($cat as $categoryName) {
             Category::create([
                 'name' => $categoryName,

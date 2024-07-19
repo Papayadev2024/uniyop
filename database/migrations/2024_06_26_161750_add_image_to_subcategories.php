@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('visible')->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
-            $table->renameColumn('state', 'status')->default(true)->change();
+            
         });
     }
 

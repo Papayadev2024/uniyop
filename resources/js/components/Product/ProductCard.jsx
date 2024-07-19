@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const ProductCard = ({ item, width, bgcolor }) => {
   const [showAmbiente, setShowAmbiente] = useState(false);
   const category = item.category;
-  console.log(item)
+
+
 
 
   return (
@@ -29,13 +30,13 @@ const ProductCard = ({ item, width, bgcolor }) => {
           <div className="relative flex justify-center items-center h-[300px]">
             <img
               style={{ opacity: !showAmbiente ? '1' : '0', scale: !showAmbiente ? '1' : '0.95' }}
-              src={item.imagen ? item.imagen : 'images/img/noimagen.jpg'}
+              src={item.imagen ? `/${item.imagen}` : 'images/img/noimagen.jpg'}
               alt={item.name}
               className={`transition ease-out duration-300 transform w-full h-[300px] object-${category.fit} absolute inset-0 `}
             />
             <img
               style={{ opacity: showAmbiente ? '1' : '0', scale: showAmbiente ? '1' : '0.95' }}
-              src={item.imagen_ambiente ? item.imagen_ambiente : 'images/img/noimagen.jpg'}
+              src={item.imagen_ambiente ? `/${item.imagen_ambiente}` : 'images/img/noimagen.jpg'}
               alt={item.name}
               className="transition ease-out duration-300 transform w-full h-[300px] object-cover absolute inset-0 "
             />

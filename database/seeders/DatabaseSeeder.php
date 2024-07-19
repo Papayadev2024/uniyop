@@ -38,7 +38,9 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             FaqsSeeder::class,
             BeneficiosSeeder::class,
-            SliderSeeder::class
+            SliderSeeder::class,
+            SubcategorySeeder::class,
+            ProductSeeder::class
             //ServiceSeeder::class,
         ]);
     }

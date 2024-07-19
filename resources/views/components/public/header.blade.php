@@ -64,7 +64,7 @@
   }
 </style>
 
-{{-- <img src="{{ asset('images/Producto_Detalle.jpg') }}" class="absolute top-0 left-0 w-full z-[99999] opacity-0"></img> --}}
+{{-- <img src="{{ asset('images/contacto.png') }}" class="absolute top-0 left-0 w-full z-[99999] opacity-30"></img> --}}
 
 <div class="navigation shadow-xl px-5" style="z-index: 9999; background-color: #fff !important">
   <button aria-label="hamburguer" type="button" class="hamburger" id="position" onclick="show()">
@@ -153,26 +153,27 @@
 
 <header class="font-Inter_Regular">
   @foreach ($datosgenerales as $item)
-      <div class="bg-[#006BF6] h-[50px] flex lg:justify-between justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
-        <div class="text-white font-Inter_Regular text-[17px] text-start flex gap-3">
-          <h3>(51)
-            987 456 243</h3>
-          <div>|</div>
-          <a href="#">Direccion</a>
+    <div
+      class="bg-[#006BF6] h-[50px] flex lg:justify-between justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
+      <div class="text-white font-Inter_Regular text-[17px] text-start flex gap-3">
+        <h3>(51)
+          987 456 243</h3>
+        <div>|</div>
+        <a href="#">Direccion</a>
 
-        </div>
-        <h3 class="text-white font-Inter_Regular  text-center hidden lg:flex">
-          Cuéntale a un amigo sobre Boost y consigue un 20% de descuento *
-        </h3>
-        <div class="text-white font-Inter_Regular  text-end hidden lg:flex">
-          <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
-        </div>
       </div>
+      <h3 class="text-white font-Inter_Regular  text-center hidden lg:flex">
+        Cuéntale a un amigo sobre Boost y consigue un 20% de descuento *
+      </h3>
+      <div class="text-white font-Inter_Regular  text-end hidden lg:flex">
+        <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
+      </div>
+    </div>
   @endforeach
 
   <div>
     <div id="header-menu" class="flex justify-between gap-5 w-full px-[5%] xl:px-[8%] py-4  text-[17px] ">
-      
+
       <div id="menu-burguer" class="lg:hidden z-10 w-max">
         <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}" alt="menu hamburguesa"
           onclick="show()" />
@@ -187,15 +188,17 @@
 
       <div class="hidden lg:flex items-center justify-center">
         <div>
-          <nav id="menu-items" class=" text-[#333] text-base font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center" x-data="{ openCatalogo: false, openSubMenu: null }">
+          <nav id="menu-items"
+            class=" text-[#333] text-base font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center"
+            x-data="{ openCatalogo: false, openSubMenu: null }">
             <a href="/" class="font-medium hover:opacity-75 ">
               <span class="underline-this">INICIO</span>
             </a>
-            
+
             <a href="{{ route('Catalogo.jsx') }}" class="font-medium hover:opacity-75">
-                <span class="underline-this">PRODUCTOS</span>
+              <span class="underline-this">PRODUCTOS</span>
             </a>
-           
+
             <a href="/blog/0" class="font-medium hover:opacity-75 ">
               <span class="underline-this">BLOG</span>
             </a>
@@ -208,7 +211,7 @@
       </div>
 
       <div class="flex justify-end md:w-auto md:justify-center items-center gap-2">
-       
+
         @if (Auth::user() == null)
           <a class="hidden md:flex" href="{{ route('login') }}"><img class="bg-white rounded-lg"
               src="{{ asset('images/svg/header_user.svg') }}" alt="user" /></a>
@@ -258,13 +261,13 @@
         {{-- <div class="bg-[#EB5D2C] flex justify-center items-center rounded-full w-7 h-7">
             <span id="itemsCount" class="text-white"></span>
           </div> --}}
-         
-          <div class="relative inline-block cursor-pointer">
-              <img src="{{ asset('images/svg/search_boost.svg') }}"
-                class="bg-white rounded-lg max-w-full h-auto cursor-pointer" />
-          </div>
-            
-          <div class="flex justify-center items-center">
+
+        <div class="relative inline-block cursor-pointer">
+          <img src="{{ asset('images/svg/search_boost.svg') }}"
+            class="bg-white rounded-lg max-w-full h-auto cursor-pointer" />
+        </div>
+
+        <div class="flex justify-center items-center">
           <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
             <span id="itemsCount"
               class="bg-[#EB5D2C] text-xs font-medium text-white text-center px-[7px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>

@@ -83,8 +83,10 @@ class IndexController extends Controller
     return view('public.index', compact('url_env','banners','blogs','categoriasAll', 'productosPupulares','ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
   }
 
-  public function catalogo(Request $request)
+  public function catalogo(Request $request, string $id_cat = null)
   {
+
+   
     $minPrice = Products::where('descuento', '>', 0)->min('descuento');
     if ($minPrice) Products::min('precio');
     $maxPrice = Products::max('precio');
@@ -108,7 +110,8 @@ class IndexController extends Controller
       'maxPrice' => $maxPrice,
       'brands' => $brands,
       'colors' => $colors,
-      'sizes' => $sizes
+      'sizes' => $sizes,
+      'id_cat' => $id_cat
     ])->rootView('app');
   }
 
@@ -155,7 +158,7 @@ class IndexController extends Controller
 
   public function contacto()
   {
-    $general = General::all();
+    $general = General::first();
     $categorias = Category::all();
     $url_env = env('APP_URL');
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
