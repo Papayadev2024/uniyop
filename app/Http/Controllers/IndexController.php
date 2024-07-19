@@ -773,7 +773,7 @@ class IndexController extends Controller
                   <td style="height: 10px">
                     <p
                       style="
-                        color: #74a68d;
+                        color: #006bf6;
                         font-size: 40px;
                         font-family: Montserrat, sans-serif;
                         font-weight: bold;
@@ -813,7 +813,7 @@ class IndexController extends Controller
                       href="'.$appUrl.'"
                       style="
                         text-decoration: none;
-                        background-color: #74a68d;
+                        background-color: #006bf6;
                         color: white;
                         padding: 10px 16px;
                         display: inline-flex;
@@ -936,7 +936,7 @@ class IndexController extends Controller
                   <td style="height: 10px">
                     <p
                       style="
-                        color: #74a68d;
+                        color: #006bf6;
                         font-size: 40px;
                         font-family: Montserrat, sans-serif;
                         font-weight: bold;
@@ -976,7 +976,7 @@ class IndexController extends Controller
                       href="https://decotab.pe/"
                       style="
                         text-decoration: none;
-                        background-color: #74a68d;
+                        background-color: #006bf6;
                         color: white;
                         padding: 10px 16px;
                         display: inline-flex;
