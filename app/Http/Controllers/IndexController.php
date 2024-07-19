@@ -679,6 +679,7 @@ class IndexController extends Controller
 
   private function envioCorreo($data)
   {
+    $appUrl = env('APP_URL');
 
     $name = $data['full_name'];
     $mensaje = "Gracias por comunicarte con Decotab";
@@ -686,155 +687,161 @@ class IndexController extends Controller
     // dd($mail);
     try {
       $mail->addAddress($data['email']);
-      $mail->Body = '<html lang="es">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Mundo web</title>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-          />
-          <style>
-            * {
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-            }
-          </style>
-        </head>
-        <body>
-          <main>
-            <table
-              style="
-                width: 600px;
-                height: 700px;
-                margin: 0 auto;
-                text-align: center;
-                background-image: url(https://decotab.pe/mail/ImagenFondo.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-              "
-            >
-              <thead>
-                <tr>
-                  <th
-                    style="
-                      display: flex;
-                      flex-direction: row;
-                      justify-content: center;
-                      align-items: center;
-                      margin: 40px;
-                    "
-                  >
-                    <img src="https://decotab.pe/mail/LogoP.png" alt="mundo web"  style="
-                    margin: auto;
-                  "/>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #ffffff;
-                        font-weight: 500;
-                        font-size: 18px;
-                        text-align: center;
-                        width: 500px;
-                        margin: 0 auto;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 30px;
-                      "
-                    >
-                      <span style="display: block">Hola </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #ffffff;
-                        font-size: 40px;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 60px;
-                      "
-                    >
-                      <span style="display: block">' . $name . ' </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #74a68d;
-                        font-size: 40px;
-                        font-family: Montserrat, sans-serif;
-                        font-weight: bold;
-                        line-height: 60px;
-                      "
-                    >
-                      !Gracias
-                      <span style="color: #ffffff">por escribirnos!</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #ffffff;
-                        font-weight: 500;
-                        font-size: 18px;
-                        text-align: center;
-                        width: 250px;
-                        margin: 0 auto;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 30px;
-                      "
-                    >
-                      En breve estaremos comunicandonos contigo.
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    style="
-                    text-align: center;
-                  "
-                  >
-                    <a
-                      href="https://decotab.pe/"
-                      style="
-                        text-decoration: none;
-                        background-color: #74a68d;
-                        color: white;
-                        padding: 10px 16px;
-                        display: inline-flex;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 10px;
-                        font-weight: 600;
-                        font-family: Montserrat, sans-serif;
-                        font-size: 16px;
-                        border-radius: 30px;
-                      "
-                    >
-                      <span>Visita nuestra web</span>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </main>
-        </body>
-      </html>
+      $mail->Body = '
+      <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fit2finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <table
+        style="
+          width: 600px;
+          margin: 0 auto;
+          text-align: center;
+          
+          
+          background-image: url("'.$appUrl.'/images/Ellipse_18.png") ,url("'.$appUrl.'/images/Tabpanel.png");
+          background-repeat: no-repeat ,no-repeat;
+          background-position: center bottom , center bottom;
+          background-size: fit, fit;
+          background-color: #f9f9f9;
+        "
+      >
+        <thead>
+          <tr>
+            <th style="text-align: center; padding-top: 50px">
+              <img src="'.$appUrl.'/images/Group1.png" alt="mundo web" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p
+                style="
+                  color: #ffffff;
+                  font-weight: 500;
+                  font-size: 18px;
+                  text-align: center;
+                  width: 500px;
+                  margin: 0 auto;
+                  padding: 20px 0;
+                  font-family: Montserrat, sans-serif;
+                "
+              ></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p
+                style="
+                  color: #e38533;
+                  font-size: 40px;
+                  line-height: 20px;
+                  font-family: Montserrat, sans-serif;
+                "
+              ></p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p
+                style="
+                  font-size: 40px;
+                  line-height: 70px;
+                  font-family: Montserrat, sans-serif;
+                  font-weight: bold;
+                "
+              >
+                <span>¡Gracias por escribirnos!</span>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p
+                style="
+                  font-weight: 500;
+                  font-size: 18px;
+                  text-align: center;
+                  width: 500px;
+                  margin: 0 auto;
+                  padding: 20px 0;
+                  font-family: Montserrat, sans-serif;
+                "
+              >
+                !Hola [nombre Cliente]
+              </p>
+              <p
+                style="
+                  font-weight: 500;
+                  font-size: 18px;
+                  text-align: center;
+                  width: 500px;
+                  margin: 0 auto;
+                  padding: 20px 0;
+                  font-family: Montserrat, sans-serif;
+                "
+              >
+                En breve estaremos comunicandonos contigo.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a
+                target="_blank"
+                href="'.$appUrl.'"
+                style="
+                  text-decoration: none;
+                  background-color: #006bf6;
+                  color: white;
+                  padding: 12px 16px;
+                  display: inline-flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 10px;
+                  font-weight: 600;
+                  font-family: Montserrat, sans-serif;
+                  font-size: 16px;
+                  border-radius: 10px;
+                "
+              >
+                <span>Visita nuestra Web</span>
+              </a>
+            </td>
+          </tr>
+          <tr style="height: 300px">
+            <td style="text-align: center">
+              <img src="./Face.svg" alt="" srcset="" />
+              <img src="./Insta.svg" alt="" srcset="" />
+              <img src="./X.svg" alt="" srcset="" />
+              <img src="./Linkedin(2).svg" alt="" srcset="" />
+              <img src="./Youtube.svg" alt="" srcset="" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>
+
       ';
       $mail->isHTML(true);
       $mail->send();
