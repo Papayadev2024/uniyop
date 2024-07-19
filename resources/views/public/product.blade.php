@@ -72,7 +72,7 @@
                         alt="">
                 </div> --}}
                 <div id="containerProductosdetail" class="w-full flex justify-center items-center h-[330px] 2xs:h-[400px] sm:h-[450px] xl:h-[550px] rounded-3xl overflow-hidden">
-                  <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-cover"
+                  <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain"
                       data-aos="fade-up" data-aos-offset="150">
                 </div>
                 <x-product-slider :product="$product" />
@@ -151,14 +151,14 @@
                 @if (!$especificaciones->isEmpty())
                   <p class="font-Inter_Medium text-base gap-2 ">Especificaciones: </p>
                   <div class="min-w-full divide-y divide-gray-200">
-                      <table class="clase_table divide-y divide-gray-200 ">
+                      <table class=" divide-y divide-gray-200 ">
                           <tbody>
                               @foreach ($especificaciones as $item)
                                   <tr>
-                                      <td class="px-4 py-2 whitespace-nowrap border border-gray-200 rounded-lg">
+                                      <td class="px-4 py-1 border border-gray-200">
                                           {{ $item->tittle }}
                                       </td>
-                                      <td class="px-4 py-2 whitespace-nowrap border border-gray-200 rounded-lg">
+                                      <td class="px-4 py-1 border border-gray-200">
                                           {{ $item->specifications }}
                                       </td>
                                   </tr>
