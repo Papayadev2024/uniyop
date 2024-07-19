@@ -33,7 +33,7 @@
     @if ($ultimosProductos->count() > 0)
       <section class="w-full px-[5%] py-10 lg:py-20">
         <div class="flex flex-col md:flex-row justify-between w-full gap-3">
-          <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Últimos productos</h1>
+          <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Últimos productos agregados</h1>
           <a href="/catalogo" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6] ">Ver todos los productos <img
               src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
@@ -59,7 +59,7 @@
       <section class=" bg-[#F8F8F8]">
         <div class="w-full px-[5%] py-14 lg:py-20">
           <div class="flex flex-col md:flex-row justify-between w-full gap-3">
-            <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Productos Populares</h1>
+            <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Productos Destacados</h1>
             {{-- <div class="flex  flex-col md:flex-row gap-2 md:gap-8">
               <a href="/catalogo" class="flex items-center   font-Inter_Medium  hover:text-[#006BF6] ">Todos</a>
               @foreach ($categoriasAll as $item)
