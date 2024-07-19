@@ -63,7 +63,7 @@
     <main class="font-Inter_Regular" id="mainSection">
         @csrf
         <section class="w-full px-[5%] md:px-[8%]">
-          <div class="grid grid-cols-1 2md:grid-cols-2 gap-10 md:gap-16">
+          <div class="grid grid-cols-1 2md:grid-cols-2 gap-10 md:gap-16 pt-8 lg:pt-16">
           {{-- grid grid-col-1 sm:grid-cols-3  gap-6  mt-5 h-max w-6/12 --}}
           {{-- flex flex-col justify-center items-center gap-5 h-max w-6/12 --}}
             <div class="flex flex-col justify-start items-center gap-5">
