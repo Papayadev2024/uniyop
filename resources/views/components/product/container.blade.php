@@ -62,7 +62,7 @@
         </div>
     </div>
     <a href="{{ route('producto', $item->id) }}">
-        <h2 class="text-base mt-4 text-center font-Inter_Medium tracking-tight">
+        <h2 class="text-base mt-4 text-center font-Inter_Medium tracking-tight line-clamp-2 truncate">
             {{ $item->producto }}
         </h2>
         <div class="flex content-between flex-row gap-4 items-center justify-center font-Inter_Medium">

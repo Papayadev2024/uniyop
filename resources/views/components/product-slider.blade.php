@@ -28,7 +28,7 @@
   <div class="col-span-3 h-full">
       <div class="swiper img-complementarias">
           <div class="swiper-wrapper">
-            <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden" id="img-complementariaPROD-0">
+            <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-4 border-azulboost" id="img-complementariaPROD-0">
                 <div class="flex gap-2 items-center justify-center h-full">
                     <div class="flex justify-center items-center h-full">
                             <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl" 
@@ -56,9 +56,10 @@
 <script>
   var headerServices = new Swiper(".img-complementarias", {
     slidesPerView: 3,
-    spaceBetween: 20,
-    loop: {{ count($product->galeria) > 1 ? 'true' : 'false' }},
-    centeredSlides: false,
+    spaceBetween: 10,
+    loop: false,
+    // {{ count($product->galeria) > 1 ? 'true' : 'false' }},
+    centeredSlides: true,
     initialSlide: 0, // Empieza en el cuarto slide (índice 3) */
     /* pagination: {
       el: ".swiper-pagination-estadisticas",
@@ -67,11 +68,11 @@
     //allowSlideNext: false,  //Bloquea el deslizamiento hacia el siguiente slide
     //allowSlidePrev: false,  //Bloquea el deslizamiento hacia el slide anterior
     allowTouchMove: {{ count($product->galeria) > 1 ? 'true' : 'false' }}, // Bloquea el movimiento táctil
-    autoplay: {
-      delay: 5500,
-      disableOnInteraction: true,
-      pauseOnMouseEnter: true
-    },
+    // autoplay: {
+    //   delay: 5500,
+    //   disableOnInteraction: true,
+    //   pauseOnMouseEnter: true
+    // },
 
     breakpoints: {
       0: {
