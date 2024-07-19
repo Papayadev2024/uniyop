@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('description')->nullable();
-            $table->boolean('state')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
