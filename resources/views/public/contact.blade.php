@@ -144,8 +144,8 @@
             icon: "success",
           });
 
-          if (!window.location.href.includes('#FormularioEnviado')) {
-            window.location.href = window.location.href.split('#')[0] + '#FormularioEnviado';
+          if (!window.location.href.includes('#formularioenviado')) {
+            window.location.href = window.location.href.split('#')[0] + '#formularioenviado';
           }
 
         },
