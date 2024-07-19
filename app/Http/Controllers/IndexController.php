@@ -713,10 +713,10 @@ class IndexController extends Controller
                 height: 700px;
                 margin: 0 auto;
                 text-align: center;
-                background-image: url('.$appUrl.'images/Tabpanel.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
+                background-image:url('.$appUrl.'images/Ellipse_18.png),  url('.$appUrl.'images/Tabpanel.png);
+                background-repeat: no-repeat, no-repeat;
+                background-position: center bottom , center bottom;;
+                background-size: fit , fit;
               "
             >
               <thead>
@@ -730,7 +730,7 @@ class IndexController extends Controller
                       margin: 40px;
                     "
                   >
-                    <img src="https://decotab.pe/mail/LogoP.png" alt="mundo web"  style="
+                    <img src="'.$appUrl.'images/Group1.png" alt="mundo web"  style="
                     margin: auto;
                   "/>
                   </th>
@@ -741,7 +741,7 @@ class IndexController extends Controller
                   <td style="height: 10px">
                     <p
                       style="
-                        color: #ffffff;
+                        
                         font-weight: 500;
                         font-size: 18px;
                         text-align: center;
@@ -759,7 +759,7 @@ class IndexController extends Controller
                   <td style="height: 10px">
                     <p
                       style="
-                        color: #ffffff;
+                        
                         font-size: 40px;
                         font-family: Montserrat, sans-serif;
                         line-height: 60px;
@@ -781,7 +781,7 @@ class IndexController extends Controller
                       "
                     >
                       !Gracias
-                      <span style="color: #ffffff">por escribirnos!</span>
+                      <span >por escribirnos!</span>
                     </p>
                   </td>
                 </tr>
@@ -789,7 +789,7 @@ class IndexController extends Controller
                   <td style="height: 10px">
                     <p
                       style="
-                        color: #ffffff;
+                        
                         font-weight: 500;
                         font-size: 18px;
                         text-align: center;
@@ -810,7 +810,7 @@ class IndexController extends Controller
                   "
                   >
                     <a
-                      href="https://decotab.pe/"
+                      href="'.$appUrl.'"
                       style="
                         text-decoration: none;
                         background-color: #74a68d;
