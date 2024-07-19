@@ -155,17 +155,21 @@
     <div
       class="bg-[#006BF6] h-[50px] flex lg:justify-between justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
       <div class="text-white font-Inter_Regular text-[17px] text-start flex gap-3">
-        <h3>(51)
-          987 456 243</h3>
-        <div>|</div>
-        <a href="#">Direccion</a>
+        <h3>
+          {{ $item->cellphone }}</h3>
+
+        {{-- <div>|</div>
+        <a href="#">Direccion</a> --}}
 
       </div>
       <h3 class="text-white font-Inter_Regular  text-center hidden lg:flex">
         Cuéntale a un amigo sobre Boost y consigue un 20% de descuento *
       </h3>
       <div class="text-white font-Inter_Regular  text-end hidden lg:flex">
-        <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
+        @if (Auth::user() == null)
+          <a href="/login">Log In </a> / <a href="/register">Sign Up</a>
+        @endif
+
       </div>
     </div>
   @endforeach

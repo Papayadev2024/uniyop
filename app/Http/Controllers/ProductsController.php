@@ -205,12 +205,18 @@ class ProductsController extends Controller
 
       // Imagenes
       $data['descuento'] = $data['descuento'] ?? 0;
-      $data['image_texture'] = $this->saveImg($request, 'image_texture');
-      $data['imagen_ambiente'] = $this->saveImg($request, 'imagen_ambiente');
-      $data['imagen'] = $this->saveImg($request, 'imagen');
-      $data['imagen_2'] = $this->saveImg($request, 'imagen_2');
-      $data['imagen_3'] = $this->saveImg($request, 'imagen_3');
-      $data['imagen_4'] = $this->saveImg($request, 'imagen_4');
+      if ($request->hasFile('imagen')) {
+        $data['imagen'] = $this->saveImg($request, 'imagen');
+      }
+      if ($request->hasFile('imagen_ambiente')) {
+        $data['imagen_ambiente'] = $this->saveImg($request, 'imagen_ambiente');
+      }
+      if ($request->hasFile('image_texture')) {
+        $data['image_texture'] = $this->saveImg($request, 'image_texture');
+      }
+      // $data['imagen_2'] = $this->saveImg($request, 'imagen_2');
+      // $data['imagen_3'] = $this->saveImg($request, 'imagen_3');
+      // $data['imagen_4'] = $this->saveImg($request, 'imagen_4');
 
       foreach ($data as $key => $value) {
         if (strstr($key, '-')) {
