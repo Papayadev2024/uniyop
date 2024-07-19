@@ -1,4 +1,6 @@
+import Tippy from '@tippyjs/react';
 import React, { useState } from 'react';
+import 'tippy.js/dist/tippy.css';
 
 const ProductCard = ({ item, width, bgcolor }) => {
   const [showAmbiente, setShowAmbiente] = useState(false);
@@ -54,9 +56,11 @@ const ProductCard = ({ item, width, bgcolor }) => {
         </div>
       </div>
       <a href={`/producto/${item.id}`} className='p-2'>
-        <h2 className="block text-[17px] text-center overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, textOverflow: 'ellipsis', WebkitBoxOrient: 'vertical', height: '51px'}}>
-          {item.producto}
-        </h2>
+        <Tippy content={item.producto}>
+          <h2 className="block text-[17px] text-center overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, textOverflow: 'ellipsis', WebkitBoxOrient: 'vertical', height: '51px' }}>
+            {item.producto}
+          </h2>
+        </Tippy>
         <div className="flex content-between flex-row gap-4 items-center justify-center">
           <span className="text-[#006BF6] text-[16.45px] font-bold">{item.precio}</span>
           {item.descuento > 0 && (
