@@ -65,9 +65,9 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
         <FilterItem key={`attribute-${i}`} title={x[0].attribute.titulo} items={x} itemName='valor' onClick={onClick} />
       ))
     }
-    <button className="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24" type="submit">
+    {/* <button className="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24" type="submit">
       Filtrar
-    </button>
+    </button> */}
   </>)
 }
 
