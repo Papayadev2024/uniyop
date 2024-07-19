@@ -145,25 +145,43 @@ class ProductsController extends Controller
 
   private function saveImg(Request $request, string $field)
   {
-    if ($request->hasFile($field)) {
-      $file = $request->file($field);
-      // $route = 'storage/images/imagen/';
-      $route = "storage/images/productos/$request->categoria_id/";
-      // $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
-      $nombreImagen = $request->sku.'.png';
-      $manager = new ImageManager(new Driver());
-      $img =  $manager->read($file);
-      // $img->coverDown(340, 340, 'center');
+    try {
+      //code...
+      if(isset($request->id)){
+        $producto = Products::find($request->id);
+        $ruta = $producto->$field;
 
-      if (!file_exists($route)) {
-        mkdir($route, 0777, true);
+        dump($ruta);
+        //borrar imagen
+        if (!empty($ruta) && file_exists($ruta)) {
+          // Borrar imagen
+          unlink($ruta);
+        }
       }
-
-      // $img->save($route . $nombreImagen);
-      $img->save($route . $nombreImagen);
-      return $route . $nombreImagen;
+      if ($request->hasFile($field)) {
+        $file = $request->file($field);
+        // $route = 'storage/images/imagen/';
+        $route = "storage/images/productos/$request->categoria_id/";
+        // $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+        $nombreImagen = $request->sku.'.png';
+        $manager = new ImageManager(new Driver());
+        $img =  $manager->read($file);
+        // $img->coverDown(340, 340, 'center');
+  
+        if (!file_exists($route)) {
+          mkdir($route, 0777, true);
+        }
+  
+        // $img->save($route . $nombreImagen);
+        $img->save($route . $nombreImagen);
+        return $route . $nombreImagen;
+      }
+      return null;
+    } catch (\Throwable $th) {
+      //throw $th;
+      dump($th);
     }
-    return null;
+    
   }
 
   /**
