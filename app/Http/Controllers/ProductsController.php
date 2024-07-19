@@ -147,8 +147,10 @@ class ProductsController extends Controller
   {
     if ($request->hasFile($field)) {
       $file = $request->file($field);
-      $route = 'storage/images/imagen/';
-      $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+      // $route = 'storage/images/imagen/';
+      $route = "storage/images/productos/$request->categoria_id/";
+      // $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+      $nombreImagen = $request->sku.'.png';
       $manager = new ImageManager(new Driver());
       $img =  $manager->read($file);
       // $img->coverDown(340, 340, 'center');
@@ -157,6 +159,7 @@ class ProductsController extends Controller
         mkdir($route, 0777, true);
       }
 
+      // $img->save($route . $nombreImagen);
       $img->save($route . $nombreImagen);
       return $route . $nombreImagen;
     }
