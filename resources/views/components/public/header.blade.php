@@ -181,7 +181,7 @@
       <div class="w-auto">
         <a href="#">
           <img id="logo-boostperu" class="w-[170px] md:w-[200px]"
-            src="{{ asset($isIndex ? 'images\img\LogoBoost.png' : 'images\img\LogoBoost.png') }}" alt="boostperu" />
+            src="{{ asset($isIndex ? 'images\svg\logoboost.svg' : 'images\svg\LogoBoost.svg') }}" alt="boostperu" />
         </a>
       </div>
 

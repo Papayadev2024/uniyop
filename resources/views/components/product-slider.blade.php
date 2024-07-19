@@ -1,45 +1,61 @@
-<div class="col-span-3 h-full" data-aos="fade-up" data-aos-offset="150">
-  <!-- Asegúrate de que este div tome todo el alto disponible -->
-  <div class="swiper h-full img-complementarias"> <!-- Asegura que el swiper tome todo el alto -->
-
-    <div class="swiper-wrapper gap-6 h-full"> <!-- Asegura que el wrapper tome todo el alto -->
-      <div class="swiper-slide w-full h-full col-span-1"> <!-- Asegura que cada slide tome todo el alto -->
+{{-- <div class="col-span-3">
+  <div class="swiper h-full img-complementarias"> 
+    <div class="swiper-wrapper"> 
+      <div class="swiper-slide w-full h-full col-span-1"> 
         <div class="flex gap-2 items-center justify-start h-full">
-          <!-- Asegura que este div tome todo el alto -->
           <div class="flex justify-center items-center h-full">
-            <!-- Asegura que este div tome todo el alto -->
-
-            {{-- Verifica si la imagen no es la carátula --}}
             <img class="size-full object-cover h-full w-full shadow-xl" id="img-complementariaPROD-0"
               src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}" />
-
           </div>
         </div>
       </div>
       @foreach ($product->galeria as $index => $image)
-        <div class="swiper-slide w-full h-full col-span-1"> <!-- Asegura que cada slide tome todo el alto -->
+        <div class="swiper-slide w-full h-full col-span-1"> 
           <div class="flex gap-2 items-center justify-start h-full">
-            <!-- Asegura que este div tome todo el alto -->
             <div class="flex justify-center items-center h-full">
-              <!-- Asegura que este div tome todo el alto -->
-
-              {{-- Verifica si la imagen no es la carátula --}}
               <img class="size-full object-cover h-full w-full shadow-xl"
                 id="img-complementariaPROD-{{ $index }}"
                 src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}" />
-
             </div>
           </div>
         </div>
       @endforeach
     </div>
   </div>
+</div> --}}
+
+<div class="grid grid-cols-3">
+  <div class="col-span-3 h-full">
+      <div class="swiper img-complementarias">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden">
+              <div class="flex gap-2 items-center justify-start h-full">
+                  <div class="flex justify-center items-center h-full">
+                          <img class=" object-cover h-40 w-full shadow-xl" id="img-complementariaPROD-0"
+                              src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}" />    
+                      </div>
+                  </div>
+              </div>
+              @foreach ($product->galeria as $index => $image)
+                <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden">
+                      <div class="flex gap-2 items-center justify-start h-full">
+                          <div class="flex justify-center items-center h-full">
+                              <img class=" object-cover h-40 w-full shadow-xl" 
+                                   id="img-complementariaPROD-{{ $index }}"
+                                   src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}" />    
+                          </div>
+                      </div>
+                </div>
+              @endforeach
+          </div>
+      </div>
+  </div>
 </div>
 
 <script>
   var headerServices = new Swiper(".img-complementarias", {
     slidesPerView: 3,
-    spaceBetween: 0,
+    spaceBetween: 20,
     loop: true,
     centeredSlides: false,
     initialSlide: 0, // Empieza en el cuarto slide (índice 3) */
@@ -58,7 +74,7 @@
 
     breakpoints: {
       0: {
-        slidesPerView: 1,
+        slidesPerView: 2,
         centeredSlides: false,
         loop: true,
       },
@@ -76,14 +92,10 @@
   var imgComplementaria = document.getElementById('img-complementariaPROD');
 
   $(document).on("click", "[id^='img-complementariaPROD-']", function() {
-
     let img = document.createElement('img');
     img.src = $(this).attr('src');
-
-    img.classList.add('w-full', 'h-max', 'md:h-[400px]', '2xl:h-[580px]', 'object-cover', 'ease-in', 'duration-300',
+    img.classList.add('w-full', 'h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]' , 'object-cover', 'ease-in', 'duration-300',
       'transform', 'hover:scale-105');
-
     $("#containerProductosdetail").html(img)
-
   });
 </script>
