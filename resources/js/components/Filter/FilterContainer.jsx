@@ -41,7 +41,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
     </FilterItem>
     {
       categories.length > 0 &&
-      <FilterItemSelect2 eRef={categoryRef} label='Categoría' onChange={onCategoryChange} filter={filter} multiple defaultValue={[selected_category]}>
+      <FilterItemSelect2 eRef={categoryRef} label='Categoría' onChange={onCategoryChange} filter={filter} multiple defaultValue={[selected_category]} placeholder="Seleccione una categoria">
         {categories.map(x => (
           <option key={x.id} value={x.id}>{x.name}</option>
         ))}
