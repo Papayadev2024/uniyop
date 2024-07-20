@@ -192,7 +192,7 @@
       <div class="hidden lg:flex items-center justify-center">
         <div>
           <nav id="menu-items"
-            class=" text-[#333] text-sm font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center"
+            class=" text-[#333] text-base font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center"
             x-data="{ openCatalogo: false, openSubMenu: null }">
             <a href="/" class="font-medium hover:opacity-75 ">
               <span class="underline-this">INICIO</span>
