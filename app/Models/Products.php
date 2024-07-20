@@ -33,7 +33,8 @@ class Products extends Model
     'color',
     'image_texture',
     'slug',
-    'sku'
+    'sku', 
+    'max_stock'
   ];
 
   public function categoria()

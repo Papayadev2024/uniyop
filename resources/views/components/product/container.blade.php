@@ -71,8 +71,8 @@
       @if ($item->descuento == 0)
         <span class="text-[#006BF6] text-base font-bold">{{ $item->precio }}</span>
       @else
-        <span class="text-[#006BF6] text-base font-bold">{{ $item->precio }}</span>
-        <span class="text-sm text-[#15294C] opacity-60 line-through">{{ $item->descuento }}</span>
+        <span class="text-[#006BF6] text-base font-bold">{{ $item->descuento }}</span>
+        <span class="text-sm text-[#15294C] opacity-60 line-through">{{ $item->precio }}</span>
       @endif
     </div>
   </a>

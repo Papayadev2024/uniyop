@@ -252,8 +252,10 @@ class ProductsController extends Controller
       // Busca el producto, si existe lo actualiza, si no lo crea
       $producto = Products::find($request->id);
       if ($producto) {
+        $cleanedData['max_stock'] = $this->gestionarMaxStock($producto->max_stock, $cleanedData['stock']);
         $producto->update($cleanedData);
       } else {
+        $cleanedData['max_stock'] = $cleanedData['stock'];
         $producto = Products::create($cleanedData);
       }
 
@@ -310,6 +312,15 @@ class ProductsController extends Controller
     foreach ($nTags as $key => $value) {
       DB::insert('insert into tags_xproducts (producto_id, tag_id) values (?, ?)', [$id, $value]);
     }
+  }
+
+  private function gestionarMaxStock($stock_actual , $nuevo_stock)
+  {
+    if($nuevo_stock > $stock_actual  ){
+      return $nuevo_stock;
+    }
+    return $stock_actual;
+
   }
 
 
