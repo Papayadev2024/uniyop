@@ -14,6 +14,10 @@
     #tabladatos_wrapper .dt-length select{
         @apply px-5;
     }
+
+    .select2-dropdown {
+        @apply rounded-b-lg shadow-md;
+    }
   
 }
 

@@ -42,7 +42,7 @@ class ProductsController extends Controller
       $instance = Products::select([
         DB::raw('DISTINCT products.*')
       ])
-        ->with('category')
+        ->with(['category', 'tags'])
         ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
         ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
         ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id');
