@@ -13,17 +13,27 @@ const ProductCard = ({ item, width, bgcolor }) => {
       className={`flex flex-col relative w-full md:${width} ${bgcolor}`} data-aos="zoom-in-left"
     >
       <div className={`${bgcolor} product_container basis-4/5 flex flex-col justify-center relative`}>
-        <div className="absolute top-2 left-2">
+        <div className="absolute top-2 left-2 w-max">
           {item.tags?.map((tag) => (
             <div className="px-4 mb-1" key={tag.id}>
               <span
-                className="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-2 flex-initial w-24 text-center text-white rounded-[5px] relative top-[18px] z-10"
+                className="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-3 flex-initial w-full text-center text-white rounded-[5px] relative top-[18px] z-10"
                 style={{ backgroundColor: tag.color }}
               >
                 {tag.name}
               </span>
             </div>
           ))}
+          {
+            item.descuento > 0 && <div className="px-4 mb-1">
+              <span
+                className="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-3 flex-initial w-full text-center text-white rounded-[5px] relative top-[18px] z-10"
+                style={{ backgroundColor: '#10c469' }}
+              >
+                -{Math.round(100 - ((item.descuento * 100) / item.precio))}%
+              </span>
+            </div>
+          }
         </div>
         <div>
           <div className="relative flex justify-center items-center h-[300px]">
@@ -59,9 +69,9 @@ const ProductCard = ({ item, width, bgcolor }) => {
           </h2>
         </Tippy>
         <div className="flex content-between flex-row gap-4 items-center justify-center">
-          <span className="text-[#006BF6] text-[16.45px] font-bold">{item.precio}</span>
+          <span className="text-[#006BF6] text-[16.45px] font-bold">{item.descuento > 0 ? item.descuento : item.precio}</span>
           {item.descuento > 0 && (
-            <span className="text-sm text-[#15294C] opacity-60 line-through">{item.descuento}</span>
+            <span className="text-sm text-[#15294C] opacity-60 line-through">{item.precio}</span>
           )}
         </div>
       </a>
