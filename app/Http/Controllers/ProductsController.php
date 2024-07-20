@@ -148,7 +148,7 @@ class ProductsController extends Controller
   {
     try {
       //code...
-      if(isset($request->id)){
+      if (isset($request->id)) {
         $producto = Products::find($request->id);
         $ruta = $producto->$field;
 
@@ -161,18 +161,18 @@ class ProductsController extends Controller
       }
       if ($request->hasFile($field)) {
         $file = $request->file($field);
-        // $route = 'storage/images/imagen/';
-        $route = "storage/images/productos/$request->categoria_id/";
-        // $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
-        $nombreImagen = $request->sku.'.png';
+        $route = "storage/images/productos/{$request->categoria_id}/";
+        // $route = "storage/images/productos/$request->categoria_id/";
+        $nombreImagen = Str::random(10) . '_' . $field . '.' . $file->getClientOriginalExtension();
+        // $nombreImagen = $request->sku.'.png';
         $manager = new ImageManager(new Driver());
         $img =  $manager->read($file);
         // $img->coverDown(340, 340, 'center');
-  
+
         if (!file_exists($route)) {
           mkdir($route, 0777, true);
         }
-  
+
         // $img->save($route . $nombreImagen);
         $img->save($route . $nombreImagen);
         return $route . $nombreImagen;
@@ -182,7 +182,6 @@ class ProductsController extends Controller
       //throw $th;
       // dump($th);
     }
-    
   }
 
   /**
@@ -314,13 +313,12 @@ class ProductsController extends Controller
     }
   }
 
-  private function gestionarMaxStock($stock_actual , $nuevo_stock)
+  private function gestionarMaxStock($stock_actual, $nuevo_stock)
   {
-    if($nuevo_stock > $stock_actual  ){
+    if ($nuevo_stock > $stock_actual) {
       return $nuevo_stock;
     }
     return $stock_actual;
-
   }
 
 
