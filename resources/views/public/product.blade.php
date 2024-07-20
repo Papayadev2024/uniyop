@@ -54,7 +54,7 @@
     $maxStock = 100; // maximo stock
 
     if (!is_null($product->max_stock) > 0) {
-        $StockActual = $product->max_stock;
+        $maxStock = $product->max_stock;
     }
     # calculamos en % cuanto queda en base a 100
     $stock = ($StockActual * 100) / $maxStock;
