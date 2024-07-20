@@ -28,7 +28,7 @@
   <div class="col-span-3 h-full">
       <div class="swiper img-complementarias">
           <div class="swiper-wrapper">
-            <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-4 border-azulboost" id="img-complementariaPROD-0">
+            <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-azulboost" id="img-complementariaPROD-0">
                 <div class="flex gap-2 items-center justify-center h-full">
                     <div class="flex justify-center items-center h-full">
                             <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl" 
@@ -38,7 +38,7 @@
             </div>
             
               @foreach ($product->galeria as $index => $image)
-                <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden" id="img-complementariaPROD-{{ $index }}">
+                <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-gray-400" id="img-complementariaPROD-{{ $index }}">
                       <div class="flex gap-2 items-center justify-center h-full">
                           <div class="flex justify-center items-center h-full" >
                               <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl" 
@@ -59,7 +59,7 @@
     spaceBetween: 10,
     loop: false,
     // {{ count($product->galeria) > 1 ? 'true' : 'false' }},
-    centeredSlides: true,
+    centeredSlides: false,
     initialSlide: 0, // Empieza en el cuarto slide (índice 3) */
     /* pagination: {
       el: ".swiper-pagination-estadisticas",
@@ -93,8 +93,11 @@
 
   $(document).on("click", "[id^='img-complementariaPROD-']", function() {
     let img = document.createElement('img');
-    $("[id^='img-complementariaPROD-']").removeClass('border-4 border-azulboost');
-    $(this).addClass('border-4 border-azulboost');
+
+    $("[id^='img-complementariaPROD-']").removeClass('border-azulboost').addClass('border-gray-400');
+  
+    $(this).removeClass('border-gray-400').addClass('border-azulboost');
+
     img.src = $(this).find('img').attr('src');
     img.classList.add('w-full', 'h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]' , 'object-contain', 'ease-in', 'duration-500',
       'transform', 'hover:scale-105', 'opacity-0', 'transition-opacity', 'duration-200');

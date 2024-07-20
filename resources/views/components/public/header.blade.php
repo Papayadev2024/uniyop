@@ -279,12 +279,12 @@
           </div>
           {{-- <input type="checkbox" class="bag__modal" id="check" /> --}}
           <div id="cart-modal"
-            class="bag !fixed top-0 right-0 md:w-[450px] cartContainer border shadow-2xl !rounded-l-2xl !rounded-r-none !p-0 !z-30"
+            class="bag !fixed top-0 right-0 md:w-[450px] cartContainer border shadow-2xl  !rounded-none !p-0 !z-30"
             style="display: none">
             <div class="p-4 flex flex-col h-screen justify-between gap-2">
               <div class="flex flex-col">
                 <div class="flex justify-between ">
-                  <h2 class="font-medium text-[28px] text-[#151515] pb-5">Carrito</h2>
+                  <h2 class="font-semibold font-Inter_Medium text-[28px] text-[#151515] pb-5">Carrito</h2>
                   <div id="close-cart" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                       stroke="currentColor" class="w-6 h-6">
@@ -301,14 +301,14 @@
                   </table>
                 </div>
               </div>
-              <div class="font-poppins flex flex-col gap-2 pt-2">
-                <div class="text-[#141718] font-medium text-[20px] flex justify-between items-center">
-                  <p>Total</p>
-                  <p id="itemsTotal">S/ 0.00</p>
+              <div class="flex flex-col gap-2 pt-2">
+                <div class="text-[#006BF6]  text-xl flex justify-between items-center">
+                  <p class="font-Inter_Medium font-semibold">Total</p>
+                  <p class="font-Inter_Medium font-semibold" id="itemsTotal">S/ 0.00</p>
                 </div>
                 <div>
                   <a href="/carrito"
-                    class="font-semibold text-base bg-[#74A68D] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Checkout</a>
+                    class="font-normal font-Inter_Medium text-lg bg-[#006BF6] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Ir a pagar</a>
                 </div>
               </div>
             </div>
