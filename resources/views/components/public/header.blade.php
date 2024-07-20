@@ -175,7 +175,7 @@
   @endforeach
 
   <div>
-    <div id="header-menu" class="flex justify-between gap-5 w-full px-[5%] xl:px-[8%] py-4  text-[17px] ">
+    <div id="header-menu" class="flex justify-between gap-5 w-full px-[5%] xl:px-[8%] py-2  text-[17px] ">
 
       <div id="menu-burguer" class="lg:hidden z-10 w-max">
         <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}" alt="menu hamburguesa"
@@ -184,7 +184,7 @@
 
       <div class="w-auto">
         <a href="#">
-          <img id="logo-boostperu" class="w-[170px] md:w-[200px]"
+          <img id="logo-boostperu" class="w-[170px] "
             src="{{ asset($isIndex ? 'images\svg\logoboost.svg' : 'images\svg\logoboost.svg') }}" alt="boostperu" />
         </a>
       </div>
@@ -192,7 +192,7 @@
       <div class="hidden lg:flex items-center justify-center">
         <div>
           <nav id="menu-items"
-            class=" text-[#333] text-base font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center"
+            class=" text-[#333] text-sm font-Inter_Medium flex gap-5 xl:gap-10 items-center justify-center"
             x-data="{ openCatalogo: false, openSubMenu: null }">
             <a href="/" class="font-medium hover:opacity-75 ">
               <span class="underline-this">INICIO</span>
