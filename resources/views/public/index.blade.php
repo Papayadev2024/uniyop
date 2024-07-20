@@ -17,7 +17,7 @@
 
   <main class="z-[15] ">
 
-    <section class="bg-[#f8f8f8] ">
+    <section class="bg-[#f1f1f1] ">
       <x-swipper-card :items="$slider" />
     </section>
 
