@@ -68,11 +68,11 @@
   <script src="{{ asset('js/functions.js') }}?v={{ uniqid() }}"></script>
 
 
-  <script>
+  {{--   <script>
     tippy('[tippy]', {
       arrow: true
     })
-  </script>
+  </script> --}}
 </body>
 
 </html>

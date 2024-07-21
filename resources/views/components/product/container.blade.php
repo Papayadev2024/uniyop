@@ -64,8 +64,9 @@
     </div>
   </div>
   <a href="{{ route('producto', $item->id) }}">
-    <h2 class="text-base mt-4 text-center font-Inter_Medium tracking-tight cortartexto">
-      {{ $item->producto }}
+    <h2 id="h2Container" class="text-base mt-4 text-center font-Inter_Medium tracking-tight  cortartexto tippy"
+      title="{{ $item->producto }}">
+      {{ mb_strimwidth($item->producto, 0, 50, '...') }}
     </h2>
     <div class="flex content-between flex-row gap-4 items-center justify-center font-Inter_Medium pb-4">
       @if ($item->descuento == 0)
@@ -88,3 +89,14 @@
     max-height: 60px;
   }
 </style>
+
+<script>
+  $(document).ready(function() {
+    tippy('.tippy', {
+      arrow: true,
+      followCursor: true,
+      placement: 'right',
+
+    })
+  })
+</script>
