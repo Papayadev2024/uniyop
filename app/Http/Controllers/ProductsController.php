@@ -111,6 +111,83 @@ class ProductsController extends Controller
       );
     }
   }
+  public function paginateOffers(Request $request)
+  {
+    $response =  new dxResponse();
+    try {
+      $instance = Products::select([
+        DB::raw('DISTINCT products.*')
+      ])
+        ->with(['category', 'tags'])
+        ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
+        ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
+        ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id')
+        ->where('descuento', '>', 0);
+
+      if ($request->group != null) {
+        [$grouping] = $request->group;
+        $selector = \str_replace('.', '__', $grouping['selector']);
+        $instance = Products::select([
+          "{$selector} AS key"
+        ])
+          ->groupBy($selector);
+      }
+
+      if ($request->filter) {
+        $instance->where(function ($query) use ($request) {
+          dxDataGrid::filter($query, $request->filter ?? [], false);
+        });
+      }
+
+      if ($request->sort != null) {
+        foreach ($request->sort as $sorting) {
+          // $selector = \str_replace('.', '__', $sorting['selector']);
+          $selector = $sorting['selector'];
+          $instance->orderBy(
+            $selector,
+            $sorting['desc'] ? 'DESC' : 'ASC'
+          );
+        }
+      } else {
+        $instance->orderBy('products.id', 'DESC');
+      }
+
+      $totalCount = 0;
+      if ($request->requireTotalCount) {
+        $totalCount = $instance->count('*');
+      }
+
+      $jpas = [];
+      if (!$request->ignoreData) {
+        $jpas = $request->isLoadingAll
+          ? $instance->get()
+          : $instance
+          ->skip($request->skip ?? 0)
+          ->take($request->take ?? 10)
+          ->get();
+      }
+
+      // $results = [];
+
+      // foreach ($jpas as $jpa) {
+      //   $result = JSON::unflatten($jpa->toArray(), '__');
+      //   $results[] = $result;
+      // }
+
+      $response->status = 200;
+      $response->message = 'Operación correcta';
+      $response->data = $jpas;
+      $response->totalCount = $totalCount;
+    } catch (\Throwable $th) {
+      $response->status = 400;
+      $response->message = $th->getMessage() . " " . $th->getFile() . ' Ln.' . $th->getLine();
+    } finally {
+      return response(
+        $response->toArray(),
+        $response->status
+      );
+    }
+  }
 
   /**
    * Show the form for creating a new resource.

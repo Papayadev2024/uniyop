@@ -1,22 +1,42 @@
 {
+  "_ProductCard-!~{005}~.js": {
+    "file": "assets/ProductCard-C64i7G0l.css",
+    "src": "_ProductCard-!~{005}~.js"
+  },
+  "_ProductCard-X4NoYPPw.js": {
+    "css": [
+      "assets/ProductCard-C64i7G0l.css"
+    ],
+    "file": "assets/ProductCard-X4NoYPPw.js",
+    "imports": [
+      "_axios-GZ4oqQ7_.js"
+    ]
+  },
   "_axios-GZ4oqQ7_.js": {
     "file": "assets/axios-GZ4oqQ7_.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-cdatjOvk.css",
+    "file": "assets/app-wxnSObNz.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/Catalogo.jsx": {
-    "css": [
-      "assets/Catalogo-C64i7G0l.css"
-    ],
-    "file": "assets/Catalogo-QvvbL0va.js",
+    "file": "assets/Catalogo-yz6HR8p1.js",
     "imports": [
+      "_ProductCard-X4NoYPPw.js",
       "_axios-GZ4oqQ7_.js"
     ],
     "isEntry": true,
     "src": "resources/js/Catalogo.jsx"
+  },
+  "resources/js/Ofertas.jsx": {
+    "file": "assets/Ofertas-h3xhgMfN.js",
+    "imports": [
+      "_ProductCard-X4NoYPPw.js",
+      "_axios-GZ4oqQ7_.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/Ofertas.jsx"
   },
   "resources/js/app.js": {
     "css": [

@@ -42,6 +42,39 @@ class Router
         ]
       ]
     ],
+    'ofertas' => [
+      'component' => 'Ofertas.jsx',
+      'adminto-instance' => true,
+      'compact' => [
+        'minPrice' => [
+          'query' => Products::min('descuento'),
+        ],
+        'maxPrice' => [
+          'query' => Products::max('descuento'),
+        ],
+        'brands' => [
+          'class' => AttributesValues::class,
+          'filter' => [
+            'attribute_id' => 1,
+            'status' => true
+          ]
+        ],
+        'colors' => [
+          'class' => AttributesValues::class,
+          'filter' => [
+            'attribute_id' => 2,
+            'status' => true
+          ]
+        ],
+        'sizes' => [
+          'class' => AttributesValues::class,
+          'filter' => [
+            'attribute_id' => 3,
+            'status' => true
+          ]
+        ]
+      ]
+    ],
     // 'home' => [
     //   'component' => 'Home.jsx',
     //   'adminto-instance' => true

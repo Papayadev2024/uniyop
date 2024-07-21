@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/products/paginate', [ProductsController::class, 'paginate'])->name('products.paginate');
+Route::post('/ofertas/paginate', [ProductsController::class, 'paginateOffers'])->name('ofertas.paginate');
 
 Route::post('/payment/culqi', [PaymentController::class, 'culqi'])->name('payment.culqi');
 

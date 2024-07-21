@@ -117,6 +117,38 @@ class IndexController extends Controller
       'id_cat' => $id_cat
     ])->rootView('app');
   }
+  
+  public function ofertas(Request $request, string $id_cat = null)
+  {
+
+    $categories = Category::where('visible', true)->get();
+    $tags = Tag::where('visible', true)->get();
+
+    $minPrice = Products::select()
+      ->where('visible', true)
+      ->where('descuento', '>', 0)
+      ->min('descuento');
+    if ($minPrice) Products::where('visible', true)->min('precio');
+    $maxPrice = Products::max('precio');
+
+    $attribute_values = AttributesValues::select('attributes_values.*')
+    ->with('attribute')
+      ->join('attributes', 'attributes.id', '=', 'attributes_values.attribute_id')
+      ->where('attributes_values.visible', true)
+      ->where('attributes.visible', true)
+      ->get();
+
+    return Inertia::render('Catalogo', [
+      'component' => 'Ofertas',
+      'minPrice' => $minPrice,
+      'maxPrice' => $maxPrice,
+      'categories' => $categories,
+      'tags' => $tags,
+      'attribute_values' => $attribute_values,
+      'id_cat' => $id_cat
+    ])->rootView('app');
+  }
+
 
   public function comentario()
   {
