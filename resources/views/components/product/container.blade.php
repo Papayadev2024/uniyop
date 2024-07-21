@@ -69,10 +69,10 @@
     </h2>
     <div class="flex content-between flex-row gap-4 items-center justify-center font-Inter_Medium pb-4">
       @if ($item->descuento == 0)
-        <span class="text-[#006BF6] text-base font-bold">{{ $item->precio }}</span>
+        <span class="text-[#006BF6] text-base font-bold">S/. {{ $item->precio }}</span>
       @else
-        <span class="text-[#006BF6] text-base font-bold">{{ $item->descuento }}</span>
-        <span class="text-sm text-[#15294C] opacity-60 line-through">{{ $item->precio }}</span>
+        <span class="text-[#006BF6] text-base font-bold">S/. {{ $item->descuento }}</span>
+        <span class="text-sm text-[#15294C] opacity-60 line-through">S/. {{ $item->precio }}</span>
       @endif
     </div>
   </a>
