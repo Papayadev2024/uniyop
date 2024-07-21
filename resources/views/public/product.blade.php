@@ -221,7 +221,7 @@
             <h6 class="text-base font-Inter_Medium">Combinalo con: </h6>
             <div class="grid grid-cols-3 gap-3  mb-6">
               <div class="col-span-3">
-                <div class="swiper productos-relacionados h-[350px]">
+                <div class="swiper productos-relacionados ">
                   <div class="swiper-wrapper h-full">
                     @foreach ($ProdComplementarios as $item)
                       <div class="swiper-slide w-full h-full col-span-1">
@@ -230,8 +230,9 @@
                             {{-- <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
                                                           <span> {{ $item->producto }}</span>
                                                           <h2 class="font-Inter_Bold text-[#006BF6]">S/ 80.00</h2> --}}
-                            <x-product.container-combinalo width="" height="h-[230px]" bgcolor="bg-[#FFFFFF]"
-                              textpx="text-[17px]" :item="$item" />
+                            {{--  <x-product.container-combinalo width="" height="h-[300px]" bgcolor="bg-[#FFFFFF]"
+                              textpx="text-[17px]" :item="$item" /> --}}
+                            <x-product.container width="col-span-1 " bgcolor="" :item="$item" />
                           </a>
                         </div>
                       </div>
