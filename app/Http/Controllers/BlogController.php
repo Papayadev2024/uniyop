@@ -91,7 +91,8 @@ class BlogController extends Controller
     $post->meta_keywords = $request->meta_keywords;
     $post->status = 1;
     $post->visible = 1;
-
+    $post->save();
+    
     $plantilla = '<html lang="es">
         <head>
           <meta charset="UTF-8" />
@@ -220,7 +221,7 @@ class BlogController extends Controller
                   "
                   >
                     <a
-                      href="' . $appUrl .'/post'.$post->id. '"
+                      href="' . $appUrl .'post/'.$post->id. '"
                       style="
                         text-decoration: none;
                         background-color: #006bf6;
@@ -248,7 +249,7 @@ class BlogController extends Controller
       ';
 
 
-    $post->save();
+   
     //envioMasivo($plantilla, $blog)
 
     $newsletter->envioMasivo($plantilla);
