@@ -55,7 +55,7 @@
                 <span id="itemTotal" class="font-semibold text-[20px]">s/ 0.00</span>
               </div>
               <a id="btnSiguiente" href="/pago"
-                class="text-white bg-[#74A68D] w-full py-4 rounded-3xl cursor-pointer font-semibold text-[16px] inline-block text-center">Siguiente</a>
+                class="text-white bg-[#006BF6] w-full py-4 rounded-3xl cursor-pointer font-semibold text-[16px] inline-block text-center">Siguiente</a>
             </div>
           </div>
         </div>
