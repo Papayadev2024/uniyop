@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\IndexController;
 use App\Models\General;
 use App\Models\LibroReclamaciones;
 use App\Models\Message;
 use App\Models\PolyticsCondition;
 use App\Models\Sale;
+use App\Models\TermsAndCondition;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Support\Facades\View;
@@ -27,12 +29,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         View::composer('components.public.footer', function ($view) {
+        
+           
+
             // Obtener los datos del footer
             $datosgenerales = General::first(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
             // Pasar los datos a la vista
 
-            $view->with('datosgenerales', $datosgenerales);
+            //jalar datos de un controlador 
+            $politicDev = PolyticsCondition::first();
+            $termsAndCondicitions = TermsAndCondition::first();
+
+            $view->with(['datosgenerales'=> $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions]);
         });
 
         View::composer('components.public.header', function ($view) {

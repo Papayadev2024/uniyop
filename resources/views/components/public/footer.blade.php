@@ -1,4 +1,12 @@
 <footer class="font-Inter_Medium bg-[#FFFFFF] mt-5">
+  <style>
+    #modalPoliticasDev #modalTerminosCondiciones {
+      height: 70vh;
+      /* Establece la altura del modal al 70% de la altura de la ventana gráfica */
+      overflow-y: auto;
+      /* Permite el desplazamiento vertical si el contenido excede la altura del modal */
+    }
+  </style>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] py-8 lg:py-16 ">
 
@@ -21,9 +29,11 @@
     <div class="flex flex-col text-[#444444] text-base gap-1">
       <h3 class="font-bold text-xl text-[#333333] pb-3">Servicio al Cliente</h3>
       <a href="/contacto">Contacto</a>
-      <a href="#">Politicas y Reglas </a>
-      {{--  <a href="{{ route('librodereclamaciones') }}"><img class="w-28"
-           src="{{ asset('images/img/reclamaciones.png') }}" /></a> --}}
+      <a id="linkTerminos">Terminos y condiciones </a>
+      <a id="linkPoliticas">Politicas de devolucion </a>
+
+      <a href="{{ route('librodereclamaciones') }}"><img class="w-24"
+          src="{{ asset('images/img/reclamaciones.png') }}" /></a>
     </div>
 
     <div class=" flex flex-col gap-2 text-[#444444] text-base">
@@ -59,4 +69,50 @@
     </div>
   </div>
 
+  <div id="modalTerminosCondiciones" class="modal">
+    <!-- Modal body -->
+    <div class="p-4 ">
+      <h1 class="font-Inter_SemiBold">Terminos y condiciones</h1>
+      <p class="font-Inter_Regular p-2">{!! $terminos->content ?? '' !!}</p>
+    </div>
+  </div>
+  <div id="modalPoliticasDev" class="modal">
+    <!-- Modal body -->
+    <div class="p-4 ">
+      <h1 class="font-Inter_SemiBold">Politicas de devolucion</h1>
+
+      <p class="font-Inter_Regular p-2">{!! $politicas->content ?? '' !!}</p>
+
+
+    </div>
+  </div>
+
 </footer>
+
+
+<script>
+  $(document).ready(function() {
+
+    $(document).on('click', '#linkTerminos', function() {
+      $('#modalTerminosCondiciones').modal({
+        show: true,
+        fadeDuration: 400,
+
+      })
+    })
+    $(document).on('click', '#linkPoliticas', function() {
+      $('#modalPoliticasDev').modal({
+        show: true,
+        fadeDuration: 400,
+
+
+      })
+    })
+
+
+
+
+
+
+  })
+</script>
