@@ -115,9 +115,11 @@
                         @if ($product->imagen_ambiente)
                           <img id="imagen_ambiente_previewer" x-show="showAmbiente"
                             x-transition:enter="transition ease-out duration-300 transform"
-                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
-                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95"
                             src="{{ asset($product->imagen_ambiente) }}" alt="{{ $product->name }}"
                             class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @else
@@ -127,8 +129,9 @@
                             x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
                             x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/img/noimagen.jpg') }}"
-                            alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
+                            x-transition:leave-end="opacity-0 scale-95"
+                            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+                            class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @endif
                       </div>
                       <div>
