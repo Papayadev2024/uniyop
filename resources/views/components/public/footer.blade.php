@@ -17,6 +17,39 @@
       <p> {{ $datosgenerales->city }} - {{ $datosgenerales->country }}</p>
       <p>{{ $datosgenerales->cellphone }}</p>
       <p>{{ $datosgenerales->email }}</p>
+
+      <div class="flex flex-row gap-4 text-[#333333] mt-6 pt-2">
+        @if ($datosgenerales->facebook)
+          <a href="{{ $datosgenerales->facebook }}">
+            <i class="fa-brands fa-facebook fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->instagram)
+          <a href="{{ $datosgenerales->instagram }}">
+            <i class="fa-brands fa-instagram fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->linkedin)
+          <a href="{{ $datosgenerales->linkedin }}">
+            <i class="fa-brands fa-linkedin fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->tiktok)
+          <a href="{{ $datosgenerales->tiktok }}">
+            <i class="fa-brands fa-tiktok fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->twitter)
+          <a href="{{ $datosgenerales->twitter }}">
+            <i class="fa-brands fa-twitter fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->youtube)
+          <a href="{{ $datosgenerales->youtube }}">
+            <i class="fa-brands fa-youtube fa-2xl"></i>
+          </a>
+        @endif
+      </div>
     </div>
 
     <div class="flex flex-col text-[#444444] text-base gap-1">
