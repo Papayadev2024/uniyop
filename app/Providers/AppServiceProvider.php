@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\IndexController;
+use App\Models\Blog;
 use App\Models\General;
 use App\Models\LibroReclamaciones;
 use App\Models\Message;
@@ -47,9 +48,10 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('components.public.header', function ($view) {
             // Obtener los datos del footer
-            $datosgenerales = General::all(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
+            $datosgenerales = General::all();
+            $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->count() ; // Suponiendo que tienes un modelo Footer y un método footerData() en él
             // Pasar los datos a la vista
-            $view->with('datosgenerales', $datosgenerales);
+            $view->with(['datosgenerales'=> $datosgenerales, 'blog' => $blog]);
         });
 
         View::composer('components.app.sidebar', function ($view) {

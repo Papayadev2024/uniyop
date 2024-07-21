@@ -202,9 +202,12 @@
               <span class="underline-this">PRODUCTOS</span>
             </a>
 
-            <a href="/blog/0" class="font-medium hover:opacity-75 ">
-              <span class="underline-this">BLOG</span>
-            </a>
+            @if ($blog > 0)
+              <a href="/blog/0" class="font-medium hover:opacity-75 ">
+                <span class="underline-this">BLOG {{ $blog }}</span>
+              </a>
+            @endif
+
 
             <a href="/contacto" class="font-medium hover:opacity-75 ">
               <span class="underline-this">CONTACTO</span>
@@ -308,7 +311,8 @@
                 </div>
                 <div>
                   <a href="/carrito"
-                    class="font-normal font-Inter_Medium text-lg bg-[#006BF6] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Ir a pagar</a>
+                    class="font-normal font-Inter_Medium text-lg bg-[#006BF6] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Ir
+                    a pagar</a>
                 </div>
               </div>
             </div>
