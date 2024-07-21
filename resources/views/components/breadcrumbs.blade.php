@@ -1,5 +1,5 @@
 @if (isset($breadcrumbs) && is_array($breadcrumbs) && count($breadcrumbs) > 0)
-  <div class="bg-[#F8F8F8] py-7 lg:py-10 flex items-center justify-center font-Inter_Medium w-full px-[5%] lg:px-[8%]">
+  <div class="bg-[#F8F8F8] py-7 2xl:py-10 flex items-center justify-center font-Inter_Medium w-full px-[5%] xl:px-[8%]">
     <nav aria-label="breadcrumb" class="flex gap-4 items-center w-full">
       <ol class="breadcrumb flex flex-row items-center gap-3">
         @foreach ($breadcrumbs as $index => $breadcrumb)
