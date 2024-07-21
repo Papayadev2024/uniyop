@@ -207,7 +207,7 @@
 
             @if ($blog > 0)
               <a href="/blog/0" class="font-medium hover:opacity-75 ">
-                <span class="underline-this">BLOG {{ $blog }}</span>
+                <span class="underline-this">BLOG </span>
               </a>
             @endif
 
