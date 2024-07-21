@@ -684,7 +684,7 @@ class IndexController extends Controller
   {
     $appUrl = env('APP_URL');
     $name = $data['full_name'];
-    $mensaje = "Gracias por comunicarte con Decotab";
+    $mensaje = "Gracias por comunicarte con BoostPeru";
     $mail = EmailConfig::config($name, $mensaje);
     // dd($mail);
     try {

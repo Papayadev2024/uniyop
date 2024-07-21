@@ -55,6 +55,8 @@ class BlogController extends Controller
   public function store(Request $request)
   {
 
+    $appUrl = env('APP_URL');
+    $newsletter = new NewsletterSubscriberController();
     
     $request->validate([
       'title' => 'required',
@@ -90,10 +92,166 @@ class BlogController extends Controller
     $post->status = 1;
     $post->visible = 1;
 
-    
+    $plantilla = '<html lang="es">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Mundo web</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+          />
+          <style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+          </style>
+        </head>
+        <body>
+          <main>
+            <table
+              style="
+                width: 600px;
+                height: 800px;
+                margin: 0 auto;
+                text-align: center;
+                background-image:url(' . $appUrl . 'images/Ellipse_18.png),  url(' . $appUrl . 'images/Tabpanel.png);
+                background-repeat: no-repeat, no-repeat;
+                background-position: center bottom , center bottom;;
+                background-size: fit , fit;
+                background-color: #f9f9f9;
+              "
+            >
+              <thead>
+                <tr>
+                  <th
+                    style="
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 40px;
+                    "
+                  >
+                    <img src="' . $appUrl . 'images/Group1.png" alt="mundo web"  style="
+                    margin: auto;
+                  "/>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="height: 10px">
+                    <p
+                      style="
+                        
+                        font-weight: 500;
+                        font-size: 18px;
+                        text-align: center;
+                        width: 500px;
+                        margin: 0 auto;
+                        font-family: Montserrat, sans-serif;
+                        line-height: 30px;
+                      "
+                    >
+                      <span style="display: block">Hola </span>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="height: 10px">
+                    <p
+                      style="
+                        
+                        font-size: 40px;
+                        font-family: Montserrat, sans-serif;
+                        line-height: 60px;
+                      "
+                    >
+                      <span style="display: block">' . $post->title . ' </span>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="height: 10px">
+                    <p
+                      style="
+                        color: #006bf6;
+                        font-size: 40px;
+                        font-family: Montserrat, sans-serif;
+                        font-weight: bold;
+                        line-height: 60px;
+                      "
+                    >
+                     Acaba de ser publicado 
+                      <span ></span>
+                    </p>
+                    <img src="' . $appUrl . $post->url_image . $post->name_image.'" alt="mundo web"  style="
+                    margin: auto;
+                  "/>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="height: 10px">
+                    <p
+                      style="
+                        
+                        font-weight: 500;
+                        font-size: 18px;
+                        text-align: center;
+                        width: 250px;
+                        margin: 0 auto;
+                        font-family: Montserrat, sans-serif;
+                        line-height: 30px;
+                      "
+                    >
+                      '.$post->extract.'
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                    text-align: center;
+                  "
+                  >
+                    <a
+                      href="' . $appUrl .'/post'.$post->id. '"
+                      style="
+                        text-decoration: none;
+                        background-color: #006bf6;
+                        color: white;
+                        padding: 10px 16px;
+                        display: inline-flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        font-weight: 600;
+                        font-family: Montserrat, sans-serif;
+                        font-size: 16px;
+                        border-radius: 30px;
+                      "
+                    >
+                      <span>Sigue Leyendo </span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </main>
+        </body>
+      </html>
+      ';
 
 
     $post->save();
+    //envioMasivo($plantilla, $blog)
+
+    $newsletter->envioMasivo($plantilla);
 
     return redirect()->route('blog.index')->with('success', 'Publicación creado exitosamente.');
   }

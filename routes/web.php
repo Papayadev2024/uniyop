@@ -30,6 +30,7 @@ use App\Http\Controllers\LogosClientController;
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LibroReclamacionesController;
+use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PolyticsConditionController;
 use App\Http\Controllers\PopupController;
@@ -95,6 +96,8 @@ Route::get('/terminos-y-condiciones', [IndexController::class, 'TerminosyCondici
 
 // Route::post('/payment/culqi', [PaymentController::class, 'culqi'])->name('payment.culqi');
 Route::get('/buscarblog', [IndexController::class, 'searchBlog'])->name('buscarblog');
+
+Route::post('guardarUserNewsLetter', [NewsletterSubscriberController::class, 'guardarUserNewsLetter'])->name('guardarUserNewsLetter');
 
 Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {
 
@@ -224,6 +227,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::resource('/popup', PopupController::class);
         Route::post('/popup/deleteBanner', [PopupController::class, 'deleteBanner'])->name('popup.deleteBanner');
         Route::post('/popup/updateVisible', [PopupController::class, 'updateVisible'])->name('popup.updateVisible');
+
+        Route::get('/subscripciones', [NewsletterSubscriberController::class, 'showSubscripciones'])->name('subscripciones') ;
 
         Route::fallback(function () {
             return view('pages/utility/404');
