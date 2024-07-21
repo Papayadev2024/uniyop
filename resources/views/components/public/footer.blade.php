@@ -56,7 +56,9 @@
     <div class="flex flex-col lg:flex-row justify-between items-center gap-5 w-full px-[5%]">
       <div class="text-center">
         <p class="font-normal text-sm text-[#444444]">
-          Copyright &copy; 2023 Mundo Web. Reservados todos los derechos
+          Copyright &copy; 2023 {{ config('app.name') }}. Reservados todos los derechos. Power By <a
+            href="https://www.mundoweb.pe" target="_blank" class="text-[#006BF6] border-b border-[#006BF6]"> Mundo Web
+          </a>
         </p>
       </div>
       <div class="flex gap-2 items-center justify-center">
