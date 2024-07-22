@@ -520,10 +520,6 @@ class IndexController extends Controller
     $usuario = User::find($user->id);
 
     $wishlistItems = $usuario->wishlistItems()->with('products')->get();
-<<<<<<< HEAD
-
-    return view('public.dashboard_wishlist', compact('user', 'wishlistItems'));
-=======
     $arrayWishlist = $wishlistItems->toArray();
     $array = [];
     foreach ($arrayWishlist as $key => $value) {
@@ -533,7 +529,6 @@ class IndexController extends Controller
 
     $productos = Products::with('tags')->whereIn('id', $array)->get();
     return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos') );
->>>>>>> 10dd086ca50fc6693f5ca922f285ccffaa33d54c
   }
 
  
@@ -664,7 +659,6 @@ class IndexController extends Controller
       }
     }
 
-<<<<<<< HEAD
     $combo = Offer::select([
       DB::raw('DISTINCT offers.*')
     ])
@@ -676,25 +670,16 @@ class IndexController extends Controller
 
     if (!$combo) $combo = new Offer();
 
-    return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery', 'combo'));
-=======
-    return view('public.product', compact('atributos', 'isWhishList','testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
->>>>>>> 10dd086ca50fc6693f5ca922f285ccffaa33d54c
+    return view('public.product', compact('atributos', 'isWhishList', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery', 'combo'));
   }
 
   public function wishListAdd(Request $request)
   {
     $user = Auth::user();
-<<<<<<< HEAD
-
-    $exite = Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
-    if ($exite) {
-=======
     
     $exite= Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
     if($exite){
       Wishlist::find($exite->id)->delete();
->>>>>>> 10dd086ca50fc6693f5ca922f285ccffaa33d54c
       return response()->json(['message' => 'El producto ya se encuentra en la lista de deseos']);
     }else{
       $whistList = Wishlist::create([
