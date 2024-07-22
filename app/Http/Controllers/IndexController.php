@@ -524,7 +524,6 @@ class IndexController extends Controller
       $array[] = $value['products']['id'];
     }
 
-    dump($array);
 
     $productos = Products::with('tags')->whereIn('id', $array)->get();
     return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos') );
@@ -641,8 +640,16 @@ class IndexController extends Controller
 
     $general = General::first();
     $testimonios = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $isWhishList = false;
+    if (Auth::check()) {
+      $user = Auth::user();
+      $exite= Wishlist::where('user_id', $user->id)->where('product_id', $id)->first();
+      if($exite){
+        $isWhishList = true;
+      }
+    }
 
-    return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
+    return view('public.product', compact('atributos', 'isWhishList','testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
   }
 
   public function wishListAdd(Request $request){
@@ -650,14 +657,17 @@ class IndexController extends Controller
     
     $exite= Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
     if($exite){
+      Wishlist::find($exite->id)->delete();
       return response()->json(['message' => 'El producto ya se encuentra en la lista de deseos']);
+    }else{
+      $whistList = Wishlist::create([
+        'user_id' => $user->id,
+        'product_id' => $request->product_id,
+        'quantity' => 1,
+        'note' => ''
+      ]);
     }
-    $whistList = Wishlist::create([
-      'user_id' => $user->id,
-      'product_id' => $request->product_id,
-      'quantity' => 1,
-      'note' => ''
-    ]);
+    
 
     return response()->json(['message' => 'Producto agregado a la lista de deseos']);
   }

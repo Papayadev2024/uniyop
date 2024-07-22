@@ -200,12 +200,13 @@
               </div>
               <div class="xl:ml-8 flex flex-row gap-5 justify-start items-center">
                 <button id="btnAgregarCarrito"
-                  class="bg-[#0D2E5E] w-[286px] h-16  text-white text-center rounded-full font-Inter_SemiBold tracking-wide text-lg ">
+                  class="bg-[#0D2E5E] w-[286px] h-16  text-white text-center rounded-full font-Inter_SemiBold tracking-wide text-lg hover:bg-[#1E8E9E]">
                   Agregar
                   al Carrito
                 </button>
                 @if (Auth::user() !== null)
-                  <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center"
+                  <button
+                    class=" @if ($isWhishList) bg-[#0D2E5E]  @else bg-[#99b9eb] @endif w-12 h-12 rounded-full text-white flex justify-center items-center hover:bg-[#1E8E9E]"
                     type="button" id="addWishlist">
                     <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
                   </button>
@@ -572,7 +573,6 @@
     })
 
     $('#addWishlist').on('click', function() {
-      console.log('agregando a la lista de deseos');
       $.ajax({
         url: `{{ route('wishlist.store') }}`,
         method: 'POST',
@@ -582,6 +582,13 @@
         },
         success: function(response) {
           console.log(response);
+          // Cambiar el color del botón
+
+          if (response.message === 'Producto agregado a la lista de deseos') {
+            $('#addWishlist').removeClass('bg-[#99b9eb]').addClass('bg-[#0D2E5E]');
+          } else {
+            $('#addWishlist').removeClass('bg-[#0D2E5E]').addClass('bg-[#99b9eb]');
+          }
           Swal.fire({
             icon: 'success',
             title: response.message,
