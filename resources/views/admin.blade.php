@@ -1,3 +1,7 @@
+@php
+  $component = Route::currentRouteName();
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -54,7 +58,7 @@
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <!-- Scripts -->
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @vite(['resources/js/' . $component, 'resources/css/app.css', 'resources/js/app.js'])
 
   <!-- Styles -->
   @livewireStyles
@@ -75,6 +79,7 @@
   <script src="//unpkg.com/alpinejs" defer></script>
   <script src="/js/tippy.all.min.js"></script>
   <script src="/js/cookies.extend.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
 </head>
 
@@ -96,13 +101,13 @@
 
     <!-- Content area -->
     <div
-      class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden @if ($attributes['background']) {{ $attributes['background'] }} @endif"
+      class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden "
       x-ref="contentarea">
 
       <x-app.header />
 
       <main class="grow">
-        {{ $slot }}
+        @inertia()
       </main>
 
     </div>

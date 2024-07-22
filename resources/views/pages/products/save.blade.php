@@ -25,7 +25,7 @@
           <div class="grid grid-cols-1 md:grid-cols-5 gap-2 p-3 ">
 
             <div class="col-span-5 md:col-span-3">
-              <div class="rounded shadow-lg p-4 px-4 border">
+              <div class="rounded shadow-lg p-4 px-4 border mb-2">
 
 
                 <div id='general' class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
@@ -115,11 +115,9 @@
                         @if ($product->imagen_ambiente)
                           <img id="imagen_ambiente_previewer" x-show="showAmbiente"
                             x-transition:enter="transition ease-out duration-300 transform"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
-                            x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                             src="{{ asset($product->imagen_ambiente) }}" alt="{{ $product->name }}"
                             class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @else
@@ -129,9 +127,8 @@
                             x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
                             x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95"
-                            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
-                            class="w-full h-full object-cover absolute inset-0 rounded-lg" />
+                            x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/img/noimagen.jpg') }}"
+                            alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @endif
                       </div>
                       <div>
@@ -514,7 +511,6 @@
 
 
   </div>
-
   {{-- <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
   <script>
     const sortable = new Draggable.Sortable(document.getElementById('imagenes_sortable'), {

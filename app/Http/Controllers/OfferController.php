@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Offer;
 use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
+use Inertia\Inertia;
 
 class OfferController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function reactView()
     {
-        //
+        $offers = Offer::with('products')
+        ->where('status', true)
+        ->get();
+        return Inertia::render('Catalogo', [
+            'offers' => $offers,
+        ])->rootView('admin');
     }
 
     /**

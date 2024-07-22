@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\OfferController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,7 @@ use Inertia\Inertia;
 
 Route::get('/catalogo/{id?}', [IndexController::class, 'catalogo'])->name('Catalogo.jsx');
 Route::get('/ofertas/{id?}', [IndexController::class, 'ofertas'])->name('Ofertas.jsx');
+Route::get('/admin/offers', [OfferController::class, 'reactView'])->name('Admin/Offers.jsx');
 // foreach (Router::components as $path => $page) {
 //   if (Auth::check()) {
 //     Auth::user()->getAllPermissions();
