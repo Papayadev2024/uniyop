@@ -49,7 +49,7 @@
 
                 <div class="flex flex-col gap-5">
                   <div>
-                    <a href="{{ route('catalogo.all') }}"
+                    <a href="{{ route('Catalogo.jsx') }}"
                       class="text-white bg-[#006BF6] w-full py-3 rounded-2xl cursor-pointer font-semibold text-[16px] inline-block text-center">Seguir
                       comprando</a>
                   </div>
