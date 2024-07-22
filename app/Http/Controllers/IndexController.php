@@ -529,6 +529,14 @@ class IndexController extends Controller
     return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos') );
   }
 
+ 
+  public function searchProduct(Request $request)
+  {
+    $query = $request->input('query');
+    $resultados = Products::where('producto', 'like', "%$query%")->get();
+
+    return response()->json($resultados);
+  }
 
   public function direccion()
   {
