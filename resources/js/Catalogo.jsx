@@ -8,11 +8,12 @@ import FilterPagination from './components/Filter/FilterPagination'
 import arrayJoin from './Utils/ArrayJoin'
 import ProductCard from './components/Product/ProductCard'
 
-const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category }) => {
+const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category, tag_id }) => {
   const take = 10
+  console.log(tag_id)
 
   const [items, setItems] = useState([])
-  const [filter, setFilter] = useState(selected_category ? { category_id: [selected_category] }: {})
+  const [filter, setFilter] = useState(selected_category ? { category_id: [selected_category] } : { 'txp.tag_id': [tag_id] })
   const [totalCount, setTotalCount] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -57,6 +58,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
         ])
       }
     }
+
 
     if (filter['txp.tag_id'] && filter['txp.tag_id'].length > 0) {
       const tagsFilter = []
@@ -127,7 +129,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
   return (<>
     <form className="flex flex-col md:flex-row gap-6  mx-auto font-poppins bg-[#F1F1F1] w-full" style={{ padding: '40px' }}>
       <section className="flex flex-col gap-4 md:basis-3/12 bg-white p-6 rounded-lg h-max md:sticky top-2">
-        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} attribute_values={Object.values(attributes)} selected_category={selected_category} />
+        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} />
       </section>
       <section className="flex flex-col gap-6 md:basis-9/12">
         <div className="w-full bg-white rounded-lg font-medium flex flex-row justify-between items-center px-2 py-3">

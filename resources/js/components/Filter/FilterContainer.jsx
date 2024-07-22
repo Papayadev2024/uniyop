@@ -2,8 +2,10 @@ import React, { useRef } from 'react'
 import FilterItem from './FilterItem'
 import FilterItemSelect2 from './FilterItemSelect2'
 
-const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], brands = [], sizes = [], colors = [], attribute_values, selected_category }) => {
+const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], brands = [], sizes = [], colors = [], attribute_values, tag_id, selected_category }) => {
   const categoryRef = useRef()
+
+
 
   const setMinPrice = (e) => {
     const newFilter = structuredClone(filter)
@@ -52,10 +54,12 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
         <h2 className="font-semibold">Etiquetas</h2>
         <div className='flex flex-row gap-4 w-full flex-wrap'>
           {tags.map(item => {
+            const isChecked = item.id === Number(tag_id);
+
             return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="text-custom-border flex flex-row gap-2  items-center cursor-pointer">
-                <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)} />
-                {item.name}
-              </label>)
+              <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)} defaultChecked={isChecked} />
+              {item.name}
+            </label>)
           })}
         </div>
       </div>

@@ -3,11 +3,11 @@
     "file": "assets/ProductCard-C64i7G0l.css",
     "src": "_ProductCard-!~{005}~.js"
   },
-  "_ProductCard-X4NoYPPw.js": {
+  "_ProductCard-Ok5gcVzs.js": {
     "css": [
       "assets/ProductCard-C64i7G0l.css"
     ],
-    "file": "assets/ProductCard-X4NoYPPw.js",
+    "file": "assets/ProductCard-Ok5gcVzs.js",
     "imports": [
       "_axios-GZ4oqQ7_.js"
     ]
@@ -16,23 +16,23 @@
     "file": "assets/axios-GZ4oqQ7_.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-yEGSujEx.css",
+    "file": "assets/app-N3zCTz6D.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/Catalogo.jsx": {
-    "file": "assets/Catalogo-yz6HR8p1.js",
+    "file": "assets/Catalogo-JNAKdJ2o.js",
     "imports": [
-      "_ProductCard-X4NoYPPw.js",
+      "_ProductCard-Ok5gcVzs.js",
       "_axios-GZ4oqQ7_.js"
     ],
     "isEntry": true,
     "src": "resources/js/Catalogo.jsx"
   },
   "resources/js/Ofertas.jsx": {
-    "file": "assets/Ofertas-h3xhgMfN.js",
+    "file": "assets/Ofertas-yMCz7bQQ.js",
     "imports": [
-      "_ProductCard-X4NoYPPw.js",
+      "_ProductCard-Ok5gcVzs.js",
       "_axios-GZ4oqQ7_.js"
     ],
     "isEntry": true,

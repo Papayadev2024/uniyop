@@ -90,6 +90,12 @@ class IndexController extends Controller
 
   public function catalogo(Request $request, string $id_cat = null)
   {
+    $tag_id = null ; 
+    $tag_id = $request->input('tag');
+    
+    $catId = $request->input('category');
+    $tag_id = $request->input('tag');
+    $id_cat = $id_cat ?? $catId;
 
     $categories = Category::where('visible', true)->get();
     $tags = Tag::where('visible', true)->get();
@@ -115,13 +121,14 @@ class IndexController extends Controller
       'categories' => $categories,
       'tags' => $tags,
       'attribute_values' => $attribute_values,
-      'id_cat' => $id_cat
+      'id_cat' => $id_cat,
+      'tag_id' => $tag_id
     ])->rootView('app');
   }
   
   public function ofertas(Request $request, string $id_cat = null)
   {
-
+   
     $categories = Category::where('visible', true)->get();
     $tags = Tag::where('visible', true)->get();
 
