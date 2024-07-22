@@ -222,7 +222,7 @@
                     Comprar ahora
                   </a>
                 </div> --}}
-          <div class="flex flex-col mt-7">
+          <div class="flex flex-col mt-7  "data-aos="zoom-out-right">
             <h6 class="text-base font-Inter_Medium">Combinalo con: </h6>
             <div class="grid grid-cols-3 gap-3  mb-6">
               <div class="col-span-3">
@@ -250,7 +250,7 @@
 
           </div>
 
-          <div class="flex flex-col gap-2 pb-8 lg:pb-16">
+          <div class="flex flex-col gap-2 pb-8 lg:pb-16" data-aos="fade-up">
             <span class="text-base font-Inter_Medium">
               Pago seguro garantizado
             </span>
@@ -275,7 +275,7 @@
       </div>
     </section>
 
-    <section class="bg-[#F8F8F8] py-10 lg:py-14">
+    <section class="bg-[#F8F8F8] py-10 lg:py-14" data-aos="zoom-out-right">
       <div class="w-full px-[5%] md:px-[8%]">
         <div class="flex flex-col md:flex-row justify-between w-full ">
           <h1 class="text-3xl font-Inter_SemiBold tracking-tight">Productos Relacionados</h1>
