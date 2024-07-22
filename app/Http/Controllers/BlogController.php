@@ -204,7 +204,7 @@ class BlogController extends Controller
                         font-weight: 500;
                         font-size: 18px;
                         text-align: center;
-                        width: 250px;
+                        width: 350px;
                         margin: 0 auto;
                         font-family: Montserrat, sans-serif;
                         line-height: 30px;
