@@ -222,33 +222,6 @@
                     Comprar ahora
                   </a>
                 </div> --}}
-          <div class="flex flex-col mt-7  "data-aos="zoom-out-right">
-            <h6 class="text-base font-Inter_Medium">Combinalo con: </h6>
-            <div class="grid grid-cols-3 gap-3  mb-6">
-              <div class="col-span-3">
-                <div class="swiper productos-relacionados ">
-                  <div class="swiper-wrapper h-full">
-                    @foreach ($ProdComplementarios as $item)
-                      <div class="swiper-slide w-full h-full col-span-1">
-                        <div class="flex flex-col items-center justify-center col-span-1  shadow-lg py-2  pb-5">
-                          <a href="/producto/{{ $item->id }}" target="_blanck">
-                            {{-- <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
-                                                          <span> {{ $item->producto }}</span>
-                                                          <h2 class="font-Inter_Bold text-[#006BF6]">S/ 80.00</h2> --}}
-                            {{--  <x-product.container-combinalo width="" height="h-[300px]" bgcolor="bg-[#FFFFFF]"
-                              textpx="text-[17px]" :item="$item" /> --}}
-                            <x-product.container width="col-span-1 " bgcolor="" :item="$item" />
-                          </a>
-                        </div>
-                      </div>
-                    @endforeach
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
 
           <div class="flex flex-col gap-2 pb-8 lg:pb-16" data-aos="fade-up">
             <span class="text-base font-Inter_Medium">
@@ -275,7 +248,61 @@
       </div>
     </section>
 
-    <section class="bg-[#F8F8F8] py-10 lg:py-14" data-aos="zoom-out-right">
+
+    @if ($combo->id)
+      <section class="bg-[#F8F8F8] py-10 lg:py-14">
+        <div class="w-full px-[5%] md:px-[8%]">
+          <div class="flex flex-col justify-between w-full ">
+            <h1 class="text-3xl font-Inter_SemiBold tracking-tight">Por tu compra llévate</h1>
+            <div class="flex flex-col mt-7">
+              <div class="border rounded-md shadow-sm py-4 px-6">
+                <div class="flex justify-between items-center mb-4">
+                  <div>
+                    <b class="block text-xl">{{ $combo->producto }}</b>
+                    <span class="flex items-start gap-1">
+                      <span class="text-lg font-semibold">S/. {{ $combo->descuento }}</span>
+                      <span class="text-sm line-through">{{ $combo->precio }}</span>
+                    </span>
+                  </div>
+                  <button id="btnAgregarCombo" type="button"
+                    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-3 py-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                    data-id={{ $combo->id }}>
+                    <i class="fa fa-cart-plus"></i>
+                    Agregar al carrito
+                  </button>
+                </div>
+                <div class="grid grid-cols-3 gap-3  mb-6">
+                  <div class="col-span-3">
+                    <div class="swiper productos-relacionados ">
+                      <div class="swiper-wrapper h-full">
+                        @foreach ($combo->products as $item)
+                          <div class="swiper-slide w-full h-full col-span-1">
+                            <div class="flex flex-col items-center justify-center col-span-1  shadow-lg py-2  pb-5">
+                              <a href="/producto/{{ $item->id }}" target="_blanck">
+                                {{-- <img src="{{ asset('images\img\1.png') }}" alt="" class="h-40 w-40 ">
+                                                                    <span> {{ $item->producto }}</span>
+                                                                    <h2 class="font-Inter_Bold text-[#006BF6]">S/ 80.00</h2> --}}
+                                {{--  <x-product.container-combinalo width="" height="h-[300px]" bgcolor="bg-[#FFFFFF]"
+                                        textpx="text-[17px]" :item="$item" /> --}}
+                                <x-product.container width="col-span-1 " bgcolor="" :item="$item" />
+                              </a>
+                            </div>
+                          </div>
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    @endif
+
+    <section class="bg-[#F8F8F8] py-10 lg:py-14">
       <div class="w-full px-[5%] md:px-[8%]">
         <div class="flex flex-col md:flex-row justify-between w-full ">
           <h1 class="text-3xl font-Inter_SemiBold tracking-tight">Productos Relacionados</h1>
@@ -335,7 +362,7 @@
 @section('scripts_importados')
   <script>
     var headerServices = new Swiper(".productos-relacionados", {
-      slidesPerView: 2,
+      slidesPerView: 4,
       spaceBetween: 10,
       loop: true,
       centeredSlides: false,
@@ -370,7 +397,7 @@
 
         },
         850: {
-          slidesPerView: 2,
+          slidesPerView: 4,
           centeredSlides: false,
 
         },
@@ -484,6 +511,55 @@
 
 
     }
+
+    $('#btnAgregarCombo').on('click', async function() {
+      const offerId = this.getAttribute('data-id')
+      const res = await fetch(`/api/offers/${offerId}`)
+      const data = await res.json()
+
+      let nombre = `<b>${data.producto}</b><ul class="mb-1">`
+      data.products.forEach(product => {
+        nombre +=
+          `<li class="text-xs text-nowrap overflow-hidden text-ellipsis w-[270px]">${product.producto}</li>`
+      })
+      nombre += '</ul>'
+
+      console.log(nombre)
+
+      let items = Local.get('carrito') ?? []
+      const index = items.findIndex(item => item.id == data.id)
+      if (index != -1) {
+        items = items.map(item => {
+          if (item.id == data.id) {
+            item.nombre = nombre
+            item.cantidad++
+          }
+          return item
+        })
+      } else {
+        items.push({
+          "id": data.id,
+          "isCombo": true,
+          "producto": nombre,
+          "descuento": data.descuento,
+          "precio": data.precio,
+          "imagen": data.imagen ?? '/images/img/noimagen.jpg',
+          "cantidad": 1,
+          "color": null
+        })
+      }
+      Local.set('carrito', items)
+
+      limpiarHTML()
+      PintarCarrito()
+      mostrarTotalItems()
+
+      Swal.fire({
+        icon: "success",
+        title: `Combo agregado correctamente`,
+        showConfirmButton: true
+      });
+    })
 
     $('#btnAgregarCarrito').on('click', function() {
       let url = window.location.href;

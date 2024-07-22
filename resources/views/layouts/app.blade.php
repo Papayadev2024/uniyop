@@ -76,6 +76,12 @@
   <script src="/js/tippy.all.min.js"></script>
   <script src="/js/cookies.extend.js"></script>
 
+  <style>
+    .jquery-modal.blocker.current {
+      z-index: 40;
+    }
+  </style>
+
 </head>
 
 <body class="font-inter antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400"

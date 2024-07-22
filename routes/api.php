@@ -30,6 +30,8 @@ Route::post('/ofertas/paginate', [ProductsController::class, 'paginateOffers'])-
 
 Route::post('/payment/culqi', [PaymentController::class, 'culqi'])->name('payment.culqi');
 
+Route::get('/offers/{id}', [OfferController::class, 'get'])->name('offers.get');
+
 Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/dashboard/top-products/{orderBy}', [DashboardController::class, 'topProducts'])->name('dashboard.top-products');
@@ -43,5 +45,7 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
     Route::patch('/sales/status', [SaleController::class, 'status'])->name('sales.status');
     Route::get('/saledetails/{sale}', [SaleDetailController::class, 'bySale'])->name('sale.bySale');
 
+    Route::get('/offers', [OfferController::class, 'all'])->name('offers.all');
+    Route::patch('/offers', [OfferController::class, 'save'])->name('offers.save');
     Route::delete('/offers/{offer_id}', [OfferController::class, 'delete'])->name('offers.delete');
 });

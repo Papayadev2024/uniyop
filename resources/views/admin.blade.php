@@ -81,6 +81,12 @@
   <script src="/js/cookies.extend.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 
+  <style>
+    .jquery-modal.blocker.current {
+      z-index: 40;
+    }
+  </style>
+
 </head>
 
 <body class="font-inter antialiased bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400"
@@ -100,9 +106,7 @@
     <x-app.sidebar />
 
     <!-- Content area -->
-    <div
-      class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden "
-      x-ref="contentarea">
+    <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden " x-ref="contentarea">
 
       <x-app.header />
 
