@@ -204,9 +204,13 @@
                   Agregar
                   al Carrito
                 </button>
-                <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center">
-                  <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
-                </button>
+                @if (Auth::user() !== null)
+                  <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center"
+                    type="button" id="addWishlist">
+                    <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
+                  </button>
+                @endif
+
 
               </div>
             </div>
@@ -565,17 +569,30 @@
 
       // articulosCarrito = {...articulosCarrito , detalleProducto }
     })
-    // $('#openCarrito').on('click', function() {
-    //   $('.main').addClass('blur')
-    // })
-    // $('#closeCarrito').on('click', function() {
 
-    //   $('.cartContainer').addClass('hidden')
-    //   $('#check').prop('checked', false);
-    //   $('.main').removeClass('blur')
-
-
-    // })
+    $('#addWishlist').on('click', function() {
+      console.log('agregando a la lista de deseos');
+      $.ajax({
+        url: `{{ route('wishlist.store') }}`,
+        method: 'POST',
+        data: {
+          _token: $('input[name="_token"]').val(),
+          product_id: '{{ $product->id }}'
+        },
+        success: function(response) {
+          console.log(response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto agregado a la lista de deseos',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    })
   </script>
 
 

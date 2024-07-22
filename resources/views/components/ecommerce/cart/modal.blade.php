@@ -32,7 +32,7 @@
       </div>
       <div>
         <a href="/carrito"
-          class="font-semibold text-base bg-[#74A68D] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Checkout</a>
+          class="font-semibold text-base bg-[#006BF6] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Checkout</a>
       </div>
     </div>
   </div>

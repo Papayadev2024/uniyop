@@ -31,6 +31,7 @@ use App\Models\Tag;
 use App\Models\TermsAndCondition;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Wishlist;
 use Attribute;
 use Culqi\Culqi;
 use Illuminate\Http\Request;
@@ -503,6 +504,17 @@ class IndexController extends Controller
     return view('public.dashboard_order',  compact('user', 'categorias', 'statuses'));
   }
 
+  public function listadeseos(){
+    $user = Auth::user();
+    dump($user);
+
+    $usuario = User::find($user->id);
+
+    $wishlistItems = $usuario->wishlistItems()->with('products')->get();
+    
+    return view('public.dashboard_wishlist', compact('user', 'wishlistItems') );
+  }
+
 
   public function direccion()
   {
@@ -617,6 +629,21 @@ class IndexController extends Controller
 
     return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
   }
+
+  public function wishListAdd(Request $request){
+    $user = Auth::user();
+    
+
+    $whistList = Wishlist::create([
+      'user_id' => $user->id,
+      'product_id' => $request->product_id,
+      'quantity' => 1,
+      'note' => ''
+    ]);
+
+    return response()->json(['message' => 'Producto agregado a la lista de deseos']);
+  }
+
 
   //  --------------------------------------------
   /**
