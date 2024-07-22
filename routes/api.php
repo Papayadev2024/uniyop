@@ -43,5 +43,5 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
     Route::patch('/sales/status', [SaleController::class, 'status'])->name('sales.status');
     Route::get('/saledetails/{sale}', [SaleDetailController::class, 'bySale'])->name('sale.bySale');
 
-    Route::delete('/offers', [OfferController::class, 'delete'])->name('offers.delete');
+    Route::delete('/offers/{offer_id}', [OfferController::class, 'delete'])->name('offers.delete');
 });
