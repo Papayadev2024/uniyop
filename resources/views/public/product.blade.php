@@ -583,7 +583,7 @@
           console.log(response);
           Swal.fire({
             icon: 'success',
-            title: 'Producto agregado a la lista de deseos',
+            title: response.message,
             showConfirmButton: false,
             timer: 1500
           });

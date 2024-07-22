@@ -633,7 +633,10 @@ class IndexController extends Controller
   public function wishListAdd(Request $request){
     $user = Auth::user();
     
-
+    $exite= Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
+    if($exite){
+      return response()->json(['message' => 'El producto ya se encuentra en la lista de deseos']);
+    }
     $whistList = Wishlist::create([
       'user_id' => $user->id,
       'product_id' => $request->product_id,
