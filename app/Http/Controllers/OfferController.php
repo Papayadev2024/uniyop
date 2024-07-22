@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Offer;
 use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class OfferController extends Controller
@@ -15,8 +16,8 @@ class OfferController extends Controller
     public function reactView()
     {
         $offers = Offer::with('products')
-        ->where('status', true)
-        ->get();
+            ->where('status', true)
+            ->get();
         return Inertia::render('Catalogo', [
             'offers' => $offers,
         ])->rootView('admin');
@@ -65,8 +66,11 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Offer $offer)
+    public function delete(Request $request, int $offer_id)
     {
-        //
+        $offer = Offer::find($offer_id);
+        $offer->status = null;
+        $offer->save();
+        return $offer;
     }
 }

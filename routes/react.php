@@ -11,7 +11,12 @@ use Inertia\Inertia;
 
 Route::get('/catalogo/{id?}', [IndexController::class, 'catalogo'])->name('Catalogo.jsx');
 Route::get('/ofertas/{id?}', [IndexController::class, 'ofertas'])->name('Ofertas.jsx');
-Route::get('/admin/offers', [OfferController::class, 'reactView'])->name('Admin/Offers.jsx');
+
+Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {
+  Route::prefix('admin')->group(function () {
+    Route::get('/offers', [OfferController::class, 'reactView'])->name('Admin/Offers.jsx');
+  });
+});
 // foreach (Router::components as $path => $page) {
 //   if (Auth::check()) {
 //     Auth::user()->getAllPermissions();

@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import CreateReactScript from '../Utils/CreateReactScript'
 import OfferCard from '../components/Offer/OfferCard'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+import OfferForm from '../components/Offer/OfferForm'
+
 
 const Offers = ({ offers }) => {
+  const [offerLoaded, setOfferLoaded] = React.useState(null)
+
+  const offerFormRef = useRef()
+
+  const onOpenModalClicked = (data) => {
+    setOfferLoaded(data)
+    $(offerFormRef.current).modal({
+      clickClose: false,
+      escapeClose: false,
+      show: true
+    })
+  }
+
   return (<>
     <div className="p-8 flex flex-col gap-6 justify-center items-center min-h-[calc(100vh-64px)] bg-gray-100">
       <form>
@@ -18,10 +35,17 @@ const Offers = ({ offers }) => {
           <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
         </div>
       </form>
+      <Tippy content="Agregar combo">
+        <button type="button" className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-4 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500" onClick={onOpenModalClicked}>
+          <i className='fa fa-plus'></i>
+        </button>
+      </Tippy>
       <ul className="flex flex-wrap w-full gap-6 items-center justify-center">
-        {offers.length > 0 && offers.map((offer, i) => <OfferCard key={i} item={offer} />)}
+        {offers.length > 0 && offers.map((offer, i) => <OfferCard key={i} item={offer} setItem={setOfferLoaded} onOpenModalClicked={onOpenModalClicked} />)}
       </ul>
     </div>
+
+    <OfferForm eRef={offerFormRef} data={offerLoaded} />
   </>)
 }
 
