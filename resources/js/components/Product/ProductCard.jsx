@@ -69,9 +69,9 @@ const ProductCard = ({ item, width, bgcolor }) => {
           </h2>
         </Tippy>
         <div className="flex content-between flex-row gap-4 items-center justify-center">
-          <span className="text-[#006BF6] text-[16.45px] font-bold">{item.descuento > 0 ? item.descuento : item.precio}</span>
+          <span className="text-[#006BF6] text-[16.45px] font-bold">S/. {item.descuento > 0 ? item.descuento : item.precio}</span>
           {item.descuento > 0 && (
-            <span className="text-sm text-[#15294C] opacity-60 line-through">{item.precio}</span>
+            <span className="text-sm text-[#15294C] opacity-60 line-through">S/. {item.precio}</span>
           )}
         </div>
       </a>
