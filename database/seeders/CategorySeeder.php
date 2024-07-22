@@ -18,7 +18,9 @@ class CategorySeeder extends Seeder
         $cat = ['Accesorios de Oficina','Accesorios para Auto','Accesorios Gamer','Accesorios para celular','Accesorios para Laptop','Accesorios para Ipad / tablets','Accesorios Audio y Video','Accesorios Home','Accesorios de Reloj','Packs'];
 
         foreach ($cat as $categoryName) {
-            Category::create([
+            Category::updateOrCreate([
+                'name' => $categoryName,
+            ],[
                 'name' => $categoryName,
                 'description' => 'Aquí va la descripción de la categoria ' . $categoryName,
                 'status' => 1,

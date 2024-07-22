@@ -17,7 +17,9 @@ class MessageSeeder extends Seeder
     {
         //
         for ($i = 1; $i <= 5; $i++) {
-            Message::create([
+            Message::updateOrCreate([
+                'id' => $i
+            ],[
                 'full_name' => 'Nombre ' . $i . ' Apellidos',
                 'email' => 'usuario' . $i . '@mundoweb.pe',
                 'phone' => '555-555-' . str_pad($i, 4, '0', STR_PAD_LEFT),

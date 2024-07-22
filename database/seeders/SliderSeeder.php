@@ -13,7 +13,9 @@ class SliderSeeder extends Seeder
      */
     public function run(): void
     {
-        Slider::create([
+        Slider::updateOrCreate([
+            'id' =>1 
+        ],[
             'title' => 'Serie de Cargadores Premium',
             'description' => 'Funciones empaquetadas a un mejor precio que nunca Potentes sensores para
 controla tu estado físico',

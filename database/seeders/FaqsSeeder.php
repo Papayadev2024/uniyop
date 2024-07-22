@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Faqs;
+
 class FaqsSeeder extends Seeder
 {
     /**
@@ -23,8 +24,10 @@ class FaqsSeeder extends Seeder
             ['titulo' => 'Pregunta 8', 'pregunta' => '¿Qué es el UV Mármol y para qué sirve?'],
         ];
 
-        foreach ($preguntas as $pregunta) {
-            Faqs::create($pregunta);
+        foreach ($preguntas as $key => $pregunta) {
+            Faqs::updateOrCreate([
+                'id' => $key + 1
+            ], $pregunta);
         }
     }
 }
