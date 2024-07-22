@@ -196,6 +196,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         //Etiquetas
         Route::resource('/tags', TagController::class);
         Route::post('/tags/deleteTags', [TagController::class, 'deleteTags'])->name('tags.deleteTags');
+        Route::post('/tags/updateVisible', [TagController::class, 'updateVisible'])->name('tags.updateVisible');
+
 
         //Productos
         Route::resource('/products', ProductsController::class);
@@ -242,6 +244,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/micuenta', [IndexController::class, 'micuenta'])->name('micuenta');
     Route::get('/micuenta/pedidos', [IndexController::class, 'pedidos'])->name('pedidos');
     Route::get('/micuenta/direccion', [IndexController::class, 'direccion'])->name('direccion');
+    Route::get('/micuenta/listadeseos', [IndexController::class, 'listadeseos'])->name('listadeseos');
 
     Route::post('/micuenta/cambiofoto', [IndexController::class, 'cambiofoto'])->name('cambiofoto');
     Route::post('/micuenta/direccion/cambiofoto', [IndexController::class, 'cambiofoto'])->name('cambiofoto');
@@ -249,4 +252,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     Route::post('/micuenta/actualizarPerfil', [IndexController::class, 'actualizarPerfil'])->name('actualizarPerfil');
+    Route::post('/micuenta/wishList', [IndexController::class, 'wishListAdd'])->name('wishlist.store');
+
 });

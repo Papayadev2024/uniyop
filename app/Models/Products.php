@@ -33,7 +33,7 @@ class Products extends Model
     'color',
     'image_texture',
     'slug',
-    'sku', 
+    'sku',
     'max_stock'
   ];
 
@@ -42,9 +42,9 @@ class Products extends Model
     return Category::find($this->categoria_id);
   }
   public function category()
-    {
-        return $this->belongsTo(Category::class, 'categoria_id');
-    }
+  {
+    return $this->belongsTo(Category::class, 'categoria_id');
+  }
 
   public function subcategory()
   {
@@ -75,5 +75,9 @@ class Products extends Model
   {
     return $this->belongsToMany(Attributes::class, 'attribute_product_values', 'product_id', 'attribute_id')
       ->withPivot('attribute_value_id');
+  }
+  public function wishedByUsers()
+  {
+    return $this->hasMany(Wishlist::class, 'product_id');
   }
 }

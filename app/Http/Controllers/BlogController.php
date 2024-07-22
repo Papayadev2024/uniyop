@@ -191,7 +191,7 @@ class BlogController extends Controller
                      Acaba de ser publicado 
                       <span ></span>
                     </p>
-                    <img src="' . $appUrl . $post->url_image . $post->name_image.'" alt="mundo web"  style="
+                    <img src="'. $appUrl . $post->url_image . $post->name_image.'" alt="mundo web"  style="
                     margin: auto;
                   "/>
                   </td>

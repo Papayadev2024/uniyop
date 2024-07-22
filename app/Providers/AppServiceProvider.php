@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Http\Controllers\IndexController;
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\General;
 use App\Models\LibroReclamaciones;
 use App\Models\Message;
 use App\Models\PolyticsCondition;
 use App\Models\Sale;
+use App\Models\Tag;
 use App\Models\TermsAndCondition;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Pagination\Paginator as PaginationPaginator;
@@ -50,8 +52,10 @@ class AppServiceProvider extends ServiceProvider
             // Obtener los datos del footer
             $datosgenerales = General::all();
             $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->count() ; // Suponiendo que tienes un modelo Footer y un método footerData() en él
+            $categoriasMenu = Category::where('visible', '=', 1)->where('is_menu', 1)->get();
+            $tags = Tag::where('visible', '=', 1)->where('is_menu', 1)->get();
             // Pasar los datos a la vista
-            $view->with(['datosgenerales'=> $datosgenerales, 'blog' => $blog]);
+            $view->with(['datosgenerales'=> $datosgenerales, 'blog' => $blog ,  'categoriasMenu' =>$categoriasMenu, 'tags' => $tags]);
         });
 
         View::composer('components.app.sidebar', function ($view) {

@@ -125,7 +125,7 @@ class RegisterResponse implements RegisterResponseContract
                       <td style="height: 10px">
                         <p
                           style="
-                            color: #74a68d;
+                            color: #006BF6;
                             font-size: 40px;
                             font-family: Montserrat, sans-serif;
                             font-weight: bold;
@@ -168,7 +168,7 @@ class RegisterResponse implements RegisterResponseContract
                           href="https://decotab.pe/"
                           style="
                             text-decoration: none;
-                            background-color: #74a68d;
+                            background-color: #006BF6;
                             color: white;
                             padding: 10px 16px;
                             display: inline-flex;

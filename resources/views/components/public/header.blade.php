@@ -215,6 +215,10 @@
             <a href="/contacto" class="font-medium hover:opacity-75 ">
               <span class="underline-this">CONTACTO</span>
             </a>
+            @if ($tags->count() > 0)
+              <x-dropdown-categorias id="tagsMenu" class="font-medium hover:opacity-75" :items="$tags" />
+            @endif
+
           </nav>
         </div>
       </div>

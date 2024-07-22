@@ -21,7 +21,7 @@ class User extends Authenticatable
     use HasRoles;
 
 
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -65,7 +65,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->hasRole('admin');
     }
 
@@ -73,5 +74,9 @@ class User extends Authenticatable
     public function direccion()
     {
         return $this->hasMany(UserDetails::class);
+    }
+    public function wishlistItems()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }
