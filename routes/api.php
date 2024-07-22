@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SaleController;
@@ -41,4 +42,6 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
     Route::post('/sales/confirmation', [SaleController::class, 'confirmation'])->name('sales.confirmation');
     Route::patch('/sales/status', [SaleController::class, 'status'])->name('sales.status');
     Route::get('/saledetails/{sale}', [SaleDetailController::class, 'bySale'])->name('sale.bySale');
+
+    Route::delete('/offers', [OfferController::class, 'delete'])->name('offers.delete');
 });

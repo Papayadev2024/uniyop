@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('precio', 12, 2)->default(0);
             $table->decimal('descuento', 12, 2)->default(0);
             $table->string('imagen')->nullable();
+            $table->boolean('status')->nullable()->default(true);
             $table->timestamps();
         });
     }
