@@ -117,7 +117,7 @@ class BlogController extends Controller
             <table
               style="
                 width: 600px;
-                height: 1000px;
+                height: 1050px;
                 margin: 0 auto;
                 text-align: center;
                 background-image:url(' . $appUrl . 'images/Ellipse_18.png),  url(' . $appUrl . 'images/Tabpanel.png);
