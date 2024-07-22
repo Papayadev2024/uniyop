@@ -210,7 +210,7 @@ class BlogController extends Controller
                         line-height: 30px;
                       "
                     >
-                      '.mb_substr($post->extract, 0, 200).'
+                      '.mb_substr($post->extract, 0, 200).'...
                     </p>
                   </td>
                 </tr>
