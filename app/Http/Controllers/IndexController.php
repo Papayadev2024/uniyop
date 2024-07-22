@@ -513,7 +513,7 @@ class IndexController extends Controller
 
   public function listadeseos(){
     $user = Auth::user();
-    dump($user);
+   
 
     $usuario = User::find($user->id);
 
