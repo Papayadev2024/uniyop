@@ -44,7 +44,6 @@ const Offers = ({ offers }) => {
         {offers.length > 0 && offers.map((offer, i) => <OfferCard key={i} item={offer} setItem={setOfferLoaded} onOpenModalClicked={onOpenModalClicked} />)}
       </ul>
     </div>
-
     <OfferForm eRef={offerFormRef} data={offerLoaded} />
   </>)
 }
