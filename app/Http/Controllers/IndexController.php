@@ -535,7 +535,10 @@ class IndexController extends Controller
   public function searchProduct(Request $request)
   {
     $query = $request->input('query');
-    $resultados = Products::where('producto', 'like', "%$query%")->get();
+    $resultados = Products::where('producto', 'like', "%$query%")
+    ->leftJoin('categories', 'categories.id', 'products.categoria_id') 
+    ->where('categories.visible', 1)
+    ->get();
 
     return response()->json($resultados);
   }
