@@ -245,19 +245,11 @@
               @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
               <ul>
                 <li class="hover:bg-gray-100">
-                  <a class="font-medium text-sm text-black flex items-center py-1 px-3" href="{{ route('pedidos') }}"
-                    @click="open = false" @focus="open = true" @focusout="open = false">Mis pedidos</a>
-                </li>
-                <li class="hover:bg-gray-100">
-                  <a class="font-medium text-sm text-black flex items-center py-1 px-3"
-                    href="{{ route('direccion') }}" @click="open = false" @focus="open = true"
-                    @focusout="open = false">Dirección</a>
-                </li>
-                <li class="hover:bg-gray-100">
                   <a class="font-medium text-sm text-black flex items-center py-1 px-3"
                     href="{{ route('micuenta') }}" @click="open = false" @focus="open = true"
-                    @focusout="open = false">Ajustes</a>
+                    @focusout="open = false">Mis Cuenta</a>
                 </li>
+
                 <li class="hover:bg-gray-100">
                   <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
