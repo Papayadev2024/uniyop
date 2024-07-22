@@ -117,7 +117,7 @@ class BlogController extends Controller
             <table
               style="
                 width: 600px;
-                height: 900px;
+                height: 1000px;
                 margin: 0 auto;
                 text-align: center;
                 background-image:url(' . $appUrl . 'images/Ellipse_18.png),  url(' . $appUrl . 'images/Tabpanel.png);
@@ -210,7 +210,7 @@ class BlogController extends Controller
                         line-height: 30px;
                       "
                     >
-                      '.mb_substr($post->extract, 0, 250).'
+                      '.mb_substr($post->extract, 0, 200).'
                     </p>
                   </td>
                 </tr>
