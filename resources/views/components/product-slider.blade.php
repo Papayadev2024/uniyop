@@ -26,30 +26,33 @@
 
 <div class="grid grid-cols-3 w-full">
   <div class="col-span-3 h-full">
-      <div class="swiper img-complementarias">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-azulboost" id="img-complementariaPROD-0">
-                <div class="flex gap-2 items-center justify-center h-full">
-                    <div class="flex justify-center items-center h-full">
-                            <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl" 
-                                src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}" />    
-                    </div>
-                </div>
+    <div class="swiper img-complementarias">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-azulboost"
+          id="img-complementariaPROD-0">
+          <div class="flex gap-2 items-center justify-center h-full">
+            <div class="flex justify-center items-center h-full">
+              <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl"
+                src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}"
+                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
             </div>
-            
-              @foreach ($product->galeria as $index => $image)
-                <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-[#E5E7EB]" id="img-complementariaPROD-{{ $index }}">
-                      <div class="flex gap-2 items-center justify-center h-full">
-                          <div class="flex justify-center items-center h-full" >
-                              <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl" 
-                                   
-                                   src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}" />    
-                          </div>
-                      </div>
-                </div>
-              @endforeach
           </div>
+        </div>
+
+        @foreach ($product->galeria as $index => $image)
+          <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-[#E5E7EB]"
+            id="img-complementariaPROD-{{ $index }}">
+            <div class="flex gap-2 items-center justify-center h-full">
+              <div class="flex justify-center items-center h-full">
+                <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl"
+                  src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}"
+                  onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+              </div>
+            </div>
+          </div>
+        @endforeach
       </div>
+    </div>
   </div>
 </div>
 
@@ -95,17 +98,18 @@
     let img = document.createElement('img');
 
     $("[id^='img-complementariaPROD-']").removeClass('border-azulboost').addClass('border-[#E5E7EB]');
-  
+
     $(this).removeClass('border-[#E5E7EB]').addClass('border-azulboost');
 
     img.src = $(this).find('img').attr('src');
-    img.classList.add('w-full', 'h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]' , 'object-contain', 'ease-in', 'duration-500',
+    img.classList.add('w-full', 'h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]', 'object-contain',
+      'ease-in', 'duration-500',
       'transform', 'hover:scale-105', 'opacity-0', 'transition-opacity', 'duration-200');
     $("#containerProductosdetail").html(img);
-     setTimeout(function() {
+    setTimeout(function() {
       img.classList.remove('opacity-0');
     }, 100);
-    
+
     setTimeout(function() {
       container.children('img').not(img).remove();
     }, 200);

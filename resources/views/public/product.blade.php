@@ -76,7 +76,7 @@
           <div id="containerProductosdetail"
             class="w-full flex justify-center items-center h-[330px] 2xs:h-[400px] sm:h-[450px] xl:h-[550px] rounded-3xl overflow-hidden">
             <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain" data-aos="fade-up"
-              data-aos-offset="150">
+              data-aos-offset="150" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
           </div>
           <x-product-slider :product="$product" />
         </div>
