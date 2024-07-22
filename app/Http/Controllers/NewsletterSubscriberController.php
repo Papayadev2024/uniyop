@@ -79,15 +79,16 @@ class NewsletterSubscriberController extends Controller
     $data['nombre'] = '';
     $this->envioCorreo($data);
     $this->envioCorreoInterno($data);
-    return response()->json(['message' => 'Newsletter guardado ']);
+    return response()->json(['message' => 'Usuario suscrito']);
   }
 
   private function envioCorreo($data)
   {
 
     $appUrl = env('APP_URL');
+    $appName = env('APP_NAME');
     $name = '';
-    $mensaje = 'Gracias por comunicarte con MIC&JC';
+    $mensaje = "Gracias por comunicarte con $appName";
     $mail = EmailConfig::config($name, $mensaje);
     $general = General::all()->first();
     // dd($mail);

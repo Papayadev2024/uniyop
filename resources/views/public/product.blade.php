@@ -200,12 +200,13 @@
               </div>
               <div class="xl:ml-8 flex flex-row gap-5 justify-start items-center">
                 <button id="btnAgregarCarrito"
-                  class="bg-[#0D2E5E] w-[286px] h-16  text-white text-center rounded-full font-Inter_SemiBold tracking-wide text-lg ">
+                  class="bg-[#0D2E5E] w-[286px] h-16  text-white text-center rounded-full font-Inter_SemiBold tracking-wide text-lg hover:bg-[#1E8E9E]">
                   Agregar
                   al Carrito
                 </button>
                 @if (Auth::user() !== null)
-                  <button class="bg-[#0D2E5E] w-12 h-12 rounded-full text-white flex justify-center items-center"
+                  <button
+                    class=" @if ($isWhishList) bg-[#0D2E5E]  @else bg-[#99b9eb] @endif w-12 h-12 rounded-full text-white flex justify-center items-center hover:bg-[#1E8E9E]"
                     type="button" id="addWishlist">
                     <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
                   </button>
@@ -222,7 +223,7 @@
                   </a>
                 </div> --}}
 
-          <div class="flex flex-col gap-2 pb-8 lg:pb-16">
+          <div class="flex flex-col gap-2 pb-8 lg:pb-16" data-aos="fade-up">
             <span class="text-base font-Inter_Medium">
               Pago seguro garantizado
             </span>
@@ -316,8 +317,9 @@
         </div>
         <div class="grid grid-cols-4 gap-4 mt-14 w-full">
           @foreach ($ProdComplementarios->take(4) as $item)
-            <x-product.container-combinalo width="" height="h-[400px]" bgcolor="bg-[#FFFFFF]"
-              textpx="text-[20px]" :item="$item" />
+            {{-- <x-product.container-combinalo width="" height="h-[400px]" bgcolor="bg-[#FFFFFF]"
+              textpx="text-[20px]" :item="$item" /> --}}
+            <x-product.container width="col-span-1 " bgcolor="bg-[#FFFFFF]" :item="$item" />
           @endforeach
         </div>
       </div>
@@ -517,7 +519,8 @@
 
       let nombre = `<b>${data.producto}</b><ul class="mb-1">`
       data.products.forEach(product => {
-        nombre += `<li class="text-xs text-nowrap overflow-hidden text-ellipsis w-[270px]">${product.producto}</li>`
+        nombre +=
+          `<li class="text-xs text-nowrap overflow-hidden text-ellipsis w-[270px]">${product.producto}</li>`
       })
       nombre += '</ul>'
 
@@ -646,7 +649,6 @@
     })
 
     $('#addWishlist').on('click', function() {
-      console.log('agregando a la lista de deseos');
       $.ajax({
         url: `{{ route('wishlist.store') }}`,
         method: 'POST',
@@ -656,6 +658,13 @@
         },
         success: function(response) {
           console.log(response);
+          // Cambiar el color del botón
+
+          if (response.message === 'Producto agregado a la lista de deseos') {
+            $('#addWishlist').removeClass('bg-[#99b9eb]').addClass('bg-[#0D2E5E]');
+          } else {
+            $('#addWishlist').removeClass('bg-[#0D2E5E]').addClass('bg-[#99b9eb]');
+          }
           Swal.fire({
             icon: 'success',
             title: response.message,

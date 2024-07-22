@@ -28,7 +28,7 @@
             Lista de deseos
           </h2>
           <!-- para destop tabla -->
-          <div class="hidden md:block">
+          {{-- <div class="hidden md:block">
             <table class="table-auto w-full">
               <thead>
                 <tr class="text-left text-[#6C7275] font-normal text-[14px] border-b-[1px] border-[#E8ECEF]">
@@ -62,7 +62,15 @@
 
               </tbody>
             </table>
+          </div> --}}
+          <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 md:flex-row gap-4 mt-14 w-full items-start">
+            @foreach ($productos as $item)
+              <x-product.container width="col-span-1" bgcolor="" :item="$item" />
+              {{-- <x-productos-card width="w-1/5" bgcolor="" :item="$item" /> --}}
+            @endforeach
           </div>
+
+
           <!-- para mobiles acordion -->
           <div class="relative ring-gray-900/5 sm:mx-auto sm:rounded-lg block md:hidden">
             <div class="mx-auto">

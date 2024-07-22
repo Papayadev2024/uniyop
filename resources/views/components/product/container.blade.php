@@ -5,16 +5,19 @@
       echo json_encode($item->tags);
     @endphp --}}
     <div class="absolute top-2 left-2">
-      @foreach ($item->tags as $tag)
-        <div class="px-4 mb-1">
-          <span
-            class="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-2 flex-initial w-24 text-center text-white rounded-[5px] relative top-[18px] z-10"
-            style="background-color: {{ $tag->color }}">
+      @if ($item->tags)
+        @foreach ($item->tags as $tag)
+          <div class="px-4 mb-1">
+            <span
+              class="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-2 flex-initial w-24 text-center text-white rounded-[5px] relative top-[18px] z-10"
+              style="background-color: {{ $tag->color }}">
 
-            {{ $tag->name }}
-          </span>
-        </div>
-      @endforeach
+              {{ $tag->name }}
+            </span>
+          </div>
+        @endforeach
+      @endif
+
     </div>
     <div>
       <div class="relative flex justify-center items-center h-[300px]">

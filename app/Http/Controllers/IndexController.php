@@ -515,15 +515,35 @@ class IndexController extends Controller
   public function listadeseos()
   {
     $user = Auth::user();
-    dump($user);
+   
 
     $usuario = User::find($user->id);
 
     $wishlistItems = $usuario->wishlistItems()->with('products')->get();
+<<<<<<< HEAD
 
     return view('public.dashboard_wishlist', compact('user', 'wishlistItems'));
+=======
+    $arrayWishlist = $wishlistItems->toArray();
+    $array = [];
+    foreach ($arrayWishlist as $key => $value) {
+      $array[] = $value['products']['id'];
+    }
+
+
+    $productos = Products::with('tags')->whereIn('id', $array)->get();
+    return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos') );
+>>>>>>> 10dd086ca50fc6693f5ca922f285ccffaa33d54c
   }
 
+ 
+  public function searchProduct(Request $request)
+  {
+    $query = $request->input('query');
+    $resultados = Products::where('producto', 'like', "%$query%")->get();
+
+    return response()->json($resultados);
+  }
 
   public function direccion()
   {
@@ -635,7 +655,16 @@ class IndexController extends Controller
 
     $general = General::first();
     $testimonios = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $isWhishList = false;
+    if (Auth::check()) {
+      $user = Auth::user();
+      $exite= Wishlist::where('user_id', $user->id)->where('product_id', $id)->first();
+      if($exite){
+        $isWhishList = true;
+      }
+    }
 
+<<<<<<< HEAD
     $combo = Offer::select([
       DB::raw('DISTINCT offers.*')
     ])
@@ -648,22 +677,34 @@ class IndexController extends Controller
     if (!$combo) $combo = new Offer();
 
     return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery', 'combo'));
+=======
+    return view('public.product', compact('atributos', 'isWhishList','testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
+>>>>>>> 10dd086ca50fc6693f5ca922f285ccffaa33d54c
   }
 
   public function wishListAdd(Request $request)
   {
     $user = Auth::user();
+<<<<<<< HEAD
 
     $exite = Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
     if ($exite) {
+=======
+    
+    $exite= Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
+    if($exite){
+      Wishlist::find($exite->id)->delete();
+>>>>>>> 10dd086ca50fc6693f5ca922f285ccffaa33d54c
       return response()->json(['message' => 'El producto ya se encuentra en la lista de deseos']);
+    }else{
+      $whistList = Wishlist::create([
+        'user_id' => $user->id,
+        'product_id' => $request->product_id,
+        'quantity' => 1,
+        'note' => ''
+      ]);
     }
-    $whistList = Wishlist::create([
-      'user_id' => $user->id,
-      'product_id' => $request->product_id,
-      'quantity' => 1,
-      'note' => ''
-    ]);
+    
 
     return response()->json(['message' => 'Producto agregado a la lista de deseos']);
   }

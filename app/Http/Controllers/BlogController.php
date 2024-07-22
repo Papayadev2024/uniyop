@@ -204,13 +204,13 @@ class BlogController extends Controller
                         font-weight: 500;
                         font-size: 18px;
                         text-align: center;
-                        width: 350px;
+                        width: 370px;
                         margin: 0 auto;
                         font-family: Montserrat, sans-serif;
                         line-height: 30px;
                       "
                     >
-                      '.mb_substr($post->extract, 0, 200).'...
+                      '.mb_substr($post->extract, 0, 200).' ...
                     </p>
                   </td>
                 </tr>
