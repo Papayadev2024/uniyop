@@ -89,7 +89,7 @@
     <div class="flex flex-col lg:flex-row justify-between items-center gap-5 w-full px-[5%]">
       <div class="text-center">
         <p class="font-normal text-sm text-[#444444]">
-          Copyright &copy; 2023 {{ config('app.name') }}. Reservados todos los derechos. Power By <a
+          Copyright &copy; 2023 {{ config('app.name') }}. Reservados todos los derechos. Powered by <a
             href="https://www.mundoweb.pe" target="_blank" class="text-[#006BF6] border-b border-[#006BF6]"> Mundo Web
           </a>
         </p>
@@ -105,14 +105,14 @@
     </div>
   </div>
 
-  <div id="modalTerminosCondiciones" class="modal">
+  <div id="modalTerminosCondiciones" class="modal" style="max-width: 900px !important;width: 100% !important;  ">
     <!-- Modal body -->
     <div class="p-4 ">
       <h1 class="font-Inter_SemiBold">Terminos y condiciones</h1>
       <p class="font-Inter_Regular p-2">{!! $terminos->content ?? '' !!}</p>
     </div>
   </div>
-  <div id="modalPoliticasDev" class="modal">
+  <div id="modalPoliticasDev" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
     <!-- Modal body -->
     <div class="p-4 ">
       <h1 class="font-Inter_SemiBold">Politicas de devolucion</h1>
@@ -128,6 +128,7 @@
 
 <script>
   $(document).ready(function() {
+
 
     $(document).on('click', '#linkTerminos', function() {
       $('#modalTerminosCondiciones').modal({
