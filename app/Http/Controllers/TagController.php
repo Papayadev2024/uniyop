@@ -92,7 +92,7 @@ class TagController extends Controller
        
         $category = Tag::findOrfail($id); 
        
-        // $category->status = false;
+        $category->status = false;
        
         $category->save();
 
