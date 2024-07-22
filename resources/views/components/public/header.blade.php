@@ -247,7 +247,7 @@
                 <li class="hover:bg-gray-100">
                   <a class="font-medium text-sm text-black flex items-center py-1 px-3"
                     href="{{ route('micuenta') }}" @click="open = false" @focus="open = true"
-                    @focusout="open = false">Mis Cuenta</a>
+                    @focusout="open = false">Mi Cuenta</a>
                 </li>
 
                 <li class="hover:bg-gray-100">

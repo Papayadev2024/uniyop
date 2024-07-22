@@ -518,8 +518,16 @@ class IndexController extends Controller
     $usuario = User::find($user->id);
 
     $wishlistItems = $usuario->wishlistItems()->with('products')->get();
-    
-    return view('public.dashboard_wishlist', compact('user', 'wishlistItems') );
+    $arrayWishlist = $wishlistItems->toArray();
+    $array = [];
+    foreach ($arrayWishlist as $key => $value) {
+      $array[] = $value['products']['id'];
+    }
+
+    dump($array);
+
+    $productos = Products::with('tags')->whereIn('id', $array)->get();
+    return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos') );
   }
 
 
