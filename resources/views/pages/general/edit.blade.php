@@ -223,6 +223,7 @@
                           <div class="md:col-span-5">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-0">
                               <div>
+                                <label for="facebook">Facebook</label>
                                 <div class="relative">
                                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -241,6 +242,8 @@
                               </div>
 
                               <div>
+                                <label for="instagram">Instagram</label>
+
                                 <div class="relative ">
                                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -259,6 +262,8 @@
                               </div>
 
                               <div>
+                                <label for="youtube">Youtube</label>
+
                                 <div class="relative ">
                                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -277,6 +282,7 @@
                               </div>
 
                               <div>
+                                <label for="twitter">Twitter</label>
 
                                 <div class="relative">
                                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -295,6 +301,7 @@
                                 </div>
                               </div>
                               <div>
+                                <label for="linkedin">Linkedin</label>
 
                                 <div class="relative">
                                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -313,6 +320,7 @@
                                 </div>
                               </div>
                               <div>
+                                <label for="tiktok">Tiktok</label>
 
                                 <div class="relative">
                                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
