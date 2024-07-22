@@ -21,6 +21,7 @@ use App\Models\Testimony;
 use App\Models\Category;
 use App\Models\Department;
 use App\Models\Galerie;
+use App\Models\Offer;
 use App\Models\PolyticsCondition;
 use App\Models\Popup;
 use App\Models\Price;
@@ -74,7 +75,7 @@ class IndexController extends Controller
     $descuentos = Products::where('descuento', '>', 0)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
 
-      $popups = Popup::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $popups = Popup::where('status', '=', 1)->where('visible', '=', 1)->get();
 
     $general = General::all();
     $benefit = Strength::where('status', '=', 1)->take(3)->get();
@@ -85,14 +86,14 @@ class IndexController extends Controller
 
 
 
-    return view('public.index', compact('url_env','popups' ,'banners','blogs','categoriasAll', 'productosPupulares','ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
+    return view('public.index', compact('url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'category'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)
   {
-    $tag_id = null ; 
+    $tag_id = null;
     $tag_id = $request->input('tag');
-    
+
     $catId = $request->input('category');
     $tag_id = $request->input('tag');
     $id_cat = $id_cat ?? $catId;
@@ -108,7 +109,7 @@ class IndexController extends Controller
     $maxPrice = Products::max('precio');
 
     $attribute_values = AttributesValues::select('attributes_values.*')
-    ->with('attribute')
+      ->with('attribute')
       ->join('attributes', 'attributes.id', '=', 'attributes_values.attribute_id')
       ->where('attributes_values.visible', true)
       ->where('attributes.visible', true)
@@ -125,10 +126,10 @@ class IndexController extends Controller
       'tag_id' => $tag_id
     ])->rootView('app');
   }
-  
+
   public function ofertas(Request $request, string $id_cat = null)
   {
-   
+
     $categories = Category::where('visible', true)->get();
     $tags = Tag::where('visible', true)->get();
 
@@ -140,7 +141,7 @@ class IndexController extends Controller
     $maxPrice = Products::max('precio');
 
     $attribute_values = AttributesValues::select('attributes_values.*')
-    ->with('attribute')
+      ->with('attribute')
       ->join('attributes', 'attributes.id', '=', 'attributes_values.attribute_id')
       ->where('attributes_values.visible', true)
       ->where('attributes.visible', true)
@@ -511,15 +512,16 @@ class IndexController extends Controller
     return view('public.dashboard_order',  compact('user', 'categorias', 'statuses'));
   }
 
-  public function listadeseos(){
+  public function listadeseos()
+  {
     $user = Auth::user();
     dump($user);
 
     $usuario = User::find($user->id);
 
     $wishlistItems = $usuario->wishlistItems()->with('products')->get();
-    
-    return view('public.dashboard_wishlist', compact('user', 'wishlistItems') );
+
+    return view('public.dashboard_wishlist', compact('user', 'wishlistItems'));
   }
 
 
@@ -634,14 +636,26 @@ class IndexController extends Controller
     $general = General::first();
     $testimonios = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-    return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery'));
+    $combo = Offer::select([
+      DB::raw('DISTINCT offers.*')
+    ])
+      ->with('products')
+      ->leftJoin('offer_details', 'offers.id', 'offer_details.offer_id')
+      ->where('offer_details.isParent', true)
+      ->where('offer_details.product_id', $id)
+      ->first();
+
+    if (!$combo) $combo = new Offer();
+
+    return view('public.product', compact('atributos', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery', 'combo'));
   }
 
-  public function wishListAdd(Request $request){
+  public function wishListAdd(Request $request)
+  {
     $user = Auth::user();
-    
-    $exite= Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
-    if($exite){
+
+    $exite = Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
+    if ($exite) {
       return response()->json(['message' => 'El producto ya se encuentra en la lista de deseos']);
     }
     $whistList = Wishlist::create([

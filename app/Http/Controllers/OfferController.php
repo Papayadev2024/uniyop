@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
-use App\Http\Requests\StoreOfferRequest;
-use App\Http\Requests\UpdateOfferRequest;
+use App\Models\OfferDetail;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Exception;
 
-class OfferController extends Controller
+class OfferController extends BasicController
 {
+    public $model = Offer::class;
+
     /**
      * Display a listing of the resource.
      */
@@ -23,54 +26,35 @@ class OfferController extends Controller
         ])->rootView('admin');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function all(Request $request) {
+        return Offer::with('products')
+        ->where('status', true)
+        ->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreOfferRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Offer $offer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Offer $offer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOfferRequest $request, Offer $offer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function delete(Request $request, int $offer_id)
-    {
-        $offer = Offer::find($offer_id);
-        $offer->status = null;
-        $offer->save();
+    public function get(Request $request, string $id) {
+        $offer = Offer::with('products')->where('id', $id)->first();
         return $offer;
+    }
+
+    public function beforeSave(Request $request)
+    {
+        $products = $request->products;
+        if (count($products) <= 0) throw new Exception('Seleccione al menos un producto en el combo');
+        if (!$request->parent_id) throw new Exception('Marque un producto como principal');
+        return $request->all();
+    }
+
+    public function afterSave(Request $request, object $jpa)
+    {
+        $jpa->products()->detach();
+        $products = $request->products;
+        foreach ($products as $product) {
+            OfferDetail::create([
+                'offer_id' => $jpa->id,
+                'product_id' => $product,
+                'isParent' => $request->parent_id == $product,
+            ]);
+        }
     }
 }

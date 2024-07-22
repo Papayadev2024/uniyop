@@ -22,6 +22,10 @@ class BasicController extends Controller
   public $reactRootView = 'admin';
 
 
+  public function all(Request $request) {
+    
+  }
+
   public function setPaginationInstance(string $model)
   {
     return $model::select();
@@ -123,12 +127,12 @@ class BasicController extends Controller
       $jpa = $this->model::find($request->id);
 
       if (!$jpa) {
-        $this->model::create($body);
+        $jpa = $this->model::create($body);
       } else {
         $jpa->update($body);
       }
 
-      $data = $this->afterSave($jpa);
+      $data = $this->afterSave($request, $jpa);
       if ($data) {
         $response->data = $data;
       }
@@ -146,7 +150,7 @@ class BasicController extends Controller
     }
   }
 
-  public function afterSave(object $jpa) {
+  public function afterSave(Request $request, object $jpa) {
     return null;
   }
 

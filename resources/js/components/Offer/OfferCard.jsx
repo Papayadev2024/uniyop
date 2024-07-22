@@ -2,9 +2,11 @@ import React from 'react'
 import { Fetch } from 'sode-extend-react'
 import Swal from 'sweetalert2'
 
-const OfferCard = ({ item, setItem, onOpenModalClicked }) => {
+const OfferCard = ({ item, offers, setOffers, onOpenModalClicked }) => {
 
-  const products = item.products.slice(0, 4).map(product => product.producto)
+  const products = item.products.sort((a,b) => {
+    return (b?.pivot?.isParent || 0) - (a?.pivot?.isParent || 0)
+  }).slice(0, 4).map(product => product.producto)
   const productsLength = item.products.length
 
   const onDeleteClicked = async (id) => {
@@ -20,19 +22,26 @@ const OfferCard = ({ item, setItem, onOpenModalClicked }) => {
     })
 
     if (isConfirmed) {
-      const { status, result } = await Fetch(`/api/offers/${id}`, {
-        method: 'DELETE',
-      })
-      if (status) Swal.fire(
-        '¡Eliminado!',
-        'La oferta ha sido eliminada correctamente.',
-        'success'
-      )
-      else Swal.fire(
-        '¡Error!',
-        result?.message || 'Ocurrió un error al eliminar la oferta.',
-        'error'
-      )
+      try {
+        const { status, result } = await Fetch(`/api/offers/${id}`, {
+          method: 'DELETE',
+        })
+        if (!status) throw new Error(result?.message ?? 'Ocurrió un error al eliminar la oferta.')
+        Swal.fire(
+          '¡Eliminado!',
+          'La oferta ha sido eliminada correctamente.',
+          'success'
+        )
+        const newOffers = structuredClone(offers).filter(offer => offer.id !== id)
+        setOffers(newOffers)
+
+      } catch (error) {
+        Swal.fire(
+          '¡Error!',
+          error.message,
+          'error'
+        )
+      }
     }
   }
 
@@ -83,7 +92,7 @@ const OfferCard = ({ item, setItem, onOpenModalClicked }) => {
               </p>
             }
             return <p key={`product-${i}`} className='w-full text-nowrap overflow-hidden text-ellipsis'>
-              {product}
+              {i == 0 ? <b>{product}</b>: product}
             </p>
           }) : <i className='text-gray-400'>- No hay productos asociados -</i>
         }</div>
