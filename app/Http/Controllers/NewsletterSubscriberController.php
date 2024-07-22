@@ -86,8 +86,9 @@ class NewsletterSubscriberController extends Controller
   {
 
     $appUrl = env('APP_URL');
+    $appName = env('APP_NAME');
     $name = '';
-    $mensaje = 'Gracias por comunicarte con MIC&JC';
+    $mensaje = "Gracias por comunicarte con $appName";
     $mail = EmailConfig::config($name, $mensaje);
     $general = General::all()->first();
     // dd($mail);
