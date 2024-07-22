@@ -17,13 +17,17 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         //
-        User::create([
+        User::updateOrCreate([
+            'email' => 'hola@mundoweb.pe'
+        ],[
             'name' => 'Admin Mundo Web',
             'email' => 'hola@mundoweb.pe',
             'password' => Hash::make('12345678'),
         ])->assignRole('Admin');
 
-        User::create([
+        User::updateOrCreate([
+            'email' => 'customer@mundoweb.pe'
+        ],[
             'name' => 'Customer Mundo Web',
             'email' => 'customer@mundoweb.pe',
             'password' => Hash::make('12345678'),

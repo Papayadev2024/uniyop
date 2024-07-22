@@ -24,7 +24,9 @@ class ProductSeeder extends Seeder
             public function model(array $row)
             {
                 if (!is_numeric($row[0])) return null;
-                return new Products([
+                Products::updateOrCreate([
+                    'sku' => $row[5]
+                ],[
                     'categoria_id' => $row[1],
                     'subcategory_id' => $row[3],
                     'sku'=> $row[5],
