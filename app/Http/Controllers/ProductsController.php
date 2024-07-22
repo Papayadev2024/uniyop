@@ -358,9 +358,7 @@ class ProductsController extends Controller
       }
 
       $this->GuardarEspecificaciones($producto->id, $especificaciones);
-      if (!is_null($tagsSeleccionados)) {
-        $this->TagsXProducts($producto->id, $tagsSeleccionados);
-      }
+      $producto->tags()->sync($tagsSeleccionados);
 
       Galerie::where('product_id', $producto->id)->delete();
       if ($request->galery) {

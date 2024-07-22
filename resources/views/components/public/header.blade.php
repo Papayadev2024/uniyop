@@ -216,7 +216,12 @@
               <span class="underline-this">CONTACTO</span>
             </a>
             @if ($tags->count() > 0)
-              <x-dropdown-categorias id="tagsMenu" class="font-medium hover:opacity-75" :items="$tags" />
+              @foreach ($tags as $item)
+                <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75 ">
+                  <span class="underline-this"> {{ $item->name }} </span>
+                </a>
+              @endforeach
+
             @endif
 
           </nav>
