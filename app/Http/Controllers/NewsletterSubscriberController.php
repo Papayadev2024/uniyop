@@ -79,7 +79,7 @@ class NewsletterSubscriberController extends Controller
     $data['nombre'] = '';
     $this->envioCorreo($data);
     $this->envioCorreoInterno($data);
-    return response()->json(['message' => 'Newsletter guardado ']);
+    return response()->json(['message' => 'Usuario suscrito']);
   }
 
   private function envioCorreo($data)
