@@ -117,7 +117,7 @@ class NewsletterSubscriberController extends Controller
             <table
               style="
                 width: 600px;
-                height: 800px;
+                height: 850px;
                 margin: 0 auto;
                 text-align: center;
                 background-image:url(' . $appUrl . 'images/Ellipse_18.png),  url(' . $appUrl . 'images/Tabpanel.png);
