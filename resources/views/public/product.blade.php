@@ -289,8 +289,9 @@
         </div>
         <div class="grid grid-cols-4 gap-4 mt-14 w-full">
           @foreach ($ProdComplementarios->take(4) as $item)
-            <x-product.container-combinalo width="" height="h-[400px]" bgcolor="bg-[#FFFFFF]"
-              textpx="text-[20px]" :item="$item" />
+            {{-- <x-product.container-combinalo width="" height="h-[400px]" bgcolor="bg-[#FFFFFF]"
+              textpx="text-[20px]" :item="$item" /> --}}
+            <x-product.container width="col-span-1 " bgcolor="bg-[#FFFFFF]" :item="$item" />
           @endforeach
         </div>
       </div>
