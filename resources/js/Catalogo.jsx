@@ -9,8 +9,8 @@ import arrayJoin from './Utils/ArrayJoin'
 import ProductCard from './components/Product/ProductCard'
 
 const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category, tag_id }) => {
-  const take = 10
-  console.log(tag_id)
+  const take = 12
+
 
   const [items, setItems] = useState([])
   const [filter, setFilter] = useState(selected_category ? { category_id: [selected_category] } : { 'txp.tag_id': [tag_id] })
