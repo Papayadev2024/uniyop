@@ -239,9 +239,15 @@
             </div>
             <div class="flex flex-row gap-4 mt-6">
               <span class="text-base font-Inter_Medium">Compartir</span>
-              <img src="{{ asset('images\svg\gb.svg') }}" alt="" class="h-8 w-8">
-              <img src="{{ asset('images\svg\twitter.svg') }}" alt="" class="h-8 w-8">
-              <img src="{{ asset('images\svg\pinterest.svg') }}" alt="" class="h-8 w-8">
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank">
+                <img src="{{ asset('images/svg/gb.svg') }}" alt="Facebook" class="h-8 w-8"></a>
+              <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}" target="_blank">
+                <img src="{{ asset('images/svg/twitter.svg') }}" alt="Twitter" class="h-8 w-8"></a>
+              <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}&media={{ urlencode(asset('path_to_your_image')) }}&description=YourDescription"
+                target="_blank">
+                <img src="{{ asset('images/svg/pinterest.svg') }}" alt="Pinterest" class="h-8 w-8"></a>
+
+
             </div>
           </div>
         </div>
