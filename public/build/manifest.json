@@ -35,12 +35,12 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-EbPfovhi.css",
+    "file": "assets/app-yB-hKsQw.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/Admin/Offers.jsx": {
-    "file": "assets/Offers-sZrLr8TW.js",
+    "file": "assets/Offers-mSYNecnW.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "_arrayJoin-xqzV41hn.js",

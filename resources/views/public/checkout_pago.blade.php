@@ -310,7 +310,8 @@
             _token: $('[name="_token"]').val(),
             cart: carrito.map((x) => ({
               id: x.id,
-              quantity: x.cantidad
+              quantity: x.cantidad,
+              isCombo : x.isCombo || false
             })),
             contact: {
               name: $('#nombre').val(),

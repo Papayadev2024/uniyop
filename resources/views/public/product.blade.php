@@ -525,13 +525,11 @@
       })
       nombre += '</ul>'
 
-      console.log(nombre)
-
       let items = Local.get('carrito') ?? []
       const index = items.findIndex(item => item.id == data.id)
       if (index != -1) {
         items = items.map(item => {
-          if (item.id == data.id) {
+          if (item.id == data.id && item.isCombo) {
             item.nombre = nombre
             item.cantidad++
           }

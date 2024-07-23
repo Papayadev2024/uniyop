@@ -9,22 +9,23 @@ class Sale extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'name',
-    //     'lastname',
-    //     'email',
-    //     'phone',
-    //     'address_department',
-    //     'address_province',
-    //     'address_district',
-    //     'address_price',
-    //     'address_street',
-    //     'address_number',
-    //     'address_description',
-    //     'total',
-    //     'status_code',
-    //     'status_message',
-    // ];
+    protected $fillable = [
+        'name',
+        'code',
+        'lastname',
+        'email',
+        'phone',
+        'address_department',
+        'address_province',
+        'address_district',
+        'address_price',
+        'address_street',
+        'address_number',
+        'address_description',
+        'total',
+        'status_code',
+        'status_message',
+    ];
 
     public function status()
     {

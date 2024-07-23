@@ -23,8 +23,9 @@ const Offers = ({ offers: offersFromBD }) => {
   }
 
   const refreshOffers = async () => {
-    const { status, result } = await Fetch('/api/offers')
-    if (status) setOffers(result)
+    location.reload()
+    // const { status, result } = await Fetch('/api/offers')
+    // if (status) setOffers(result)
   }
 
   return (<>
