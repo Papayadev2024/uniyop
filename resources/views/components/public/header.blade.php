@@ -201,9 +201,11 @@
             <a href="{{ route('Catalogo.jsx') }}" class="font-medium hover:opacity-75">
               <span class="underline-this">PRODUCTOS</span>
             </a>
+            @if($offerExists) 
             <a href="{{ route('Ofertas.jsx') }}" class="font-medium hover:opacity-75">
               <span class="underline-this">OFERTAS</span>
             </a>
+            @endif
 
             @if ($blog > 0)
               <a href="/blog/0" class="font-medium hover:opacity-75 ">

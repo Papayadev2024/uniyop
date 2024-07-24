@@ -9,6 +9,7 @@ use App\Models\General;
 use App\Models\LibroReclamaciones;
 use App\Models\Message;
 use App\Models\PolyticsCondition;
+use App\Models\Products;
 use App\Models\Sale;
 use App\Models\Tag;
 use App\Models\TermsAndCondition;
@@ -34,8 +35,8 @@ class AppServiceProvider extends ServiceProvider
     {
 
         View::composer('components.public.footer', function ($view) {
-        
-           
+
+
 
             // Obtener los datos del footer
             $datosgenerales = General::first(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
@@ -45,19 +46,24 @@ class AppServiceProvider extends ServiceProvider
             $politicDev = PolyticsCondition::first();
             $termsAndCondicitions = TermsAndCondition::first();
 
-            $view->with(['datosgenerales'=> $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions]);
+            $view->with(['datosgenerales' => $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions]);
         });
 
         View::composer('components.public.header', function ($view) {
             // Obtener los datos del footer
             $datosgenerales = General::all();
-            $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->count() ; // Suponiendo que tienes un modelo Footer y un método footerData() en él
+            $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->count(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
             $categoriasMenu = Category::where('visible', '=', 1)->where('is_menu', 1)->get();
             $tags = Tag::where('is_menu', 1)
-            ->whereHas('productos')
-            ->get();
+                ->whereHas('productos')
+                ->get();
+
+            $offerExists = Products::where('status', true)
+                ->where('descuento', '>', 0)
+                ->exists();
+
             // Pasar los datos a la vista
-            $view->with(['datosgenerales'=> $datosgenerales, 'blog' => $blog ,  'categoriasMenu' =>$categoriasMenu, 'tags' => $tags]);
+            $view->with(['datosgenerales' => $datosgenerales, 'blog' => $blog,  'categoriasMenu' => $categoriasMenu, 'tags' => $tags, 'offerExists' => $offerExists]);
         });
 
         View::composer('components.app.sidebar', function ($view) {
