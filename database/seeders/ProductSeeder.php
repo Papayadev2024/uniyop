@@ -71,13 +71,15 @@ class ProductSeeder extends Seeder
                 ]);
 
                 $path2search = "public/storage/images/products/{$category->id}/";
-                // echo $path . ' -> ';
 
-                $images = File::scan($path2search, [
-                    'type' => 'file',
-                    'startsWith' => $product->sku,
-                    'desc' => true
-                ]);
+                $images = [];
+                try {
+                    $images = File::scan($path2search, [
+                        'type' => 'file',
+                        'startsWith' => $product->sku,
+                        'desc' => true
+                    ]);
+                } catch (\Throwable $th) {}
 
                 foreach ($images as $key => $image_name) {
                     $image = "storage/images/products/{$category->id}/{$image_name}";
