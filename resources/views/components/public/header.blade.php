@@ -385,8 +385,8 @@
                   <p class="text-text12 text-left">Categoría</p>
                 </div>
                 <div class="flex flex-col justify-center w-[10%]">
-                  <p class="text-right">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
-                  ${discount > 0 ? `<p class="text-text12 text-right line-through text-slate-500">S/ ${price.toFixed(2)}</p>` : ''}
+                  <p class="text-right w-max">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
+                  ${discount > 0 ? `<p class="text-text12 text-right line-through text-slate-500 w-max">S/ ${price.toFixed(2)}</p>` : ''}
                 </div>
               </div>
             </a>`;
