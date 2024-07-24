@@ -373,24 +373,23 @@
           var url = '{{ asset('') }}';
           console.log(data)
           data.forEach(function(result) {
-            resultsHtml +=
-              `
-          <a href="/producto/${result.id}">
-            <div class="w-full flex flex-row py-3 px-5 hover:bg-slate-200">
+            const price = Number(result.precio) || 0
+            const discount = Number(result.descuento) || 0
+            resultsHtml += `<a href="/producto/${result.id}">
+              <div class="w-full flex flex-row py-3 px-5 hover:bg-slate-200">
                 <div class="w-[10%]">
-                    <img class="w-14 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
+                  <img class="w-14 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
                 </div>
                 <div class="flex flex-col justify-center w-[70%]">
-                    <h2 class="text-left">${result.producto}</h2>
-                    <p class="text-text12 text-left">Categoría</p>
+                  <h2 class="text-left">${result.producto}</h2>
+                  <p class="text-text12 text-left">Categoría</p>
                 </div>
                 <div class="flex flex-col justify-center w-[10%]">
-                    <p class="text-right">S/${result.precio}</p>
-                    <p class="text-text12 text-right line-through text-slate-500">S/${result.descuento}</p>
+                  <p class="text-right">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
+                  ${discount > 0 && `<p class="text-text12 text-right line-through text-slate-500">S/ ${price.toFixed(2)}</p>`}
                 </div>
-            </div>
-        </a>
-      `;
+              </div>
+            </a>`;
           });
 
           $('#resultados').html(resultsHtml);
