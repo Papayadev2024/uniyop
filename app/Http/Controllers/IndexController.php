@@ -542,7 +542,7 @@ class IndexController extends Controller
     ->get();
 
 
-    dump($resultados->toArray());
+    
     return response()->json($resultados);
   }
 
