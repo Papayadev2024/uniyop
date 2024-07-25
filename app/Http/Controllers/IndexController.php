@@ -307,7 +307,7 @@ class IndexController extends Controller
         "amount" => 1000,
         "capture" => true,
         "currency_code" => "PEN",
-        "description" => "Compra en Decotab",
+        "description" => "Compra en ".env('APP_NAME'), 
         "email" => "test@culqi.com",
         "installments" => 0,
         "antifraud_details" => array(
@@ -962,8 +962,9 @@ class IndexController extends Controller
   private function envioCorreoCompra($data)
   {
 
+    $appUrl = env('APP_URL');
     $name = $data['nombre'];
-    $mensaje = "Gracias por comprar en Decotab";
+    $mensaje = "Gracias por comprar en $appUrl ";
     $mail = EmailConfig::config($name, $mensaje);
     try {
       $mail->addAddress($data['email']);
@@ -994,10 +995,11 @@ class IndexController extends Controller
                 height: 700px;
                 margin: 0 auto;
                 text-align: center;
-                background-image: url(https://decotab.pe/mail/ImagenFondo.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
+                 background-image:url(' . $appUrl . 'images/Ellipse_18.png),  url(' . $appUrl . 'images/Tabpanel.png);
+                background-repeat: no-repeat, no-repeat;
+                background-position: center bottom , center bottom;;
+                background-size: fit , fit;
+                background-color: #f9f9f9;
               "
             >
               <thead>
@@ -1011,7 +1013,9 @@ class IndexController extends Controller
                       margin: 40px;
                     "
                   >
-                    <img src="https://decotab.pe/mail/Logo P.png" alt="mundo web" />
+                     <img src="' . $appUrl . 'images/Group1.png" alt="mundo web"  style="
+                    margin: auto;
+                  "/>
                   </th>
                 </tr>
               </thead>
@@ -1089,7 +1093,7 @@ class IndexController extends Controller
                 "
                 >
                     <a
-                      href="https://decotab.pe/"
+                      href="' . $appUrl . '"
                       style="
                         text-decoration: none;
                         background-color: #006bf6;
