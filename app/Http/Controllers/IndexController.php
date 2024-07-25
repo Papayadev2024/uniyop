@@ -63,16 +63,16 @@ class IndexController extends Controller
     // $productos = Products::all();
     $url_env = env('APP_URL');
     $productos =  Products::with('tags')->get();
-    $ultimosProductos = Products::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(5)->get();
-    $productosPupulares = Products::where('status', '=', 1)->where('visible', '=', 1)->where('destacar', '=', 1)->orderBy('id', 'desc')->take(8)->get();
+    $ultimosProductos = Products::join('categories', 'products.categoria_id', '=', 'categories.id')->where('categories.visible', 1)->where('products.status', '=', 1)->where('products.visible', '=', 1)->orderBy('products.id', 'desc')->take(5)->get();
+    $productosPupulares = Products::join('categories', 'products.categoria_id', '=', 'categories.id')->where('categories.visible', 1)->where('products.status', '=', 1)->where('products.visible', '=', 1)->where('products.destacar', '=', 1)->orderBy('products.id', 'desc')->take(8)->get();
     $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(3)->get();
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
     $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();
     $categoriasAll = Category::where('visible', '=', 1)->get();
-    $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
+    $destacados = Products::where('products.destacar', '=', 1)->where('products.status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
-    $descuentos = Products::where('descuento', '>', 0)->where('status', '=', 1)
+    $descuentos = Products::where('products.descuento', '>', 0)->where('products.status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
 
     $popups = Popup::where('status', '=', 1)->where('visible', '=', 1)->get();
