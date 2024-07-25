@@ -357,6 +357,8 @@
 </header>
 
 <script>
+  let clockSearch;
+
   function openSearch() {
     document.getElementById("myOverlay").style.display = "block";
 
@@ -373,23 +375,26 @@
 
   $('#buscarproducto').keyup(function() {
 
+    clearTimeout(clockSearch);
     var query = $(this).val().trim();
 
     if (query !== '') {
-      $.ajax({
-        url: '{{ route('buscar') }}',
-        method: 'GET',
-        data: {
-          query: query
-        },
-        success: function(data) {
-          var resultsHtml = '';
-          var url = '{{ asset('') }}';
-          console.log(data)
-          data.forEach(function(result) {
-            const price = Number(result.precio) || 0
-            const discount = Number(result.descuento) || 0
-            resultsHtml += `<a href="/producto/${result.id}">
+      clockSearch = setTimeout(() => {
+        $.ajax({
+          url: '{{ route('buscar') }}',
+          method: 'GET',
+          data: {
+            query: query
+          },
+          success: function(data) {
+            var resultsHtml = '';
+            var url = '{{ asset('') }}';
+            console.log(data)
+            data.forEach(function(result) {
+              console.log(result.id)
+              const price = Number(result.precio) || 0
+              const discount = Number(result.descuento) || 0
+              resultsHtml += `<a href="/producto/${result.id}">
               <div class="w-full flex flex-row py-3 px-5 hover:bg-slate-200">
                 <div class="w-[10%]">
                   <img class="w-14 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
@@ -404,11 +409,14 @@
                 </div>
               </div>
             </a>`;
-          });
+            });
 
-          $('#resultados').html(resultsHtml);
-        }
-      });
+            $('#resultados').html(resultsHtml);
+          }
+        });
+
+      }, 300);
+
     } else {
       $('#resultados').empty();
     }
