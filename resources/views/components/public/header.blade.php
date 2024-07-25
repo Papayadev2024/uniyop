@@ -334,6 +334,16 @@
 
     </div>
   </div>
+
+  <div class="flex justify-end relative">
+    <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px]">
+      <a href="https://api.whatsapp.com/send?phone={{ $datosgenerales[0]->whatsapp }}&text={{ $datosgenerales[0]->mensaje_whatsapp }}"
+        class="">
+        <img src="{{ asset('images/img/WhatsApp.png') }}" alt="whatsapp" class="w-20" />
+      </a>
+    </div>
+  </div>
+
   <div id="myOverlay" class="overlay" style="z-index: 200;">
     <span class="closebtn" onclick="closeSearch()">×</span>
     <div class="overlay-content w-3/4 md:w-1/2 z-30">
