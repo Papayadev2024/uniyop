@@ -214,13 +214,15 @@
             @endif
 
 
-            <a href="/contacto" class="font-medium hover:opacity-75 ">
+            <a href="/contacto" class="font-medium hover:opacity-75  ">
               <span class="underline-this">CONTACTO</span>
             </a>
             @if ($tags->count() > 0)
               @foreach ($tags as $item)
-                <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75 ">
-                  <span class="underline-this"> {{ $item->name }} </span>
+                <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75    "
+                  style="color: {{ $item->color }}">
+                  <span class="underline-this  ">
+                    {{ $item->name }} </span>
                 </a>
               @endforeach
 
