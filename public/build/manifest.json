@@ -35,7 +35,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-3zUunrVr.css",
+    "file": "assets/app-iQXm_VBr.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -57,7 +57,7 @@
     "src": "resources/js/Admin/Offers.jsx"
   },
   "resources/js/Catalogo.jsx": {
-    "file": "assets/Catalogo-w6WxQGR9.js",
+    "file": "assets/Catalogo-P2kqUUdP.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "_arrayJoin-xqzV41hn.js",
