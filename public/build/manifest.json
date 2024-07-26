@@ -1,6 +1,6 @@
 {
-  "_ProductCard-Ohq986cd.js": {
-    "file": "assets/ProductCard-Ohq986cd.js",
+  "_ProductCard-931KV5KM.js": {
+    "file": "assets/ProductCard-931KV5KM.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "_arrayJoin-xqzV41hn.js",
@@ -57,11 +57,11 @@
     "src": "resources/js/Admin/Offers.jsx"
   },
   "resources/js/Catalogo.jsx": {
-    "file": "assets/Catalogo-Dr4cDw0S.js",
+    "file": "assets/Catalogo-uvB-b4Pe.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "_arrayJoin-xqzV41hn.js",
-      "_ProductCard-Ohq986cd.js",
+      "_ProductCard-931KV5KM.js",
       "_main-jzs2GwAM.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",
@@ -73,11 +73,11 @@
     "src": "resources/js/Catalogo.jsx"
   },
   "resources/js/Ofertas.jsx": {
-    "file": "assets/Ofertas-DMTytJjO.js",
+    "file": "assets/Ofertas-CQCgqeU_.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "_arrayJoin-xqzV41hn.js",
-      "_ProductCard-Ohq986cd.js",
+      "_ProductCard-931KV5KM.js",
       "_main-jzs2GwAM.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",

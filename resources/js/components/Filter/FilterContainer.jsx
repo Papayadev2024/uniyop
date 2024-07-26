@@ -40,7 +40,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
   }
 
   return (<>
-    <button className="w-full h-12 text-[15px] bg-slate-100 text-center font-medium rounded-lg" type="reset">
+    <button className="w-full h-12 text-[17px] bg-[#006BF6] text-white text-center font-semibold rounded-full" type="reset">
       Limpiar filtros
     </button>
 
@@ -51,13 +51,14 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
     {
       categories.length > 0 && (
 
-        <div className="w-full">
+        <div className="w-full ">
+          <h2 className="font-semibold mb-4">Categorias</h2>
           {categories.map((item) => (
             item.subcategories.length > 0 && (<div key={item.id} className="w-full">
               <div className="border-b border-gray-200">
                 <button
                   type="button"
-                  className="w-full flex justify-between items-center py-2 px-4 text-left text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none"
+                  className="w-full flex justify-between items-center py-2 px-4 text-left text-[#006BF6] bg-gray-100 hover:bg-gray-200 focus:outline-none"
                   onClick={() => toggleAccordion(item.id)}
                 >
                   <span>{item.name}</span>
@@ -73,10 +74,10 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
                 </button>
               </div>
               {openCategories[item.id] && (
-                <div className="p-4 border border-t-0 border-gray-200">
+                <div className="p-4 border border-t-0 border-gray-200 space-y-4">
                   {item.subcategories.map((subitem) => (
                     <label key={subitem.id} htmlFor={`item-category-${subitem.id}`} className="text-custom-border flex flex-row gap-2  items-center cursor-pointer">
-                      <input id={`item-category-${subitem.id}`} name='category' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none" value={subitem.id} onClick={(e) => onClick(`subcategory_id`, e.target.value, e.target.checked)} />
+                      <input id={`item-category-${subitem.id}`} name='category' type="checkbox" className="bg-blue-500 rounded-sm  border-none" value={subitem.id} onClick={(e) => onClick(`subcategory_id`, e.target.value, e.target.checked)} />
                       {subitem.name}
                     </label>
                   ))}
