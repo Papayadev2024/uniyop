@@ -54,7 +54,12 @@ class AppServiceProvider extends ServiceProvider
             $datosgenerales = General::all();
             $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->count(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
             $categoriasMenu = Category::where('visible', '=', 1)->where('is_menu', 1)->get();
-            $categorias = Category::with('subcategories')->get();
+
+            $categorias = Category::with(['subcategories' => function ($query) {
+                $query->whereHas('products');
+            }])->get();
+
+
             $tags = Tag::where('is_menu', 1)
                 ->whereHas('productos')
                 ->get();
