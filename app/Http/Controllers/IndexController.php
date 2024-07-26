@@ -101,9 +101,9 @@ class IndexController extends Controller
 
     // $categories = Category::with('subcategories')->where('visible', true)->get();
     $categories = Category::with(['subcategories' => function ($query) {
-        $query->whereHas('products');
+      $query->whereHas('products');
     }])->where('visible', true)->get();
-    
+
     $tags = Tag::where('visible', true)->get();
 
     $minPrice = Products::select()
@@ -135,8 +135,14 @@ class IndexController extends Controller
 
   public function ofertas(Request $request, string $id_cat = null)
   {
+    $subCatId = $request->input('subcategoria');
 
-    $categories = Category::where('visible', true)->get();
+    // $categories = Category::where('visible', true)->get();
+
+    $categories = Category::with(['subcategories' => function ($query) {
+      $query->whereHas('products');
+    }])->where('visible', true)->get();
+
     $tags = Tag::where('visible', true)->get();
 
     $minPrice = Products::select()
@@ -313,7 +319,7 @@ class IndexController extends Controller
         "amount" => 1000,
         "capture" => true,
         "currency_code" => "PEN",
-        "description" => "Compra en ".env('APP_NAME'), 
+        "description" => "Compra en " . env('APP_NAME'),
         "email" => "test@culqi.com",
         "installments" => 0,
         "antifraud_details" => array(
@@ -521,7 +527,7 @@ class IndexController extends Controller
   public function listadeseos()
   {
     $user = Auth::user();
-   
+
 
     $usuario = User::find($user->id);
 
@@ -534,21 +540,21 @@ class IndexController extends Controller
 
 
     $productos = Products::with('tags')->whereIn('id', $array)->get();
-    return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos') );
+    return view('public.dashboard_wishlist', compact('user', 'wishlistItems', 'productos'));
   }
 
- 
+
   public function searchProduct(Request $request)
   {
     $query = $request->input('query');
     $resultados = Products::select('products.*')
-    ->where('producto', 'like', "%$query%")
-    ->join('categories', 'categories.id', 'products.categoria_id') 
-    ->where('categories.visible', 1)
-    ->get();
+      ->where('producto', 'like', "%$query%")
+      ->join('categories', 'categories.id', 'products.categoria_id')
+      ->where('categories.visible', 1)
+      ->get();
 
 
-    
+
     return response()->json($resultados);
   }
 
@@ -665,8 +671,8 @@ class IndexController extends Controller
     $isWhishList = false;
     if (Auth::check()) {
       $user = Auth::user();
-      $exite= Wishlist::where('user_id', $user->id)->where('product_id', $id)->first();
-      if($exite){
+      $exite = Wishlist::where('user_id', $user->id)->where('product_id', $id)->first();
+      if ($exite) {
         $isWhishList = true;
       }
     }
@@ -688,12 +694,12 @@ class IndexController extends Controller
   public function wishListAdd(Request $request)
   {
     $user = Auth::user();
-    
-    $exite= Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
-    if($exite){
+
+    $exite = Wishlist::where('user_id', $user->id)->where('product_id', $request->product_id)->first();
+    if ($exite) {
       Wishlist::find($exite->id)->delete();
       return response()->json(['message' => 'El producto ya se encuentra en la lista de deseos']);
-    }else{
+    } else {
       $whistList = Wishlist::create([
         'user_id' => $user->id,
         'product_id' => $request->product_id,
@@ -701,7 +707,7 @@ class IndexController extends Controller
         'note' => ''
       ]);
     }
-    
+
 
     return response()->json(['message' => 'Producto agregado a la lista de deseos']);
   }
