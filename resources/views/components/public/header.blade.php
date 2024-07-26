@@ -198,11 +198,12 @@
               <span class="underline-this">INICIO</span>
             </a>
 
-            <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium hover:opacity-75 ">
+            <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
               <span class="underline-this">PRODUCTOS</span>
+              <div id="productos-link-h" class="w-0"></div>
 
             </a>
-            <div id="productos-link-h" class="w-0"></div>
+
             @if ($offerExists)
               <a href="{{ route('Ofertas.jsx') }}" class="font-medium hover:opacity-75">
                 <span class="underline-this">OFERTAS</span>
