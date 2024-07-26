@@ -95,6 +95,7 @@ class IndexController extends Controller
     $tag_id = $request->input('tag');
 
     $catId = $request->input('category');
+    $subCatId = $request->input('subcategoria');
     $tag_id = $request->input('tag');
     $id_cat = $id_cat ?? $catId;
 
@@ -123,7 +124,8 @@ class IndexController extends Controller
       'tags' => $tags,
       'attribute_values' => $attribute_values,
       'id_cat' => $id_cat,
-      'tag_id' => $tag_id
+      'tag_id' => $tag_id,
+      'subCatId' => $subCatId
     ])->rootView('app');
   }
 
