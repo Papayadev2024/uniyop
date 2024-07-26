@@ -99,7 +99,11 @@ class IndexController extends Controller
     $tag_id = $request->input('tag');
     $id_cat = $id_cat ?? $catId;
 
-    $categories = Category::where('visible', true)->get();
+    // $categories = Category::with('subcategories')->where('visible', true)->get();
+    $categories = Category::with(['subcategories' => function ($query) {
+        $query->whereHas('products');
+    }])->where('visible', true)->get();
+    
     $tags = Tag::where('visible', true)->get();
 
     $minPrice = Products::select()
