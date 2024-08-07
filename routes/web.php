@@ -64,6 +64,12 @@ use App\Models\LibroReclamaciones;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/nosotros', [IndexController::class, 'nosotros'])->name('nosotros');
+Route::get('/voluntario', [IndexController::class, 'voluntario'])->name('voluntario');
+Route::get('/donar', [IndexController::class, 'donar'])->name('donar');
+Route::get('/organizacion', [IndexController::class, 'organizacion'])->name('organizacion');
+Route::get('/blogfinal', [IndexController::class, 'blogfinal'])->name('blogfinal');
+Route::get('/postfinal', [IndexController::class, 'postfinal'])->name('postfinal');
+
 Route::get('/servicios', [IndexController::class, 'servicios'])->name('servicios');
 Route::get('/comentario', [IndexController::class, 'comentario'])->name('comentario');
 Route::post('/comentario/nuevo', [IndexController::class, 'hacerComentario'])->name('nuevocomentario');

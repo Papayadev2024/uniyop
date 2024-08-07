@@ -1216,4 +1216,29 @@ class IndexController extends Controller
 
     return response()->json($resultados);
   }
+
+  public function nosotros(){
+    return view('public.nosotros');
+  }
+
+  public function voluntario(){
+    return view('public.voluntario');
+  }
+
+  public function donar(){
+    return view('public.donar');
+  }
+
+  public function organizacion(){
+    return view('public.organizacion');
+  }
+
+  public function blogfinal(){
+    return view('public.blogfinal');
+  }
+
+  public function postfinal(){
+    return view('public.postfinal');
+  }
+  
 }

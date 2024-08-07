@@ -18,23 +18,18 @@ export default {
     darkMode: 'class',
     theme: {
         extend: {
-            colors: {
-                'custom-gray': '#F8F8F8',
-                'custom-white': '#FFFFFF',
-                'custom-border': 'rgba(21, 41, 76, 0.4)', // Defin
-            },
             // Añadir el gradiente personalizado
             backgroundImage: {
                 'custom-gradient': 'linear-gradient(to bottom, #F8F8F8 100%, #FFFFFF 100%)',
             },
 
             fontFamily: {
-                Inter_Bold: ["Inter_Bold"],
-                Inter_ExtraBold: ["Inter_ExtraBold"],
-                Inter_Light: ["Inter_Light"],
-                Inter_Medium: ["Inter_Medium"],
-                Inter_Regular: ["Inter_Regular"],
-                Inter_SemiBold: ["Inter_SemiBold"],
+                Pangea_Bold: ["Pangea_Bold"],
+                Pangea_Semibold: ["Pangea_Semibold"],
+                Pangea_Regular: ["Pangea_Regular"],
+                Pangea_Medium: ["Pangea_Medium"],
+                Pangea_Light: ["Pangea_Light"],
+               
             },
 
             screens: {
@@ -48,8 +43,19 @@ export default {
                 "2xl": "1536px",
             },
             colors: {
-                azulboost: '#006BF6',
-            }
+                azuluniyop: '#3D8BF2',
+                morauniyop: '#A9A0E5',
+                blancouniyop: '#F8F8F8',
+            },
+            animation: {
+                'infinite-scroll': 'infinite-scroll 25s linear infinite',
+            },
+              keyframes: {
+                'infinite-scroll': {
+                  from: { transform: 'translateX(0)' },
+                  to: { transform: 'translateX(-100%)' },
+                }
+            },
 
 
         },

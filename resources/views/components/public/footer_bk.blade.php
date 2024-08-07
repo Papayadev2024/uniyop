@@ -1,4 +1,4 @@
-<footer class="font-Pangea_Light bg-[#3D8BF2]">
+<footer class="font-Inter_Medium bg-[#FFFFFF] mt-5">
   <style>
     #modalPoliticasDev #modalTerminosCondiciones {
       height: 70vh;
@@ -8,66 +8,99 @@
     }
   </style>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 md:justify-center w-full px-[8%] py-12 lg:py-16 ">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] py-8 lg:py-16 ">
 
-    <div class="flex flex-col col-span-1 lg:col-span-2 w-full lg:w-2/3 text-white text-base gap-2 lg:gap-4">
-      <div class="w-auto">
-        <a href="{{ route('index') }}">
-          <img id="logofooter" class="w-[190px]"
-            src="{{ asset('images\svg\logouniyop.svg') }}" alt="uniyop" />
-        </a>
-      </div>
-      <p class="font-Pangea_Light font-normal text-sm">Nunc gravida sodales lectus et finibus. Duis vehicula pretium odio, nec efficitur purus tempor at. 
-         Donec eget tellus id tellus convallis malesuada at eget justo.</p>
+    <div class="flex flex-col text-[#444444] text-base gap-1">
+      <h3 class="font-bold text-xl text-[#333333] pb-3">Contacta con Nosotros</h3>
+      <p>{{ config('app.name') }}</p>
+      <p>{{ $datosgenerales->address }}</p>
+      <p> {{ $datosgenerales->city }} - {{ $datosgenerales->country }}</p>
+      <p>{{ $datosgenerales->cellphone }}</p>
+      <p>{{ $datosgenerales->email }}</p>
 
-      <div class="flex flex-row gap-5 font-Pangea_Regular">
-          <a class="bg-[#F094BC] text-white px-5 py-2 rounded-3xl text-base border-2 flex gap-2 border-[#F094BC]  ">Mas información
-              <img src="{{ asset('images/svg/flechablanca.svg') }}" />
+      <div class="flex flex-row gap-4 text-[#333333] mt-6 pt-2">
+        @if ($datosgenerales->facebook)
+          <a href="{{ $datosgenerales->facebook }}">
+            <i class="fa-brands fa-facebook fa-2xl"></i>
           </a>
+        @endif
+        @if ($datosgenerales->instagram)
+          <a href="{{ $datosgenerales->instagram }}">
+            <i class="fa-brands fa-instagram fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->linkedin)
+          <a href="{{ $datosgenerales->linkedin }}">
+            <i class="fa-brands fa-linkedin fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->tiktok)
+          <a href="{{ $datosgenerales->tiktok }}">
+            <i class="fa-brands fa-tiktok fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->twitter)
+          <a href="{{ $datosgenerales->twitter }}">
+            <i class="fa-brands fa-twitter fa-2xl"></i>
+          </a>
+        @endif
+        @if ($datosgenerales->youtube)
+          <a href="{{ $datosgenerales->youtube }}">
+            <i class="fa-brands fa-youtube fa-2xl"></i>
+          </a>
+        @endif
       </div>
     </div>
 
-    <div class="flex flex-col text-white text-sm gap-2">
-      <h3 class="font-Pangea_Regular text-lg pb-0 lg:pb-3">Enlaces</h3>
-      <a href="/">Home</a>
-      <a href="#">Nosotros</a>
-      <a href="#">Organizacion</a>
-      <a href="#">Futuro sin violencia</a>
+    <div class="flex flex-col text-[#444444] text-base gap-1">
+      <h3 class="font-bold text-xl text-[#333333] pb-3">Información</h3>
+      <a href="/">Inicio</a>
+      <a href="{{ route('Catalogo.jsx') }}">Productos</a>
       <a href="{{ route('blog', 0) }}">Blog</a>
     </div>
 
-    <div class=" flex flex-col gap-2 text-white text-sm">
-      <h3 class="font-Pangea_Regular text-lg pb-0 lg:pb-3">Aviso Legal</h3>
-      <a id="linkPoliticas">Politicas de privacidad </a>
+    <div class="flex flex-col text-[#444444] text-base gap-1">
+      <h3 class="font-bold text-xl text-[#333333] pb-3">Servicio al Cliente</h3>
+      <a href="/contacto">Contacto</a>
       <a id="linkTerminos">Terminos y condiciones </a>
+      <a id="linkPoliticas">Politicas de devolucion </a>
+
       <a href="{{ route('librodereclamaciones') }}"><img class="w-24"
-        src="{{ asset('images/img/reclamaciones.png') }}" /></a>
+          src="{{ asset('images/img/reclamaciones.png') }}" /></a>
     </div>
 
-    <div class="flex flex-col text-white text-sm gap-2">
-      <h3 class="font-Pangea_Regular text-lg pb-0 lg:pb-3">Datos de contacto</h3>
-      <a href="/contacto">123 Calle Principal, Ciudad Perfecta</a>
-      <a >Correo Electrónico: info@uniyop.com</a>
-      <a id="linkPoliticas">Teléfono: +51 999 888 444</a>
+    <div class=" flex flex-col gap-2 text-[#444444] text-base">
+      <h3 class="font-bold text-xl text-[#333333] pb-3">Únete al Blog</h3>
+      <p>¡Suscríbete ahora para no perderte ninguno de nuestros artículos!</p>
+      <div class="relative bg-[#F8F8F8] rounded-full p-2 px-4">
+        <form id="subsEmail" class="flex">
+          @csrf
+          <input type="email" name="email" id="email" placeholder="Déjanos tu e-mail"
+            class="w-full border-none focus:border-transparent ring-0 focus:ring-0 p-2 bg-[#F8F8F8]" />
+          <input type="text" name="tipo" value="Inscripción" hidden />
+          <button type="submit" class=" text-[#444444] p-2 font-semibold">Enviar</button>
+        </form>
+      </div>
     </div>
 
   </div>
 
-  <div class=" py-4 flex items-center justify-center px-[8%] ">
-    <div class="flex flex-col lg:flex-row justify-between items-center gap-5 w-full border-t-[1px] pt-4">
-      <div class="text-left">
-        <p class="font-normal text-sm text-white">
+  <div class="bg-[#F8F8F8] py-4 flex items-center justify-center">
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-5 w-full px-[5%]">
+      <div class="text-center">
+        <p class="font-normal text-sm text-[#444444]">
           Copyright &copy; 2023 {{ config('app.name') }}. Reservados todos los derechos. Powered by <a
-            href="https://www.mundoweb.pe" target="_blank" class="text-white border-b border-[#006BF6]"> Mundo Web
+            href="https://www.mundoweb.pe" target="_blank" class="text-[#006BF6] border-b border-[#006BF6]"> Mundo Web
           </a>
         </p>
       </div>
       <div class="flex gap-2 items-center justify-center">
-        <img src="{{ asset('images/svg/iconuniyop1.svg') }}" alt="instagram" class="h-7 md:h-10" />
-        <img src="{{ asset('images/svg/iconuniyop2.svg') }}" alt="facebook" class="h-7 md:h-10" />
-        <img src="{{ asset('images/svg/iconuniyop3.svg') }}" alt="linkedin" class="h-7 md:h-10" />
-        <img src="{{ asset('images/svg/iconuniyop4.svg') }}" alt="tiktok" class="h-7 md:h-10" />
-        <img src="{{ asset('images/svg/iconuniyop5.svg') }}" alt="watsapp" class="h-7 md:h-10" />
+        <img src="{{ asset('images/svg/visa.svg') }}" alt="visa" class="h-7 md:h-10" />
+        <img src="{{ asset('images/svg/american.svg') }}" alt="american" class="h-7 md:h-10" />
+        <img src="{{ asset('images/svg/mastercad.svg') }}" alt="mastercad" class="h-7 md:h-10" />
+        <img src="{{ asset('images/svg/stripe.svg') }}" alt="stripe" class="h-7 md:h-10" />
+        <img src="{{ asset('images/svg/paypal.svg') }}" alt="paypal" class="h-7 md:h-10" />
+        <img src="{{ asset('images/svg/pay.svg') }}" alt="pay" class="h-7 md:h-10" />
       </div>
     </div>
   </div>

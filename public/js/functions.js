@@ -53,36 +53,7 @@ function show() {
 }
 
 
-/* --------------------------- CARROUSEL ---------------------------- */
-var carrouselTestimonios = new Swiper(".myTestimonios", {
-  slidesPerView: 4, //3
-  spaceBetween: 25,
-  loop: true,
-  grabCursor: true,
-  centeredSlides: true,
-  initialSlide: 0,
-  pagination: {
-    el: ".swiper-pagination-testimonios",
-    clickable: true,
-    /* dynamicBullets: true, */
-  },
-  autoplay: {
-    delay: 1500,
-    disableOnInteraction: false,
-  },
 
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-    },
-    768: {
-      slidesPerView: 2,
-    },
-    1024: {
-      slidesPerView: 4,
-    },
-  },
-});
 
 /* ------------------------------------------------------------------ */
 
